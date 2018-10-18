@@ -17,3 +17,8 @@ Route::get('/', function () {
 
 // Request routes
 Route::resource('request', 'RequestController');
+
+Hola que tal!
+
+asdasdasd
+asdasdasddas

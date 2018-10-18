@@ -17,3 +17,7 @@ Route::get('/', function () {
 
 // Request routes
 Route::resource('request', 'RequestController');
+
+Route::get('/hola', function () {
+    return "<h1> hola que tal </h1>";
+});

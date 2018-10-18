@@ -13,7 +13,8 @@
             </ul>
         </div>
     @endif
-    <div class="row">
+
+    {{-- <div class="row">
         <div class="col-6">
             <form class="form-group" method="POST" action="/request" >
                 @csrf
@@ -46,9 +47,9 @@
                 <button type="submit" class="btn btn-primary">Publicar</button>
             </form>
         </div>
-    </div>
+    </div> --}}
 
-    {{-- <div class="row">
+    <div class="row">
         <form class="col s6">
               <div class="row">
                 <div class="input-field col s12">
@@ -65,7 +66,7 @@
 
 
         </form>
-    </div> --}}
+    </div>
 @endsection
 
 

@@ -18,6 +18,13 @@ Route::get('/', function () {
 // Request routes
 Route::resource('request', 'RequestController');
 
+<<<<<<< HEAD
 Route::get('/hola', function () {
     return "<h1> hola que tal </h1>";
 });
+=======
+Hola que tal!
+
+asdasdasd
+asdasdasddas
+>>>>>>> 36af6c7b0416d5a396ec1169a4c60b33a9fa360c

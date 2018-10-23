@@ -1,0 +1,66 @@
+
+Requisitos:
+	-WAMP:
+		Para tener un servidor con:
+		PHP 7.2.4
+		MySql 5.7.21
+			Dejar las configuraciones por default (port: 3306)
+	Para Laravel:
+		-Composer (version 1.7.2).
+	Para Angular:
+		-Node.js (viene con npm).
+	-GIT
+
+	
+Orden de instalacion:
+	-Instalar WAMP. Asegurarse de usar la version 7.2.4 de PHP.
+	-Instalar Composer. Durante la instalacion indicar la ruta de php 7.2.4 correspondiente (ej C:\wamp64\bin\php\php7.2.4). 
+	La instalacion actualiza el path, sino configurarlo. Se debe poder ejectuar desde CMD: php -v y composer -V.
+	-Descargar el instalador de Laravel, desde CMD:
+		>composer global require "laravel/installer"
+	-Instalar Angular CLI, desde CMD:
+		>npm install -g @angular/cli
+	
+	-Si es un nuevo proyecto:
+		Crear "carpeta_proyecto" dentro del servidor
+			>composer create-project --prefer-dist laravel/laravel carpeta_proyecto
+		o tambien:
+			>laravel new carpeta_proyecto
+		crear una DB vacia para el projecto y configurar los detalles de la DB en el archivo .env y 
+		tambien en /config/database.php
+		Para Angular:
+			>ng new carpeta_proy_angular
+	
+	-Si es un proyecto descargado (ej, github):
+		Crear "carpeta_proyecto" dentro del servidor
+			>git clone url carpeta_proyecto
+		Moverse a carpeta_proyecto.
+		Configurar los detalles de la DB en el archivo .env (no viene con el clone, crearlo a partir del .env.example) y tambien 
+		en /config/database.php
+		Luego, instalar las dependencias necesarias:
+			>composer install
+		Generar una nueva clave de seguridad:
+			>php artisan key:generate
+		Finalmente migrar los datos desde Laravel a la DB:
+			>php artisan migrate --seed
+		Pagina para ver comandos con las migraciones:
+		https://styde.net/creacion-de-tablas-con-el-sistema-de-migraciones-de-laravel/
+		Para Angular:
+			>npm install
+
+El proyecto ya deberia poder verse en el navegador. 
+NOTA: si no se utiliza WAMP, es posible ejecutar el proyecto con:
+	>php artisan serve
+Para Angular:
+	>ng serve
+	
+A tener en cuenta:
+	>php artisan migrate
+	Puede dar error si no se usa la nueva version de mysql.
+	Para corregirlo, dentro del proyecto de Laravel hay que ir a:
+		app/Providers/AppServiceProvider.php
+		Agregar dentro de boot()
+			Schema::defaultStringLength(191);
+		y tambien importar:
+			use Illuminate\Support\Facades\Schema;
+	Estos cambios ya estan hechos en el repo.

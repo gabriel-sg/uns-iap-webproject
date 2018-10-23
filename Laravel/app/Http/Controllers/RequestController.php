@@ -61,7 +61,8 @@ class RequestController extends Controller
 
         $requestEntry->save();
 
-        return response()->json($requestEntry,200,[],JSON_PRETTY_PRINT);
+        //return response()->json($requestEntry,200,[],JSON_PRETTY_PRINT);
+        return $requestEntry;
     }
 
     /**

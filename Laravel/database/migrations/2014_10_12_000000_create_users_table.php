@@ -24,9 +24,9 @@ class CreateUsersTable extends Migration
             $table->string('name', 255);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('telefono',100)->default('Sin teléfono'); //veeeeeeeeeer
-            $table->string('carrera', 150);
-            $table->string('departamento', 100);
+            $table->string('phone',100)->default('Sin teléfono'); //veeeeeeeeeer
+            $table->string('career', 150)->default('Sin asignar');
+            $table->string('department', 100);
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

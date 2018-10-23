@@ -14,7 +14,3 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
-// Request routes
-Route::resource('request', 'RequestController');
-

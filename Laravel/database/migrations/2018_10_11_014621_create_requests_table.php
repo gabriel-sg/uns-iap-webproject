@@ -21,12 +21,13 @@ class CreateRequestsTable extends Migration
 
             // Creating Columns
             $table->increments('id'); //primary
-            $table->string('titulo', 255); // default max = 255
-            $table->text('descripcion');
-            //$table->String('telefono',50);
-            $table->string('departamento',100);
-            $table->string('carrera',150);
-            $table->string('categoria',100);
+            $table->string('title', 255); // default max = 255
+            $table->text('description');
+            $table->unsignedInteger('department_id');
+            $table->foreign('department_id')->references('id')->on('departments')
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
+            $table->string('category',100);
             $table->unsignedInteger('user_id'); //Foreign
             $table->foreign('user_id')->references('id')->on('users')
                   ->onDelete('cascade')

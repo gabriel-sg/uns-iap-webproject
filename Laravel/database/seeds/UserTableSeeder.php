@@ -17,9 +17,9 @@ class UserTableSeeder extends Seeder
         $usuario->name = "pepe";
         $usuario->email = "sapopepe@ejemplo.com";
         $usuario->password = bcrypt('sapopepe');
-        $usuario->telefono = "299 5919191";
-        $usuario->carrera = "ABOGACIA";
-        $usuario->departamento = "DERECHO";
+        $usuario->phone = "299 5919191";
+        $usuario->career = "ABOGACIA";
+        $usuario->department = "DERECHO";
         $usuario->save();
 
     }

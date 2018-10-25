@@ -20,3 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resource('requests', 'RequestController');
 
 Route::resource('publications', 'PublicationController');
+
+Route::resource('departments', 'DepartmentController');

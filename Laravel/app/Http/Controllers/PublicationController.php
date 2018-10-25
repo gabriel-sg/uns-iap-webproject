@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Publication;
+use App\Department;
 
 class PublicationController extends Controller
 {
@@ -13,18 +15,8 @@ class PublicationController extends Controller
      */
     public function index()
     {
-        //
-        return 'Hola desde el controlador de publicaciones';
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $publications = Publication::get();
+        echo json_encode($publications);
     }
 
     /**
@@ -35,29 +27,30 @@ class PublicationController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        //Dejo la validacion momentaneamente porque no se si se valida tanto en el 
+        // front como en el back end
+        $validateData = $request->validate([
+            'title' => 'required|max:140',
+            'description' => 'required',
+            'department' => 'required',
+            'category' => 'required',
+            'visible' => 'required'
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        $publication = new Publication();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $publication->title = $request->input('title');
+        $publication->description = $request->input('description');
+        $department = Department::where('name',$request->input('department'))->first();
+        $publication->department_id = $department->id;
+        $publication->category = $request->input('category');
+        $publication->visible = $request->input('visible');
+        //$requestEntry->user_id = $request->input('user_id');
+        $publication->user_id = 1;   //Placeholder
+
+        $publication->save();
+        echo json_encode($publication);
+
     }
 
     /**
@@ -69,7 +62,29 @@ class PublicationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //Dejo la validacion momentaneamente porque no se si se valida tanto en el 
+        // front como en el back end
+        $validateData = $request->validate([
+            'title' => 'required|max:140',
+            'description' => 'required',
+            'department' => 'required',
+            'category' => 'required',
+            'visible' => 'required'
+        ]);
+
+        $publication = Publication::find($id);
+
+        $publication->title = $request->input('title');
+        $publication->description = $request->input('description');
+        $department = Department::where('name',$request->input('department'))->first();
+        $publication->department_id = $department->id;
+        $publication->category = $request->input('category');
+        //$requestEntry->user_id = $request->input('user_id');
+        $publication->user_id = 1;   //Placeholder
+        $publication->visible= $request->input('visible');
+
+        $publication->save();
+        echo json_encode($publication);
     }
 
     /**
@@ -80,6 +95,7 @@ class PublicationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $publication = Publication::find($id);
+        $publication->delete();
     }
 }

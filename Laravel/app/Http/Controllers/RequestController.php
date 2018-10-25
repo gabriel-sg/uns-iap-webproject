@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\RequestModel;
+use App\Department;
 
 class RequestController extends Controller
 {
@@ -15,19 +16,8 @@ class RequestController extends Controller
     public function index()
     {
         //
-        $RequestEntries = RequestModel::get();
-        echo json_encode($RequestEntries);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-        
+        $requestEntries = RequestModel::get();
+        echo json_encode($requestEntries);
     }
     
     /**
@@ -43,7 +33,7 @@ class RequestController extends Controller
       $validateData = $request->validate([
           'title' => 'required|max:140',
           'description' => 'required',
-          //'department_id' => 'required',
+          'department' => 'required',
           'category' => 'required'
       ]);
 
@@ -51,8 +41,8 @@ class RequestController extends Controller
 
       $requestEntry->title = $request->input('title');
       $requestEntry->description = $request->input('description');
-      //$requestEntry->department_id = $request->input('department_id');
-      $requestEntry->department_id = 1;  //Placeholder
+      $department = Department::where('name',$request->input('department'))->first();
+      $requestEntry->department_id = $department->id;
       $requestEntry->category = $request->input('category');
       //$requestEntry->user_id = $request->input('user_id');
       $requestEntry->user_id = 1;   //Placeholder
@@ -71,8 +61,27 @@ class RequestController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        return 'Hola desde el PUT de solicitudes';
+        //Dejo la validacion momentaneamente porque no se si se valida tanto en el 
+        // front como en el back end
+        $validateData = $request->validate([
+            'title' => 'required|max:140',
+            'description' => 'required',
+            'department' => 'required',
+            'category' => 'required'
+        ]);
+
+        $requestEntry = RequestModel::find($id);
+
+        $requestEntry->title = $request->input('title');
+        $requestEntry->description = $request->input('description');
+        $department = Department::where('name',$request->input('department'))->first();
+        $requestEntry->department_id = $department->id;
+        $requestEntry->category = $request->input('category');
+        //$requestEntry->user_id = $request->input('user_id');
+        $requestEntry->user_id = 1;   //Placeholder
+
+        $requestEntry->save();
+        echo json_encode($requestEntry);
     }
 
     /**
@@ -83,7 +92,7 @@ class RequestController extends Controller
      */
     public function destroy($id)
     {
-        //
-        return 'Hola desde el DELETE de solicitudes';
+        $requestEntry = RequestModel::find($id);
+        $requestEntry->delete();
     }
 }

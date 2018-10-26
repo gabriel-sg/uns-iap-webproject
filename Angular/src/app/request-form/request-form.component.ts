@@ -17,6 +17,7 @@ export class RequestFormComponent implements OnInit {
     title: null,
     description: null,
     department: null,
+    department_id: null,
     category: 'Libro', //Inicial
     user_id: null,
     created_at: null,

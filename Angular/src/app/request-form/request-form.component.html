@@ -1,3 +1,32 @@
-<p>
-  request-form works!
-</p>
+<div class="row">
+  <div class="col-6">
+    <h2>Crear solicitud</h2>
+    <!-- <form class="form-group" method="POST" action="/request" > -->
+    <div class="form-group">
+      <div class="form-group">
+        <label for="titulo">Título</label>
+        <input [(ngModel)]="request.title" type="text" id="title" class="form-control">
+
+        <label for="descripcion">Descripción</label>
+        <textarea [(ngModel)]="request.description" class="form-control" id="description" rows="3"></textarea>
+
+        <div class="form-row">
+          <div class="col-6">
+            <label for="departamento">Departamento</label>
+            <select [(ngModel)]="request.department" class="form-control" id="department">
+              <option *ngFor="let depto of deptos" value={{depto.name}}>{{depto.name}}</option>
+            </select>
+            <label for="categoria">Categoría</label>
+            <select [(ngModel)]="request.category" class="form-control" id="category">
+              <option value="Libro">Libro</option>
+              <option value="Apunte">Apunte</option>
+              <option value="Material">Material</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <button (click)="saveRequest()" class="btn btn-primary">Publicar</button>
+    </div>
+  </div>
+</div>

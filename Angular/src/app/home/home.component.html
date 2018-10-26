@@ -12,7 +12,7 @@
 
 
   <body>
-    
+
     <section id="Header">
       <div id="cover-caption">
           <div class="jumbotron">
@@ -47,15 +47,15 @@
                         <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
                       </div>
                     </div>
-            
+
                     <hr>
-            
+
                   </div>
               </div>
         </div>
       </section>
 
-      
+
 
       <section id="Solicitudes">
           <div id="cover-caption">
@@ -65,25 +65,16 @@
                       <thead>
                         <tr>
                           <th scope="col">Solicitud</th>
+                          <th scope="col">Descripción</th>
                           <th scope="col">Contacto</th>
-
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <th scope="row">1</th>
-                          <td>Mark</td>
-
-                        </tr>
-                        <tr>
-                          <th scope="row">2</th>
-                          <td>Jacob</td>
-
-                        </tr>
-                        <tr>
-                          <th scope="row">3</th>
-                          <td>Larry</td>
-
+                        <tr *ngFor="let request of requests">
+                          <!-- <th scope="row">{{request.title}}</th> -->
+                          <td width="40%">{{request.title}}</td>
+                          <td width="40%">{{request.description}}</td>
+                          <td width="20%">{{request.user_id}}</td>
                         </tr>
                       </tbody>
                     </table>

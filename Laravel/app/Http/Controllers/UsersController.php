@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Department;
+use App\User;
 
-class DepartmentController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,13 +14,13 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        $departments = Department::get();
-        echo json_encode($departments);        
+        $users = User::get();
+        echo json_encode($users);
     }
 
     public function show($id)
     {
-        $department = Department::where('id',$id)->get();
-        echo json_encode($department);
+        $user = User::where('id',$id)->get();
+        echo json_encode($user);
     }
 }

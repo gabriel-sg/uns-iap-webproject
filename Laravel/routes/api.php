@@ -22,3 +22,5 @@ Route::resource('requests', 'RequestController');
 Route::resource('publications', 'PublicationController');
 
 Route::resource('departments', 'DepartmentController');
+
+Route::resource('users', 'UsersController');

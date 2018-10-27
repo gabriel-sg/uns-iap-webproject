@@ -87,6 +87,12 @@ class PublicationController extends Controller
         echo json_encode($publication);
     }
 
+    public function show($id)
+    {
+        $publication = Publication::where('id',$id)->get();
+        echo json_encode($publication);
+    }
+
     /**
      * Remove the specified resource from storage.
      *

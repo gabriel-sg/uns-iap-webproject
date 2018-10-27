@@ -84,6 +84,12 @@ class RequestController extends Controller
         echo json_encode($requestEntry);
     }
 
+    public function show($id)
+    {
+        $requestEntry = RequestModel::where('id',$id)->get();
+        echo json_encode($requestEntry);
+    }
+
     /**
      * Remove the specified resource from storage.
      *

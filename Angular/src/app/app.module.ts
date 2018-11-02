@@ -7,12 +7,14 @@ import { HomeComponent } from './home/home.component';
 import { RequestFormComponent } from './request-form/request-form.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    RequestFormComponent
+    RequestFormComponent,
+    UserDashboardComponent
   ],
   imports: [
     BrowserModule,

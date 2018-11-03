@@ -8,13 +8,15 @@ import { RequestFormComponent } from './request-form/request-form.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
+import { PruebasComponent } from './pruebas/pruebas.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     RequestFormComponent,
-    UserDashboardComponent
+    UserDashboardComponent,
+    PruebasComponent
   ],
   imports: [
     BrowserModule,

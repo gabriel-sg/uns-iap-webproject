@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { RequestService } from '../services/request.service';
+import { RequestService } from '../../services/request.service';
 import { HttpClient } from '@angular/common/http';
-import { Request } from '../interfaces/Request';
-
+import { Request } from '../../models/Request';
 
 @Component({
   selector: 'app-home',

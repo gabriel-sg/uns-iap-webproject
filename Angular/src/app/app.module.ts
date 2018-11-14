@@ -5,13 +5,25 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home.component';
-import { RequestFormComponent } from './components/request-form/request-form.component';
-import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
-import { PruebasComponent } from './components/pruebas/pruebas.component';
-import { TestComponent } from './components/test/test.component';
-import { AlertComponent } from './components/alert/alert.component';
 
+// Components
+import {
+  HomeComponent,
+  RequestFormComponent,
+  PruebasComponent,
+  TestComponent,
+  AlertComponent,
+  // User components
+  UserDashboardComponent,
+  UserDashboardMyRequestsComponent,
+  UserDashboardMessagesComponent,
+  UserDashboardFavsComponent,
+  UserDashboardHelpComponent,
+  UserDashboardContactUsComponent
+} from 'app/components';
+
+// Log in module
+// https://www.npmjs.com/package/ng-dynami-social-login
 import { DynamiSocialLoginModule, AuthServiceConfig, GoogleLoginProvider } from 'ng-dynami-social-login';
 
 export function getAuthServiceConfigs() {
@@ -42,7 +54,12 @@ export function getAuthServiceConfigs() {
     UserDashboardComponent,
     PruebasComponent,
     TestComponent,
-    AlertComponent
+    AlertComponent,
+    UserDashboardMyRequestsComponent,
+    UserDashboardMessagesComponent,
+    UserDashboardFavsComponent,
+    UserDashboardHelpComponent,
+    UserDashboardContactUsComponent
   ],
   imports: [
     BrowserModule,

@@ -24,3 +24,5 @@ Route::resource('publications', 'PublicationController');
 Route::resource('departments', 'DepartmentController');
 
 Route::resource('users', 'UsersController');
+
+Route::get('searchRequests/{search}','SearchController@index');

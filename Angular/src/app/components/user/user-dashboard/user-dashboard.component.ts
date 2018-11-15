@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { PublicationService } from '../../../services/publication.service';
 import { HttpClient } from '@angular/common/http';
-import { Publication } from '../../../models/publication';
+import { Component, OnInit } from '@angular/core';
+import { Publication } from 'app/models';
+import { PublicationService } from 'app/services';
 
 
 @Component({
@@ -10,7 +10,7 @@ import { Publication } from '../../../models/publication';
   styleUrls: ['./user-dashboard.component.css']
 })
 export class UserDashboardComponent implements OnInit {
-  API_ENDPOINT = 'http://intuni.test/api';
+  API_ENDPOINT = environment.apiUrl;
   publications: Publication[];
 
   constructor(private publicationService: PublicationService, private httpClient: HttpClient) {

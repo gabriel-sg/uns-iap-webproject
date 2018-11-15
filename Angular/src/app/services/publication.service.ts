@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Publication } from '../models/Publication';
+import { environment } from 'environments/environment';
+import { Publication } from 'app/models';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class PublicationService {
-  API_ENDPOINT = 'http://intuni.test/api';
+  API_ENDPOINT = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 

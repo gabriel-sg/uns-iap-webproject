@@ -2,7 +2,7 @@ export class Publication{
   id?: number; //? porque es opcional. Viene del back-end
   title: string;
   description: string;
-  visible:number;
+  visible:boolean;
   category: string;
   user_id: number;
   department_id: number;
@@ -13,7 +13,7 @@ export class Publication{
     this.id = 0;
     this.title = '';
     this.description = '';
-    this.visible = 1 ;
+    this.visible = true ;
     this.category = '';
     this.user_id =0 ;
     this.department_id =0 ;

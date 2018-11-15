@@ -13,7 +13,6 @@ import { Department, Publication } from 'app/models'
 })
 
 export class PublicationFormComponent implements OnInit {
-  API_ENDPOINT = 'http://intuni.test/api';
   deptos: Department[] = [];
   publication: Publication = new Publication();
 
@@ -21,7 +20,7 @@ export class PublicationFormComponent implements OnInit {
   loading = false;
   submitted = false;
 
-  constructor(    
+  constructor(
     private departmentService: DepartmentService,
     private publicationService: PublicationService,
     private formBuilder: FormBuilder,
@@ -38,12 +37,12 @@ export class PublicationFormComponent implements OnInit {
         department: ['', Validators.required],
         category: ['', Validators.required]
       });
-  
+
       // TODO: redirect to home if already logged in
       // if (this.authenticationService.currentUserValue) {
       //   this.router.navigate(['/']);
       // }
-  
+
       // TODO: ver como manejar los mensajes de error. Capaz conviene que lo haga el servicio.
       this.departmentService.getAll().subscribe(data => {
         this.deptos = data;
@@ -60,12 +59,12 @@ export class PublicationFormComponent implements OnInit {
 
     onSubmit() {
       this.submitted = true;
-  
+
       // stop here if form is invalid
       if (this.publicationForm.invalid) {
         return;
       }
-  
+
       this.loading = true;
       this.publicationService.store(this.publicationForm.value)
         .pipe(first())

@@ -18,7 +18,6 @@ import { Department, Request } from 'app/models'
 })
 
 export class RequestFormComponent implements OnInit {
-  API_ENDPOINT = 'http://intuni.test/api';
   deptos: Department[] = [];
   request: Request = new Request();
 

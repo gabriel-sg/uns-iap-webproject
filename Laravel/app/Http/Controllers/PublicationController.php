@@ -27,14 +27,14 @@ class PublicationController extends Controller
      */
     public function store(Request $request)
     {
-        //Dejo la validacion momentaneamente porque no se si se valida tanto en el 
+        //Dejo la validacion momentaneamente porque no se si se valida tanto en el
         // front como en el back end
         $validateData = $request->validate([
             'title' => 'required|max:140',
             'description' => 'required',
             'department' => 'required',
             'category' => 'required',
-            'visible' => 'required'
+            // 'visible' => 'required' // Se puede dejar siempre en true cuando se crea
         ]);
 
         $publication = new Publication();
@@ -44,7 +44,7 @@ class PublicationController extends Controller
         $department = Department::where('name',$request->input('department'))->first();
         $publication->department_id = $department->id;
         $publication->category = $request->input('category');
-        $publication->visible = $request->input('visible');
+        $publication->visible = true; // A criterio si dejarlo asi o que venga del front
         //$requestEntry->user_id = $request->input('user_id');
         $publication->user_id = 1;   //Placeholder
 
@@ -62,7 +62,7 @@ class PublicationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //Dejo la validacion momentaneamente porque no se si se valida tanto en el 
+        //Dejo la validacion momentaneamente porque no se si se valida tanto en el
         // front como en el back end
         $validateData = $request->validate([
             'title' => 'required|max:140',

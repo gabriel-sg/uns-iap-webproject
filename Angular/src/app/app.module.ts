@@ -19,7 +19,8 @@ import {
   UserDashboardMessagesComponent,
   UserDashboardFavsComponent,
   UserDashboardHelpComponent,
-  UserDashboardContactUsComponent
+  UserDashboardContactUsComponent,
+  PublicationFormComponent
 } from 'app/components';
 
 // Log in module
@@ -59,7 +60,8 @@ export function getAuthServiceConfigs() {
     UserDashboardMessagesComponent,
     UserDashboardFavsComponent,
     UserDashboardHelpComponent,
-    UserDashboardContactUsComponent
+    UserDashboardContactUsComponent,
+    PublicationFormComponent
   ],
   imports: [
     BrowserModule,

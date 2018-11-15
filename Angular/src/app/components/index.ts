@@ -9,3 +9,4 @@ export * from 'app/components/user/user-dashboard-favs/user-dashboard-favs.compo
 export * from 'app/components/user/user-dashboard-help/user-dashboard-help.component';
 export * from 'app/components/user/user-dashboard-messages/user-dashboard-messages.component';
 export * from 'app/components/user/user-dashboard-my-requests/user-dashboard-my-requests.component';
+export * from 'app/components/publication-form/publication-form.component';

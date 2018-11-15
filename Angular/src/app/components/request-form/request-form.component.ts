@@ -3,12 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-// import { DepartmentService } from '../../services/department.service';
-// import { RequestService } from '../../services/request.service';
-// import { AlertService } from '../../services/alert.service';
 import { DepartmentService, RequestService, AlertService } from 'app/services';
-// import { Department } from '../../models/department';
-// import { Request } from '../../models/Request';
 import { Department, Request } from 'app/models'
 
 @Component({

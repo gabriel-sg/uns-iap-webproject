@@ -38,18 +38,12 @@ export class PublicationFormComponent implements OnInit {
       category: ['', Validators.required]
     });
 
-    // TODO: redirect to home if already logged in
-    // if (this.authenticationService.currentUserValue) {
-    //   this.router.navigate(['/']);
-    // }
-
     // TODO: ver como manejar los mensajes de error. Capaz conviene que lo haga el servicio.
     this.departmentService.getAll().subscribe(data => {
       this.deptos = data;
     }, (error) => {
       console.log(error);
       this.alertService.error('Error al solicitar los departamentos', false);
-      // alert('Ocurrio un error al solicitar los departamentos');
     });
   }
 

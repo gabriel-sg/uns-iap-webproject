@@ -14,7 +14,7 @@ import {
   UserDashboardFavsComponent,
   UserDashboardHelpComponent,
   UserDashboardContactUsComponent
-  
+
 } from 'app/components';
 
 const routes: Routes = [
@@ -28,7 +28,10 @@ const routes: Routes = [
   { path: 'mensajes', component: UserDashboardMessagesComponent },
   { path: 'mis-solicitudes', component: UserDashboardMyRequestsComponent },
   { path: 'nueva-publicacion', component: PublicationFormComponent },
-  { path: 'test', component: TestComponent }
+  { path: 'test', component: TestComponent },
+
+  // otherwise redirect to home
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

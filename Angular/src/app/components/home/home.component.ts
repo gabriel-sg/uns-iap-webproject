@@ -7,6 +7,7 @@ import { Request } from 'app/models';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+
 export class HomeComponent implements OnInit {
   requests: Request[];
 

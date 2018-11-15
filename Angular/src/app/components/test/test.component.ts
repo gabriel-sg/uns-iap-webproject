@@ -7,6 +7,7 @@ import { AuthService, GoogleLoginProvider } from 'ng-dynami-social-login';
   templateUrl: './test.component.html',
   styleUrls: ['./test.component.css']
 })
+
 export class TestComponent implements OnInit {
 
   constructor(private socialAuthService: AuthService) { }

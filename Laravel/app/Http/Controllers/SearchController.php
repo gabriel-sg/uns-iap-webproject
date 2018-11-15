@@ -12,7 +12,7 @@ class SearchController extends Controller
         //$requests = RequestModel::search()->orderBy('created_at')->paginate(15);   //Tiene que coincidir con el type de la form
         //$search = $request->get('searchRequests');//searchRequests
 
-        $requests = RequestModel::search()
+        $requests = RequestModel::search($search)
             ->orderBy('created_at','desc')//->get();
             ->paginate(15);
         echo json_encode($requests);

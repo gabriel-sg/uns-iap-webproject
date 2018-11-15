@@ -18,7 +18,7 @@ Orden de instalacion:
 	La instalacion actualiza el path, sino configurarlo. Se debe poder ejectuar desde CMD: php -v y composer -V.
 	-Descargar el instalador de Laravel, desde CMD:
 		>composer global require "laravel/installer"
-	-Instalar Angular CLI, desde CMD:
+	-Instalar Angular CLI globalmente, desde CMD:
 		>npm install -g @angular/cli
 	
 	-Si es un nuevo proyecto:
@@ -34,7 +34,7 @@ Orden de instalacion:
 	-Si es un proyecto descargado (ej, github):
 		Crear "carpeta_proyecto" dentro del servidor
 			>git clone url carpeta_proyecto
-		Moverse a carpeta_proyecto.
+		Moverse a carpeta_proyecto y carpeta de Laravel.
 		Configurar los detalles de la DB en el archivo .env (no viene con el clone, crearlo a partir del .env.example) y tambien 
 		en /config/database.php
 		Luego, instalar las dependencias necesarias:
@@ -45,7 +45,7 @@ Orden de instalacion:
 			>php artisan migrate --seed
 		Pagina para ver comandos con las migraciones:
 		https://styde.net/creacion-de-tablas-con-el-sistema-de-migraciones-de-laravel/
-		Para Angular:
+		Para Angular, moverse a la carpeta de Angular:
 			>npm install
 
 El proyecto ya deberia poder verse en el navegador. 

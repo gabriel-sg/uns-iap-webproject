@@ -53,7 +53,7 @@ export class RequestFormComponent implements OnInit {
       this.deptos = data;
     }, (error) => {
       console.log(error);
-      this.alertService.error('Error al solicitar los departamentos', true);
+      this.alertService.error('Error al solicitar los departamentos', false);
       // alert('Ocurrio un error al solicitar los departamentos');
     });
   }

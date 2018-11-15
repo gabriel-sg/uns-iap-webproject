@@ -7,12 +7,23 @@ use App\RequestModel;
 
 class SearchController extends Controller
 {
-    public function index($search)
+    public function index(Request $request,$search)
     {
         //$requests = RequestModel::search()->orderBy('created_at')->paginate(15);   //Tiene que coincidir con el type de la form
-        $requests = RequestModel::where('title','like','%'.$search.'%')->get();
-            //->orderBy('created_at')->get();
-            //->paginate(15);
-        json_encode($requests);
+        //$search = $request->get('searchRequests');//searchRequests
+
+        $requests = RequestModel::search()
+            ->orderBy('created_at','desc')//->get();
+            ->paginate(15);
+        echo json_encode($requests);
+
+        /*
+        $requests = RequestModel::where('title','like','%'.$search.'%')
+            ->orWhere('description','like','%'.$search.'%')
+            ->orderBy('created_at','desc')//->get();
+            ->paginate(15);
+        echo json_encode($requests);
+        */
+
     }
 }

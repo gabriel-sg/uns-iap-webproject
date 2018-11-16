@@ -26,6 +26,7 @@ import {
 // Log in module
 // https://www.npmjs.com/package/ng-dynami-social-login
 import { DynamiSocialLoginModule, AuthServiceConfig, GoogleLoginProvider } from 'ng-dynami-social-login';
+import { LoginComponent } from './components/login/login.component';
 
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig(
@@ -61,7 +62,8 @@ export function getAuthServiceConfigs() {
     UserDashboardFavsComponent,
     UserDashboardHelpComponent,
     UserDashboardContactUsComponent,
-    PublicationFormComponent
+    PublicationFormComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

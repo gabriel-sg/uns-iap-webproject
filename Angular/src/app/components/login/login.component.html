@@ -1,0 +1,57 @@
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+  crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+
+
+<div class="login-form">
+  <form method="post">
+    <h2 class="text-center">Sign in</h2>
+
+    <div class="text-left social-btn">
+      <div id="customBtn" class="customGPlusSignIn" (click)="socialSignIn('google')">
+        <span class="icon"></span>
+        <span class="buttonText">Sign in with Google</span>
+      </div>
+      <!-- <div (click)="socialSignIn('google')" class="btn btn-danger btn-block"><i class="fab fa-google"></i> Sign in with <b>Google</b></div> -->
+      <!-- <div class="btn btn-primary btn-block"><i class="fab fa-facebook-f"></i> Sign in with <b>Facebook</b></div> -->
+      <!-- <div class="btn btn-info btn-block"><i class="fa fa-twitter"></i> Sign in with <b>Twitter</b></div> -->
+    </div>
+    <div class="or-seperator"><i>or</i></div>
+
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="username-addon"><i class="fas fa-user"></i></span>
+        </div>
+        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="username-addon"
+          required="required" name="username">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="password-addon"><i class="fas fa-lock"></i></span>
+        </div>
+        <input type="password" class="form-control" name="password" placeholder="Password" aria-label="Password"
+          aria-describedby="password-addon" required="required">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary btn-block login-btn">Sign in</button>
+    </div>
+
+    <div class="clearfix">
+      <label class="float-left checkbox-inline"><input type="checkbox"> Remember me</label>
+      <a href="#" class="float-right text-success">Forgot Password?</a>
+    </div>
+
+  </form>
+
+  <div class="hint-text small">Don't have an account? <a href="#" class="text-success">Register Now!</a></div>
+</div>

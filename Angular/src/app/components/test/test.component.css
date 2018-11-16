@@ -29,8 +29,8 @@ span.icon {
 span.buttonText {
   display: inline-block;
   vertical-align: middle;
-  padding-left: 42px;
-  padding-right: 42px;
+  padding-left: 5px;
+  padding-right: 5px;
   font-size: 14px;
   font-weight: bold;
   /* Use the Roboto font that is loaded in the <head> */

@@ -13,8 +13,8 @@ import {
   UserDashboardMessagesComponent,
   UserDashboardFavsComponent,
   UserDashboardHelpComponent,
-  UserDashboardContactUsComponent
-
+  UserDashboardContactUsComponent,
+  LoginComponent
 } from 'app/components';
 
 const routes: Routes = [
@@ -28,6 +28,7 @@ const routes: Routes = [
   { path: 'mensajes', component: UserDashboardMessagesComponent },
   { path: 'mis-solicitudes', component: UserDashboardMyRequestsComponent },
   { path: 'nueva-publicacion', component: PublicationFormComponent },
+  { path: 'login', component: LoginComponent},
   { path: 'test', component: TestComponent },
 
   // otherwise redirect to home

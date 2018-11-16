@@ -1,7 +1,7 @@
 
 <div class="row">
-  <div class="col-6">
-    <h2>Crear solicitud</h2>
+  <div class="col-6 offset-3">
+    <h2 class="text-center">Crear solicitud</h2>
     <form [formGroup]="requestForm" (ngSubmit)="onSubmit()" class="form-group">
       <div class="form-group">
           <label for="title">Título</label>
@@ -18,7 +18,7 @@
           </div>
       </div>
       <div class="form-row">
-        <div class="col-6">
+        <div class="col-12">
           <div class="form-group">
             <label for="department">Departamento</label>
             <select formControlName="department" class="form-control" [ngClass]="{ 'is-invalid': submitted && f('department').errors }">

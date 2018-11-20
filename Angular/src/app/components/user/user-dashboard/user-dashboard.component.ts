@@ -1,9 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'environments/environment';
 import { Publication } from 'app/models';
-import { PublicationService } from 'app/services';
-
+import { PublicationService, AlertService } from 'app/services';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -11,19 +8,23 @@ import { PublicationService } from 'app/services';
   styleUrls: ['./user-dashboard.component.css']
 })
 export class UserDashboardComponent implements OnInit {
-  API_ENDPOINT = environment.apiUrl;
   publications: Publication[];
 
-  constructor(private publicationService: PublicationService, private httpClient: HttpClient) {
-    httpClient.get(this.API_ENDPOINT + '/publications').subscribe( (data: Publication[]) => {
-      this.publications = data;
-    }, (error) => {
-      console.log(error);
-      alert('Ocurrio un error al pedir a la DB las publicaciones');
-    });
-   }
+  constructor(
+    private publicationService: PublicationService,
+    private alertService: AlertService) { }
 
-  ngOnInit() {
+  ngOnInit()  {
+    // Obtengo todas las solicitudes
+    this.publicationService.getById(2).subscribe(data => {
+      this.publications = data;
+    },(error) => {
+      console.log(error);
+      this.alertService.error('Error al obtener las solicitudes', false);
+    });
+  }
+
+  
   }
 
 }

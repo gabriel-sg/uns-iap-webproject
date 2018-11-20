@@ -30,3 +30,5 @@ Route::get('searchRequests/{search}','SearchController@index');
 Route::get('users/getRequests/{id}','UsersController@getRequests');
 
 Route::get('users/getPublications/{id}','UsersController@getPublications');
+
+Route::post('login','GoogleLoginController@login');

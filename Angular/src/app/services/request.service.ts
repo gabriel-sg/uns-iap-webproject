@@ -32,4 +32,8 @@ export class RequestService {
     return this.http.delete(this.API_ENDPOINT + '/requests/' + id);
   }
 
+  public getRequests(user_id: number) {
+    return this.http.get<Request[]>(this.API_ENDPOINT + '/users/getRequests/' + user_id);
+  }
+
 }

@@ -16,7 +16,7 @@ export class UserDashboardComponent implements OnInit {
 
   ngOnInit()  {
     // Obtengo todas las solicitudes
-    this.publicationService.getById(2).subscribe(data => {
+    this.publicationService.getPublications(1).subscribe(data => {
       this.publications = data;
     },(error) => {
       console.log(error);
@@ -27,7 +27,7 @@ export class UserDashboardComponent implements OnInit {
   
   }
 
-}
+
 
 
 

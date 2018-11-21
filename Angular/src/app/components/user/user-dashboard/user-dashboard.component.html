@@ -9,76 +9,52 @@
             <div class="sidebar-sticky">
               <ul class="nav flex-column">
                 <li class="nav-item">
-                  <a class="nav-link active" href="#">
+                  <a class="nav-link active" [routerLink]="['mis-publicaciones']">
                     <span data-feather="home"></span>
                     Mis publicaciones <span class="sr-only">(current)</span>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" routerLink="/mis-solicitudes">
+                  <a class="nav-link" [routerLink]="['mis-solicitudes']">
                     <span data-feather="file"></span>
                     Mis solicitudes
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" routerLink="/mensajes">
+                  <a class="nav-link" [routerLink]="['mensajes']">
                     <span data-feather="message-square"></span>
                     Mensajes
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" routerLink="/favoritos">
+                  <a class="nav-link" [routerLink]="['favoritos']">
                     <span data-feather="heart"></span>
                     Favoritos
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" routerLink="/ayuda">
+                  <a class="nav-link" [routerLink]="['ayuda']">
                     <span data-feather="help-circle"></span>
                     Ayuda
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" routerLink="/contactenos">
+                  <a class="nav-link" [routerLink]="['contactenos']">
                     <span data-feather="mail"></span>
                     Contactenos
                   </a>
                 </li>
               </ul>
     
-    
+              
             </div>
+         
           </nav>
 
-
-  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-      <tr *ngFor="let publication of publications">
-    <div class="card bg-light">
-      <div class="card-body">
-        
-          <h5>{{publication.title}}</h5>
-        <div class="row">
-          <div class="col-sm-8">
-              <p class="lead" >{{publication.description}}</p>
-          </div>
-            <div class="col-sm-2">
-                <img src="https://www.zendalibros.com/wp-content/uploads/2017/09/james-bold-343821.jpg" class="img-fluid"
-                alt="Responsive image">
-            </div>
-            <div class="col-sm-2">
-                <a class="btn btn-sm btn-secondary" href="../../components/navbar/" role="button">Modificar &raquo;</a>
-                <p></p>
-                <a class="btn btn-sm btn-secondary" href="../../components/navbar/" role="button">Republicar &raquo;</a>
-                <p></p>
-                <a class="btn btn-sm btn-secondary" href="../../components/navbar/" role="button">Aumentar Exposicion
-                  (pronto!) &raquo;</a>
-              </div>
-            </div>
-        </div>
-      </div>
-      <p></p>
-
-    </main>
+          <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+              <router-outlet></router-outlet>
+          </main>
+          
   </div>
 
 </div>

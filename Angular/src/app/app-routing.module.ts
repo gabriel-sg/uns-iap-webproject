@@ -14,6 +14,7 @@ import {
   UserDashboardFavsComponent,
   UserDashboardHelpComponent,
   UserDashboardContactUsComponent,
+  UserDashboardMyPublicationsComponent,
   LoginComponent
 } from 'app/components';
 
@@ -21,15 +22,20 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'crearsolicitud', component: RequestFormComponent },
-  { path: 'mi-cuenta', component: UserDashboardComponent },
-  { path: 'contactenos', component: UserDashboardContactUsComponent },
-  { path: 'favoritos', component: UserDashboardFavsComponent },
-  { path: 'ayuda', component: UserDashboardHelpComponent },
-  { path: 'mensajes', component: UserDashboardMessagesComponent },
-  { path: 'mis-solicitudes', component: UserDashboardMyRequestsComponent },
   { path: 'nueva-publicacion', component: PublicationFormComponent },
   { path: 'login', component: LoginComponent},
   { path: 'test', component: TestComponent },
+
+  { path: 'mi-cuenta', component: UserDashboardComponent,
+  children: [
+      { path: 'mis-publicaciones', component: UserDashboardMyPublicationsComponent },
+      { path: 'mis-solicitudes', component: UserDashboardMyRequestsComponent },
+      { path: 'mensajes', component: UserDashboardMessagesComponent },
+      { path: 'favoritos', component: UserDashboardFavsComponent },
+      { path: 'ayuda', component:  UserDashboardHelpComponent },
+      { path: 'contactenos', component: UserDashboardContactUsComponent },
+     
+    ]},
 
   // otherwise redirect to home
   { path: '**', redirectTo: '' }

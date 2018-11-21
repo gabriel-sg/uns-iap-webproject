@@ -14,7 +14,7 @@ class SearchController extends Controller
 
         $requests = RequestModel::search($search)
             ->orderBy('created_at','desc')//->get();
-            ->paginate(15);
+            ->paginate(3);
         echo json_encode($requests);
 
         /*

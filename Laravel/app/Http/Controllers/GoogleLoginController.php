@@ -15,9 +15,9 @@ class GoogleLoginController extends Controller
         ]);
 
         $id_token = $request->input('id_token');
-        $client = new Google_Client(['client_id' => '1098324426333-gog6d9e0qcnog9i5lbicu1sokj6b5ah2.apps.googleusercontent.com']);
+        $client = new \Google_Client(['client_id' => '1098324426333-gog6d9e0qcnog9i5lbicu1sokj6b5ah2.apps.googleusercontent.com']);
         $payload = $client->verifyIdToken($id_token);
-        if ($payload) 
+        if ($payload)
         {
             $userid = $payload['sub'];
             $existing_user=User::find($userid);

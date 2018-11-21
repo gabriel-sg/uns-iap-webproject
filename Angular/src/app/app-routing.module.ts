@@ -28,13 +28,14 @@ const routes: Routes = [
 
   { path: 'mi-cuenta', component: UserDashboardComponent,
   children: [
+      { path: '', component: UserDashboardMyPublicationsComponent },
       { path: 'mis-publicaciones', component: UserDashboardMyPublicationsComponent },
       { path: 'mis-solicitudes', component: UserDashboardMyRequestsComponent },
       { path: 'mensajes', component: UserDashboardMessagesComponent },
       { path: 'favoritos', component: UserDashboardFavsComponent },
       { path: 'ayuda', component:  UserDashboardHelpComponent },
       { path: 'contactenos', component: UserDashboardContactUsComponent },
-     
+
     ]},
 
   // otherwise redirect to home

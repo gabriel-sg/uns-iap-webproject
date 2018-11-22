@@ -40,4 +40,10 @@ return [
         ],
     ],
 
+    'google' => [
+      'client_id' => env('1098324426333-gog6d9e0qcnog9i5lbicu1sokj6b5ah2.apps.googleusercontent.com'),         // Your GitHub Client ID
+      'client_secret' => env('14Zoc-vR04hnXyMzXEK8aJk_'), // Your GitHub Client Secret
+      'redirect' => 'http://intuni.test',
+    ],
+
 ];

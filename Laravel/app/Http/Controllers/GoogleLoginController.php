@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Socialite;
+
 
 class GoogleLoginController extends Controller
 {
@@ -15,8 +17,9 @@ class GoogleLoginController extends Controller
         ]);
 
         $id_token = $request->input('id_token');
-        $client = new \Google_Client(['client_id' => '1098324426333-gog6d9e0qcnog9i5lbicu1sokj6b5ah2.apps.googleusercontent.com']);
-        $payload = $client->verifyIdToken($id_token);
+        // $client = new \Google_Client(['client_id' => '1098324426333-gog6d9e0qcnog9i5lbicu1sokj6b5ah2.apps.googleusercontent.com']);
+        // $payload = $client->verifyIdToken($id_token);
+        $user = Socialite::driver('google')->userFromToken($id_token);
         if ($payload)
         {
             $userid = $payload['sub'];

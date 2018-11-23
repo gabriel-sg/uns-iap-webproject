@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService, GoogleLoginProvider } from 'ng-dynami-social-login';
+import { AuthenticationService } from 'app/services';
 
 @Component({
   selector: 'app-login',
@@ -9,28 +9,15 @@ import { AuthService, GoogleLoginProvider } from 'ng-dynami-social-login';
 
 export class LoginComponent implements OnInit {
 
-  constructor(private socialAuthService: AuthService) { }
+  constructor(private auth: AuthenticationService) { }
 
   ngOnInit() {
   }
 
   public socialSignIn(socialPlatform: string) {
+    this.auth.login(socialPlatform);
     let socialPlatformProvider;
-    if (socialPlatform == "google") {
-      socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
-    }
-    // else if (socialPlatform == "facebook") {
-    //   socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
-    // } else if (socialPlatform == "linkedin") {
-    //   socialPlatformProvider = LinkedinLoginProvider.PROVIDER_ID;
-    // }
 
-    this.socialAuthService.signIn(socialPlatformProvider).then(
-      (userData) => {
-        console.log(userData);
-
-      }
-    );
   }
 
   // onMySignIn(googleUser) {

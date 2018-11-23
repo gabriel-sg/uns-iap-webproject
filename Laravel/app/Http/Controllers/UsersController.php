@@ -83,6 +83,30 @@ class UsersController extends Controller
         }*/
     }
 
+    public function update(Request $request, $id)
+    {
+        //Dejo la validacion momentaneamente porque no se si se valida tanto en el
+        // front como en el back end
+        $validateData = $request->validate([
+            'fullname' => 'required|max:140',
+            'phone' => 'required',
+            'career' => 'required',
+            'department' => 'required'
+        ]);
+
+        $user = User::find($id);
+
+        $user->fullname = $request->input('fullname');
+        $user->phone = $request->input('phone');
+        //$department = Department::where('name',$request->input('department'))->first();
+        //$user->department_id = $department->id;
+        $user->department = $request->input('department');
+        $user->career = $request->input('career');
+
+        $user->save();
+        echo json_encode($user);
+    }
+
     public function getPublications($id)
     {
         $publications = Publication::where('user_id',$id)->get();

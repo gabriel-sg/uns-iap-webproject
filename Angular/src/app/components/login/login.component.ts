@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from 'app/services';
+import { Router } from '@angular/router';
+import { Subscription, from } from 'rxjs';
+import { first } from 'rxjs/operators';
+
+import { User } from 'app/models';
+import { AlertService, AuthenticationService } from 'app/services';
 
 @Component({
   selector: 'app-login',
@@ -8,31 +13,36 @@ import { AuthenticationService } from 'app/services';
 })
 
 export class LoginComponent implements OnInit {
+  currentUser: User;
+  currentUserSubscription: Subscription;
 
-  constructor(private auth: AuthenticationService) { }
+  constructor(
+    private authenticationService: AuthenticationService,
+    private router: Router,
+    private alertService: AlertService
+  ) {
+      // redirect to home if already logged in
+      if (this.authenticationService.currentUserValue) {
+        this.router.navigate(['/mi-cuenta']);
+    }
+  }
 
   ngOnInit() {
   }
 
   public socialSignIn(socialPlatform: string) {
-    this.auth.login(socialPlatform);
-    let socialPlatformProvider;
+    let observable = from(this.authenticationService.login(socialPlatform));
+    observable
+    .pipe(first())
+    .subscribe(
+        data => {
+            this.router.navigate(['/mi-cuenta']);
+        },
+        error => {
+            this.alertService.error('error al logearse');
+        });
 
   }
 
-  // onMySignIn(googleUser) {
-  //   // Useful data for your client-side scripts:
-  //   var profile = googleUser.getBasicProfile();
-  //   console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-  //   console.log('Full Name: ' + profile.getName());
-  //   console.log('Given Name: ' + profile.getGivenName());
-  //   console.log('Family Name: ' + profile.getFamilyName());
-  //   console.log("Image URL: " + profile.getImageUrl());
-  //   console.log("Email: " + profile.getEmail());
-  //   console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaah");
-  //   // The ID token you need to pass to your backend:
-  //   var id_token = googleUser.getAuthResponse().id_token;
-  //   console.log("ID Token: " + id_token);
-  // }
 }
 

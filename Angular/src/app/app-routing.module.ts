@@ -18,6 +18,8 @@ import {
   LoginComponent
 } from 'app/components';
 
+import { AuthGuardService } from './services/auth-guard.service';
+
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
@@ -26,7 +28,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'test', component: TestComponent },
 
-  { path: 'mi-cuenta', component: UserDashboardComponent,
+  { path: 'mi-cuenta', component: UserDashboardComponent,canActivate:[AuthGuardService],
   children: [
       { path: '', component: UserDashboardMyPublicationsComponent },
       { path: 'mis-publicaciones', component: UserDashboardMyPublicationsComponent },

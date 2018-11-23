@@ -10,6 +10,9 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    public $incrementing = false;
+
+    public $keyType = string;
     /**
      * The attributes that are mass assignable.
      *

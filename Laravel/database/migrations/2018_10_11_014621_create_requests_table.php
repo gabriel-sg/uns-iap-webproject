@@ -28,7 +28,7 @@ class CreateRequestsTable extends Migration
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
             $table->string('category',100);
-            $table->unsignedInteger('user_id'); //Foreign
+            $table->string('user_id'); //Foreign
             $table->foreign('user_id')->references('id')->on('users')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');

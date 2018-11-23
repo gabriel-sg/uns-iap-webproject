@@ -20,14 +20,14 @@ class CreateUsersTable extends Migration
             $table->collation = 'utf8_unicode_ci'; //unicode case-insensitive
 
             // Creating Columns
-            $table->string('id')->primary();
+            $table->string('id',128)->primary();
             $table->string('fullname', 255);
             $table->string('urlImage', 255);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('phone',100)->default('Sin teléfono'); //veeeeeeeeeer
             $table->string('career', 150)->default('Sin asignar');
-            $table->string('department', 100);
+            $table->string('department', 100)->default('Sin asignar');
             $table->timestamps();
         });
     }

@@ -29,7 +29,7 @@ class CreatePublicationsTable extends Migration
             //$table->string('career',150);
             $table->string('category',100);
             //$table->string('url_foto',255);
-            $table->unsignedInteger('user_id'); //Foreign
+            $table->string('user_id'); //Foreign
             $table->foreign('user_id')->references('id')->on('users')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');

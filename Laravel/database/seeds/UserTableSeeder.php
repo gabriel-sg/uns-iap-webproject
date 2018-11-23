@@ -14,9 +14,10 @@ class UserTableSeeder extends Seeder
     {
         //
         $usuario = new User();
-        $usuario->name = "pepe";
+        $usuario->id="12345";
+        $usuario->fullname = "pepe";
         $usuario->email = "sapopepe@ejemplo.com";
-        $usuario->password = bcrypt('sapopepe');
+        $usuario->urlImage="foto1";
         $usuario->phone = "299 5919191";
         $usuario->career = "ABOGACIA";
         $usuario->department = "DERECHO";

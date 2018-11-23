@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\RequestModel;
 use App\Publication;
+use Socialite;
 
 class UsersController extends Controller
 {
@@ -24,6 +25,62 @@ class UsersController extends Controller
     {
         $user = User::where('id',$id)->get();
         echo json_encode($user);
+    }
+
+    public function login(Request $request)
+    {
+        $validateData = $request->validate([
+            'id' => 'required',
+            //'id_token' => 'required',
+        ]);
+
+        //$id_token = $request->input('id_token');
+        $id=$request->input('id');
+        // $client = new \Google_Client(['client_id' => '1098324426333-gog6d9e0qcnog9i5lbicu1sokj6b5ah2.apps.googleusercontent.com']);
+        // $payload = $client->verifyIdToken($id_token);
+        //$payload = Socialite::driver('google')->userFromToken($id_token);
+        $user=User::find($id);
+        if(!$user)
+        {
+            $newuser = new User();
+            $newuser->id=$id;
+            $newuser->fullname=$request->input('fullname');
+            $newuser->email=$request->input('email');
+            $newuser->urlImage=$request->input('urlImage');
+
+            $newuser->save();
+            echo json_encode($user);
+        }
+        else
+        {
+            echo json_encode($user);
+        }
+        /*if ($user)
+        {
+            $userid = $payload['sub'];
+            $existing_user=User::find($userid);
+            if(!$existing_user)
+            {
+                $user = new User();
+                $user->id=$userid;
+                $user->name=$payload['name'];
+                $user->mail=$payload['email'];
+                $user->department='-';
+                $user->password='-';
+
+                $user->save();
+                echo json_encode($user);
+            }
+            else
+            {
+                echo json_encode($existing_user);
+            }
+
+        }
+        else
+        {
+            //Error de token, no se que habria que poner en este caso
+        }*/
     }
 
     public function getPublications($id)

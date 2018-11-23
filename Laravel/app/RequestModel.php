@@ -21,10 +21,5 @@ class RequestModel extends Model
         $array = $this->toArray();        
         return array('title' => $array['title'],'description' => $array['description']);
     }        
-    /*
-    public function scopeSearch($query)
-    {
-        return empty(request()->search) ? $query : $query->where('title','like','%'.request()->search.'%');
-    }
-    */
+
 }

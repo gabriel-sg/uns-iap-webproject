@@ -25,7 +25,9 @@ Route::resource('departments', 'DepartmentController');
 
 Route::resource('users', 'UsersController');
 
-Route::get('searchRequests/{search}','SearchController@index');
+Route::get('searchRequests/{search}','SearchController@searchRequests');
+
+Route::get('searchPublications/{search}','SearchController@searchPublications');
 
 Route::get('users/getRequests/{id}','UsersController@getRequests');
 

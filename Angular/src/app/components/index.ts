@@ -12,4 +12,5 @@ export * from 'app/components/user/user-dashboard-my-requests/user-dashboard-my-
 export * from 'app/components/user/user-dashboard-my-publications/user-dashboard-my-publications.component';
 export * from 'app/components/publication-form/publication-form.component';
 export * from 'app/components/login/login.component';
+export * from 'app/components/new-user/new-user.component';
 

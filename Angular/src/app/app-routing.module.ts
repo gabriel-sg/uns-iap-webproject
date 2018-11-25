@@ -7,6 +7,7 @@ import {
   RequestFormComponent,
   TestComponent,
   PublicationFormComponent,
+  NewUserComponent,
   // User components
   UserDashboardComponent,
   UserDashboardMyRequestsComponent,
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'nueva-publicacion', component: PublicationFormComponent },
   { path: 'login', component: LoginComponent},
   { path: 'test', component: TestComponent },
+  { path: 'nuevo-usuario', component: NewUserComponent },
 
   { path: 'mi-cuenta', component: UserDashboardComponent,canActivate:[AuthGuardService],
   children: [

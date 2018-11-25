@@ -29,6 +29,7 @@ import { DynamiSocialLoginModule, AuthServiceConfig, GoogleLoginProvider } from 
 import { LoginComponent } from './components/login/login.component';
 import { UserDashboardMyPublicationsComponent } from './components/user/user-dashboard-my-publications/user-dashboard-my-publications.component';
 import { UserDashboardConfigurationComponent } from './components/user/user-dashboard-configuration/user-dashboard-configuration.component';
+import { NewUserComponent } from './components/new-user/new-user.component';
 
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig(
@@ -67,7 +68,8 @@ export function getAuthServiceConfigs() {
     PublicationFormComponent,
     LoginComponent,
     UserDashboardMyPublicationsComponent,
-    UserDashboardConfigurationComponent
+    UserDashboardConfigurationComponent,
+    NewUserComponent
   ],
   imports: [
     BrowserModule,

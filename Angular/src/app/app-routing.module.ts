@@ -19,6 +19,7 @@ import {
 } from 'app/components';
 
 import { AuthGuardService } from './services/auth-guard.service';
+import { UserDashboardConfigurationComponent } from './components/user/user-dashboard-configuration/user-dashboard-configuration.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -37,6 +38,8 @@ const routes: Routes = [
       { path: 'favoritos', component: UserDashboardFavsComponent },
       { path: 'ayuda', component:  UserDashboardHelpComponent },
       { path: 'contactenos', component: UserDashboardContactUsComponent },
+      { path: 'configuracion', component: UserDashboardConfigurationComponent },
+
 
     ]},
 

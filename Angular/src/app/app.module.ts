@@ -28,6 +28,7 @@ import {
 import { DynamiSocialLoginModule, AuthServiceConfig, GoogleLoginProvider } from 'ng-dynami-social-login';
 import { LoginComponent } from './components/login/login.component';
 import { UserDashboardMyPublicationsComponent } from './components/user/user-dashboard-my-publications/user-dashboard-my-publications.component';
+import { UserDashboardConfigurationComponent } from './components/user/user-dashboard-configuration/user-dashboard-configuration.component';
 
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig(
@@ -65,7 +66,8 @@ export function getAuthServiceConfigs() {
     UserDashboardContactUsComponent,
     PublicationFormComponent,
     LoginComponent,
-    UserDashboardMyPublicationsComponent
+    UserDashboardMyPublicationsComponent,
+    UserDashboardConfigurationComponent
   ],
   imports: [
     BrowserModule,

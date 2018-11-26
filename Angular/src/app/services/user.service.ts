@@ -24,7 +24,7 @@ export class UserService {
     return this.http.post( this.API_ENDPOINT + '/users', user);
   }
 
-  public update(user: User) {
+  public update(user: User, id:number) {
     return this.http.put(this.API_ENDPOINT + '/users/'+ user.id, user);
   }
 

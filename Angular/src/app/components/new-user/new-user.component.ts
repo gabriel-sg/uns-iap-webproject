@@ -57,7 +57,7 @@ export class NewUserComponent implements OnInit {
     }
 
     this.loading = true;
-    this.userService.store(this.userForm.value)
+    this.userService.update(this.userForm.value,1)
       .pipe(first())
       .subscribe(
         data => {

@@ -24,7 +24,7 @@ class CreatePhotosTable extends Migration
           $table->foreign('publi_id')->references('id')->on('publications')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-          $table->string('url_foto',255);
+          $table->string('filename',255);
           $table->timestamps();
         });
     }

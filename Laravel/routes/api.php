@@ -34,3 +34,5 @@ Route::get('users/getRequests/{id}','UsersController@getRequests');
 Route::get('users/getPublications/{id}','UsersController@getPublications');
 
 Route::post('users/login','UsersController@login');
+
+Route::post('test','TestController@image');

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AuthService, GoogleLoginProvider } from 'ng-dynami-social-login';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-test',
@@ -9,8 +11,10 @@ import { AuthService, GoogleLoginProvider } from 'ng-dynami-social-login';
 })
 
 export class TestComponent implements OnInit {
+  selectedFile: File =null;
+  API_ENDPOINT = environment.apiUrl;
 
-  constructor(private socialAuthService: AuthService) { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
   }
@@ -26,12 +30,13 @@ export class TestComponent implements OnInit {
     // } else if (socialPlatform == "linkedin") {
     //   socialPlatformProvider = LinkedinLoginProvider.PROVIDER_ID;
     // }
-
+    /*
     this.socialAuthService.signIn(socialPlatformProvider).then(
       (userData) => {
         console.log(userData);
       }
     );
+    */
   }
 
   onMySignIn(googleUser) {
@@ -47,5 +52,19 @@ export class TestComponent implements OnInit {
     // The ID token you need to pass to your backend:
     var id_token = googleUser.getAuthResponse().id_token;
     console.log("ID Token: " + id_token);
+  }
+
+  onFileSelected(event){
+    this.selectedFile = <File>event.target.files[0];
+    console.log(event);
+  }
+
+  onUpload(){
+    const fd = new FormData();
+    fd.append('filename',this.selectedFile,this.selectedFile.name);
+    this.http.post(this.API_ENDPOINT + '/test',fd)
+      .subscribe(res => {
+        console.log(res);
+      });
   }
 }

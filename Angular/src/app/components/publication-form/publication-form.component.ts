@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { DepartmentService, PublicationService, AlertService } from 'app/services';
-import { Department, Publication } from 'app/models'
+import { Department, Publication, Photo } from 'app/models'
 
 @Component({
   selector: 'app-publication-form',
@@ -13,8 +13,10 @@ import { Department, Publication } from 'app/models'
 })
 
 export class PublicationFormComponent implements OnInit {
+  selectedFile: File =null;
   deptos: Department[] = [];
   publication: Publication = new Publication();
+  //photo: Photo = new Photo();
 
   publicationForm: FormGroup;
   loading = false;
@@ -51,6 +53,11 @@ export class PublicationFormComponent implements OnInit {
   // convenience getter for easy access to form fields
   private f(key: string) { return this.publicationForm.controls[key]; }
 
+  onFileSelected(event){
+    this.selectedFile = <File>event.target.files[0];
+    console.log(event);
+  }
+
   onSubmit() {
     this.submitted = true;
 
@@ -58,7 +65,7 @@ export class PublicationFormComponent implements OnInit {
     if (this.publicationForm.invalid) {
       return;
     }
-
+    console.log(this.publicationForm.value);
     this.loading = true;
     this.publicationService.store(this.publicationForm.value)
       .pipe(first())
@@ -66,7 +73,25 @@ export class PublicationFormComponent implements OnInit {
         data => {
           this.alertService.success('Publicación creada', true);
           // alert('Publicación creada')
-          this.router.navigate(['/']);
+          this.publication = data;
+          //this.router.navigate(['/']);
+          const fd = new FormData();
+          fd.append('filename',this.selectedFile,this.selectedFile.name);
+          fd.append('publi_id',this.publication.id.toString());
+          this.publicationService.uploadPhoto(fd)
+            .pipe(first())
+            .subscribe(
+              data => {
+                this.alertService.success('Foto cargada', true);
+                console.log(data);
+                this.router.navigate(['/']);
+              },
+              error => {
+                this.alertService.error('Error al guardad la foto');
+                console.log(error);
+                this.loading = false;
+              });
+          
         },
         error => {
           this.alertService.error('Error al guardad la publicación');
@@ -74,6 +99,7 @@ export class PublicationFormComponent implements OnInit {
           // alert('Ocurrio un error al guardar la publicación');
           this.loading = false;
         });
+     
   }
 
 }

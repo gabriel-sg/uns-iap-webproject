@@ -11,4 +11,5 @@ export class Photo {
         this.created_at = '';
         this.updated_at = '';
     }
+
 }

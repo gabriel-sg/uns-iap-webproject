@@ -12,8 +12,8 @@ class TestController extends Controller
     //
     public function image(Request $request)
     {
-        /*
-        $this->validate($request, [
+        /*$this->validate($request, [
+            'publi_id' => 'required',
             'filename' => 'required',
             'filename.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);*/
@@ -33,11 +33,11 @@ class TestController extends Controller
         }
         $photo = new Photo();
         $photo->filename=$path;//json_encode($data);
-        $photo->publi_id=2;
+        $photo->publi_id=$request->publi_id;
 
         $photo->save();
 
         //return json_encode($photo);
-        echo json_encode('intuni.test/'.(Storage::url($path)));
+        echo json_encode('intuni.test'.(Storage::url($path)));
     }
 }

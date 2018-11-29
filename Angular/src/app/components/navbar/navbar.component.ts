@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticationService } from 'app/services'
+import { AuthenticationService, AlertService, SearchService } from 'app/services';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'app/models';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar',
@@ -10,14 +12,21 @@ import { User } from 'app/models';
 })
 export class NavbarComponent implements OnInit {
   currentUser: User;
+  searchForm: FormGroup;
 
   constructor(
     private authenticationService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private searchService: SearchService,
+    private alertService: AlertService
     ) { }
 
   ngOnInit() {
     this.authenticationService.currentUser.subscribe(user => this.currentUser = user);
+    this.searchForm = this.formBuilder.group({
+      search: ['', Validators.required]
+    });
   }
 
   logout(){
@@ -25,4 +34,15 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
+  onSubmit(){
+    this.searchService.searchPublications(this.searchForm.value.search)
+    .pipe(first())
+    .subscribe(
+      data=> {
+        console.log(data);
+      },
+      error => {
+        console.log(error);
+      });
+  }
 }

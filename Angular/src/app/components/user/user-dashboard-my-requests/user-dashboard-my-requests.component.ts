@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RequestService, AlertService } from 'app/services';
-import { Request } from 'app/models';
+import { RequestService, AlertService, AuthenticationService } from 'app/services';
+import { Request, User } from 'app/models';
 
 @Component({
   selector: 'app-user-dashboard-my-requests',
@@ -9,13 +9,18 @@ import { Request } from 'app/models';
 })
 export class UserDashboardMyRequestsComponent implements OnInit {
   requests: Request [];
-  constructor(    
+  currentUser: User;
+
+  constructor(
     private requestService: RequestService,
-    private alertService: AlertService) { }
+    private alertService: AlertService,
+    private authenticationService: AuthenticationService) { }
 
     ngOnInit()  {
-      // Obtengo todas las solicitudes con el correspondiente Id de usuario 
-      this.requestService.getRequests(1).subscribe(data => {
+      this.currentUser = this.authenticationService.currentUserValue;
+
+      // Obtengo todas las solicitudes con el correspondiente Id de usuario
+      this.requestService.getRequests(this.currentUser.id).subscribe(data => {
         this.requests = data;
       },(error) => {
         console.log(error);

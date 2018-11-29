@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Publication } from 'app/models';
-import { PublicationService, AlertService } from 'app/services';
+import { Publication, User } from 'app/models';
+import { PublicationService, AlertService, AuthenticationService } from 'app/services';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -9,14 +9,17 @@ import { PublicationService, AlertService } from 'app/services';
 })
 export class UserDashboardComponent implements OnInit {
   publications: Publication[];
+  currentUser: User;
 
   constructor(
     private publicationService: PublicationService,
-    private alertService: AlertService) { }
+    private alertService: AlertService,
+    private authenticationService: AuthenticationService) { }
 
   ngOnInit()  {
+    this.currentUser = this.authenticationService.currentUserValue;
     // Obtengo todas las solicitudes
-    this.publicationService.getPublications(1).subscribe(data => {
+    this.publicationService.getPublications(this.currentUser.id).subscribe(data => {
       this.publications = data;
     },(error) => {
       console.log(error);
@@ -24,7 +27,7 @@ export class UserDashboardComponent implements OnInit {
     });
   }
 
-  
+
   }
 
 

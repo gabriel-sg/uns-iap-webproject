@@ -45,8 +45,9 @@ class PublicationController extends Controller
         $publication->department_id = $department->id;
         $publication->category = $request->input('category');
         $publication->visible = true; // A criterio si dejarlo asi o que venga del front
-        //$requestEntry->user_id = $request->input('user_id');
-        $publication->user_id = 1;   //Placeholder
+        $requestEntry->user_id = $request->input('user_id');
+        // $publication->user_id = 1;   //Placeholder
+        $publication->visible= $request->input('visible');
 
         $publication->save();
         echo json_encode($publication);
@@ -79,8 +80,8 @@ class PublicationController extends Controller
         $department = Department::where('name',$request->input('department'))->first();
         $publication->department_id = $department->id;
         $publication->category = $request->input('category');
-        //$requestEntry->user_id = $request->input('user_id');
-        $publication->user_id = 1;   //Placeholder
+        $requestEntry->user_id = $request->input('user_id');
+        // $publication->user_id = 1;   //Placeholder
         $publication->visible= $request->input('visible');
 
         $publication->save();

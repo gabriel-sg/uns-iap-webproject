@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-import { DepartmentService, PublicationService, AlertService } from 'app/services';
-import { Department, Publication, Photo } from 'app/models'
+import { DepartmentService, PublicationService, AlertService, AuthenticationService } from 'app/services';
+import { Department, Publication, Photo, User } from 'app/models'
 
 @Component({
   selector: 'app-publication-form',
@@ -16,6 +16,8 @@ export class PublicationFormComponent implements OnInit {
   selectedFile: File =null;
   deptos: Department[] = [];
   publication: Publication = new Publication();
+  currentUser: User;
+
   //photo: Photo = new Photo();
 
   publicationForm: FormGroup;
@@ -27,17 +29,21 @@ export class PublicationFormComponent implements OnInit {
     private publicationService: PublicationService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private authenticationService: AuthenticationService
   ) { }
 
 
 
   ngOnInit() {
+    this.currentUser = this.authenticationService.currentUserValue;
+
     this.publicationForm = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
       department: ['', Validators.required],
-      category: ['', Validators.required]
+      category: ['', Validators.required],
+      user_id: [this.currentUser.id]
     });
 
     // TODO: ver como manejar los mensajes de error. Capaz conviene que lo haga el servicio.
@@ -91,7 +97,7 @@ export class PublicationFormComponent implements OnInit {
                 console.log(error);
                 this.loading = false;
               });
-          
+
         },
         error => {
           this.alertService.error('Error al guardad la publicación');
@@ -99,7 +105,7 @@ export class PublicationFormComponent implements OnInit {
           // alert('Ocurrio un error al guardar la publicación');
           this.loading = false;
         });
-     
+
   }
 
 }

@@ -19,7 +19,7 @@ class RequestController extends Controller
         $requestEntries = RequestModel::get();
         echo json_encode($requestEntries);
     }
-    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -28,7 +28,7 @@ class RequestController extends Controller
      */
     public function store(Request $request)
     {
-      //Dejo la validacion momentaneamente porque no se si se valida tanto en el 
+      //Dejo la validacion momentaneamente porque no se si se valida tanto en el
       // front como en el back end
       $validateData = $request->validate([
           'title' => 'required|max:140',
@@ -44,8 +44,8 @@ class RequestController extends Controller
       $department = Department::where('name',$request->input('department'))->first();
       $requestEntry->department_id = $department->id;
       $requestEntry->category = $request->input('category');
-      //$requestEntry->user_id = $request->input('user_id');
-      $requestEntry->user_id = 1;   //Placeholder
+      $requestEntry->user_id = $request->input('user_id');
+      // $requestEntry->user_id = 1;   //Placeholder
 
       $requestEntry->save();
       echo json_encode($requestEntry);
@@ -61,7 +61,7 @@ class RequestController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //Dejo la validacion momentaneamente porque no se si se valida tanto en el 
+        //Dejo la validacion momentaneamente porque no se si se valida tanto en el
         // front como en el back end
         $validateData = $request->validate([
             'title' => 'required|max:140',
@@ -77,8 +77,8 @@ class RequestController extends Controller
         $department = Department::where('name',$request->input('department'))->first();
         $requestEntry->department_id = $department->id;
         $requestEntry->category = $request->input('category');
-        //$requestEntry->user_id = $request->input('user_id');
-        $requestEntry->user_id = 1;   //Placeholder
+        $requestEntry->user_id = $request->input('user_id');
+        // $requestEntry->user_id = 1;   //Placeholder
 
         $requestEntry->save();
         echo json_encode($requestEntry);

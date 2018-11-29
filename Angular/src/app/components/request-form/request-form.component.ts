@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-import { DepartmentService, RequestService, AlertService } from 'app/services';
-import { Department, Request } from 'app/models'
+import { DepartmentService, RequestService, AlertService, AuthenticationService } from 'app/services';
+import { Department, Request, User } from 'app/models'
 
 @Component({
   selector: 'app-request-form',
@@ -15,6 +15,8 @@ import { Department, Request } from 'app/models'
 export class RequestFormComponent implements OnInit {
   deptos: Department[] = [];
   request: Request = new Request();
+  currentUser: User;
+
 
   requestForm: FormGroup;
   loading = false;
@@ -26,16 +28,19 @@ export class RequestFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private alertService: AlertService,
-    // private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService
 
   ) { }
 
   ngOnInit() {
+    this.currentUser = this.authenticationService.currentUserValue;
+
     this.requestForm = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
       department: ['', Validators.required],
-      category: ['', Validators.required]
+      category: ['', Validators.required],
+      user_id: [this.currentUser.id]
     });
 
     // TODO: redirect to home if already logged in
@@ -69,14 +74,14 @@ export class RequestFormComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this.alertService.success('Publicación creada', true);
-          // alert('Publicación creada')
+          this.alertService.success('Solicitud creada', true);
+          // alert('Solicitud creada')
           this.router.navigate(['/']);
         },
         error => {
-          this.alertService.error('Error al guardad la publicación');
+          this.alertService.error('Error al guardad la solicitud');
           console.log(error);
-          // alert('Ocurrio un error al guardar la publicación');
+          // alert('Ocurrio un error al guardar la solicitud');
           this.loading = false;
         });
   }

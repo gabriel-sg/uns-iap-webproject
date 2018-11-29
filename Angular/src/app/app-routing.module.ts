@@ -31,7 +31,7 @@ const routes: Routes = [
   { path: 'test', component: TestComponent },
   { path: 'nuevo-usuario', component: NewUserComponent },
 
-  { path: 'mi-cuenta', component: UserDashboardComponent,canActivate:[AuthGuardService],
+  { path: 'mi-cuenta', component: UserDashboardComponent, canActivate:[AuthGuardService],
   children: [
       { path: '', component: UserDashboardMyPublicationsComponent },
       { path: 'mis-publicaciones', component: UserDashboardMyPublicationsComponent },

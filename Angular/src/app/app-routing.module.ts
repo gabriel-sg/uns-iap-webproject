@@ -25,8 +25,8 @@ import { UserDashboardConfigurationComponent } from './components/user/user-dash
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'crearsolicitud', component: RequestFormComponent },
-  { path: 'nueva-publicacion', component: PublicationFormComponent },
+  { path: 'crearsolicitud', component: RequestFormComponent, canActivate:[AuthGuardService] },
+  { path: 'nueva-publicacion', component: PublicationFormComponent, canActivate:[AuthGuardService] },
   { path: 'login', component: LoginComponent},
   { path: 'test', component: TestComponent },
   { path: 'nuevo-usuario', component: NewUserComponent },

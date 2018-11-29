@@ -21,9 +21,9 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private alertService: AlertService
   ) {
-      // redirect to home if already logged in
-      if (this.authenticationService.currentUserValue) {
-        this.router.navigate(['/mi-cuenta']);
+    // redirect to home if already logged in
+    if (this.authenticationService.currentUserValue) {
+      this.router.navigate(['/mi-cuenta']);
     }
   }
 
@@ -31,16 +31,16 @@ export class LoginComponent implements OnInit {
   }
 
   public socialSignIn(socialPlatform: string) {
-    let observable = from(this.authenticationService.login(socialPlatform));
-    observable
-    .pipe(first())
-    .subscribe(
-        data => {
-            this.router.navigate(['/mi-cuenta']);
-        },
-        error => {
-            this.alertService.error('error al logearse');
-        });
+    this.authenticationService.login(socialPlatform).then(
+      data => {
+        // alert('Log in exitoso!');
+        this.router.navigate(['/mi-cuenta']);
+      },
+      error => {
+        alert('log in fail');
+        console.log(error);
+      }
+    );
 
   }
 

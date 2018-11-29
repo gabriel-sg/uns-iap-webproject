@@ -3,6 +3,7 @@ export class User{
   fullname: string;
   urlImage: string;
   email: string;
+  email_verified_at: string;
   phone: string;
   career: string;
   department: string;
@@ -12,8 +13,9 @@ export class User{
   constructor(){
     this.id = 0;
     this.fullname = '';
-    this.email = '';
     this.urlImage = '';
+    this.email = '';
+    this.email_verified_at = '';
     this.phone = '';
     this.career = '';
     this.department = '';

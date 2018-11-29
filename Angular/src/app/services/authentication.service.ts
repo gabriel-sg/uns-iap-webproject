@@ -8,6 +8,7 @@ import { environment } from "environments/environment";
 import { AuthService, GoogleLoginProvider } from "ng-dynami-social-login";
 
 @Injectable({ providedIn: "root" })
+
 export class AuthenticationService {
   apiUrl = environment.apiUrl;
   private currentUserSubject: BehaviorSubject<User>;
@@ -27,23 +28,8 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
-  // login(username: string, password: string) {
-  //   return this.http
-  //     .post<any>(this.apiUrl+'/users/authenticate', { username, password })
-  //     .pipe(
-  //       map(user => {
-  //         // login successful if there's a jwt token in the response
-  //         if (user && user.token) {
-  //           // store user details and jwt token in local storage to keep user logged in between page refreshes
-  //           localStorage.setItem("currentUser", JSON.stringify(user));
-  //           this.currentUserSubject.next(user);
-  //         }
-
-  //         return user;
-  //       })
-  //     );
-  // }
   async login(socialPlatform: string) {
+
     let socialPlatformProvider;
     let userInfo;
     if (socialPlatform == "google") {
@@ -56,46 +42,20 @@ export class AuthenticationService {
     // }
 
     let res = await this.socialAuthService.signIn(socialPlatformProvider).then(userData => {
-      console.log(userData);
+      // console.log(userData);
       userInfo = userData;
       // Authenticate user in backend
     });
 
-
-    // let observable = from(this.socialAuthService.signIn(socialPlatformProvider));
-    // Promise.resolve();
-
-    // return observable.pipe(
-    //   map(userData => {
-    //     console.log(userData);
-    //     token = userData.idToken;
-    //     // Authenticate user in backend
-    //     return this.http.post<any>(this.apiUrl + "/users/authenticate", token ).pipe(
-    //       // map(user => {
-    //       //   if (user && user.isLoggedIn) {
-    //       //     // store user details in local storage to keep user logged in between page refreshes
-    //       //     localStorage.setItem("currentUser", JSON.stringify(user));
-    //       //     this.currentUserSubject.next(user);
-    //       //   } else {
-    //       //     alert("user.isLoggedIn = false");
-    //       //   }
-    //       //   return user;
-    //       // })
-    //     ).subscribe();
-    //   }
-    //   )).subscribe(d=>{alert('exito!')},e=>{alert('Error')});
-
-    return this.http.post<any>(this.apiUrl + "/departments",  userInfo ).pipe(
+    return this.http.post<any>(this.apiUrl + "/users/login",  userInfo ).pipe(
       map(user => {
-        console.log(user);
         if (user) {
           // store user details in local storage to keep user logged in between page refreshes
+          // console.log(user);
           localStorage.setItem("currentUser", JSON.stringify(user));
           this.currentUserSubject.next(user);
-        } else {
-          alert("user.isLoggedIn = false");
-        }
         return user;
+        }
       })
     ).toPromise();
   }
@@ -104,6 +64,10 @@ export class AuthenticationService {
     // remove user from local storage to log user out
     localStorage.removeItem("currentUser");
     this.currentUserSubject.next(null);
-    this.socialAuthService.signOut();
+    this.socialAuthService.signOut()
+      // .then( data => {alert('log out!')})
+      .catch( error => {alert('Error: intentaste salir sin haber iniciado sesion?')});
+
+    // TODO: enviar algo a la base de datos?
   }
 }

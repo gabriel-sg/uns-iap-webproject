@@ -44,16 +44,18 @@ class UsersController extends Controller
         {
             $newuser = new User();
             $newuser->id=$id;
-            $newuser->fullname=$request->input('fullname');
+            $newuser->fullname=$request->input('name');
             $newuser->email=$request->input('email');
-            $newuser->urlImage=$request->input('urlImage');
+            $newuser->urlImage=$request->input('image');
 
             $newuser->save();
-            echo json_encode($user);
+            //echo json_encode($user);
+            return $newuser;
         }
         else
         {
-            echo json_encode($user);
+            //echo json_encode($user);
+            return $user;
         }
         /*if ($user)
         {

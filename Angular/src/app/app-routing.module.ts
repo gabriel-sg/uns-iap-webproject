@@ -16,7 +16,8 @@ import {
   UserDashboardHelpComponent,
   UserDashboardContactUsComponent,
   UserDashboardMyPublicationsComponent,
-  LoginComponent
+  LoginComponent,
+  SearchResultComponent
 } from 'app/components';
 
 import { AuthGuardService } from './services/auth-guard.service';
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'test', component: TestComponent },
   { path: 'nuevo-usuario', component: NewUserComponent },
+  { path: 'search-result', component: SearchResultComponent },
 
   { path: 'mi-cuenta', component: UserDashboardComponent, canActivate:[AuthGuardService],
   children: [

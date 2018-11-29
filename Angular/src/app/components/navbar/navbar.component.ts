@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService, AlertService, SearchService } from 'app/services';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { User } from 'app/models';
+import { User, Search } from 'app/models';
 import { first } from 'rxjs/operators';
 
 @Component({
@@ -13,6 +13,7 @@ import { first } from 'rxjs/operators';
 export class NavbarComponent implements OnInit {
   currentUser: User;
   searchForm: FormGroup;
+  search: Search;
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -36,13 +37,16 @@ export class NavbarComponent implements OnInit {
 
   onSubmit(){
     this.searchService.searchPublications(this.searchForm.value.search)
-    .pipe(first())
+    /*.pipe(first())
     .subscribe(
       data=> {
+        this.search=data;
         console.log(data);
+        this.router.navigate(['/search-result'], { queryParams: { busqueda: this.search }});
       },
       error => {
         console.log(error);
-      });
+      })*/;
+    this.router.navigate(['/search-result']);
   }
 }

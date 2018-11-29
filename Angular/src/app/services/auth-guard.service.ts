@@ -6,7 +6,7 @@ import {
   RouterStateSnapshot
 } from '@angular/router';
 
-import {AuthenticationService } from 'app/services';
+import {AuthenticationService, AlertService } from 'app/services';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,8 @@ import {AuthenticationService } from 'app/services';
 export class AuthGuardService implements CanActivate {
   constructor(
       private router: Router,
-      private authenticationService: AuthenticationService
+      private authenticationService: AuthenticationService,
+      private alertService: AlertService,
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
@@ -27,6 +28,7 @@ export class AuthGuardService implements CanActivate {
 
       // not logged in so redirect to login page with the return url
       this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
+      this.alertService.error('Primero debes iniciar sesión');
       return false;
   }
 }

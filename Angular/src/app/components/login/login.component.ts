@@ -34,7 +34,13 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(socialPlatform).then(
       data => {
         // alert('Log in exitoso!');
-        this.router.navigate(['/mi-cuenta']);
+        console.log(this.router.parseUrl(this.router.url).queryParams);
+        let queryParam = this.router.parseUrl(this.router.url).queryParams;
+        if(queryParam){
+          this.router.navigate([queryParam.returnUrl]);
+        }else{
+          this.router.navigate(['/mi-cuenta']);
+        }
       },
       error => {
         alert('log in fail');

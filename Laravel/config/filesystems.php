@@ -66,4 +66,34 @@ return [
 
     ],
 
+        'ftp' => [
+          'driver'   => 'ftp',
+          'host'     => 'ftp.example.com',
+          'username' => 'salva',
+          'password' => 'salvaftp',
+
+          // Optional FTP Settings...
+          // 'port'     => 21,
+          // 'root'     => '',
+          // 'passive'  => true,
+          // 'ssl'      => true,
+          // 'timeout'  => 30,
+      ],
+
+      'sftp' => [
+        'driver' => 'sftp',
+        'host' => 'example.com',
+        'username' => 'salva',
+        'password' => 'salvasftp',
+
+        // Settings for SSH key based authentication...
+        // 'privateKey' => '/path/to/privateKey',
+        // 'password' => 'encryption-password',
+
+        // Optional SFTP Settings...
+        // 'port' => 22,
+        // 'root' => '',
+        // 'timeout' => 30,
+    ],
+
 ];

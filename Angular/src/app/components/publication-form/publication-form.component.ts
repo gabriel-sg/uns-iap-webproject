@@ -23,6 +23,7 @@ export class PublicationFormComponent implements OnInit {
   publicationForm: FormGroup;
   loading = false;
   submitted = false;
+  url:string;
 
   constructor(
     private departmentService: DepartmentService,

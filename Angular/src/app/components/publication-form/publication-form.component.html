@@ -46,9 +46,9 @@
 
         <div class="container">
             <label for="photos">Fotos</label>
-          <div class="row">    
-              
-              <div class="col-xs-12 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">  
+          <div class="row">
+
+              <div class="col">
                   <!-- image-preview-filename input [CUT FROM HERE]-->
                   <div class="input-group image-preview">
                       <input type="text" class="form-control image-preview-filename" disabled="disabled"> <!-- don't give a name === doesn't send on POST/GET -->
@@ -58,31 +58,38 @@
                               <span class="glyphicon glyphicon-remove"></span> Clear
                           </button>
                           <!-- image-preview-input -->
-                          <div class="container">
-                          <div class="row">
-                            <div class="col-sm-2">
-                              <div class="btn btn-default image-preview-input">
-                                  <span class="glyphicon glyphicon-folder-open"></span>
-                                  <span class="image-preview-input-title">Browse</span>
-                                  <input type="file" accept="image/png, image/jpeg, image/gif" name="filename" (change)="onFileSelected($event)"/> <!-- rename it -->
-                                </div>
-                            </div>
-                            <div class="col-sm-2">
-                                <img [src]="url  || ''" height="50"> <br/>
-                            </div>
-                          </div>
-                          </div>
 
-                            
+
+
+
+
+
+
+
+
+
                       </span>
-                  </div><!-- /input-group image-preview [TO HERE]--> 
-                 
+
+                  </div><!-- /input-group image-preview [TO HERE]-->
+
+              </div>
+              <div class="col">
+              <div class="btn btn-default image-preview-input">
+                  <span class="glyphicon glyphicon-folder-open"></span>
+                  <span class="image-preview-input-title">Browse</span>
+                  <input type="file" accept="image/png, image/jpeg, image/gif" name="filename" (change)="onFileSelected($event)"/> <!-- rename it -->
+                </div>
+              </div>
+
+              <div class= "col">
+                  <img [src]="url  || ''" height="50"> <br/>
               </div>
           </div>
+
       </div>
 
       <p></p>
-  
+
         <div class="form-group">
           <button [disabled]="loading" class="btn btn-primary">Publicar</button>
           <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
@@ -90,7 +97,7 @@
       </form>
     </div>
   </div>
-  
+
   <!-- Primera forma que utilice
     <div class="row">
     <div class="col-6">
@@ -100,10 +107,10 @@
         <div class="form-group">
           <label for="titulo">Título</label>
           <input [(ngModel)]="request.title" type="text" id="title" class="form-control">
-  
+
           <label for="descripcion">Descripción</label>
           <textarea [(ngModel)]="request.description" class="form-control" id="description" rows="3"></textarea>
-  
+
           <div class="form-row">
             <div class="col-6">
               <label for="departamento">Departamento</label>
@@ -111,7 +118,7 @@
                 <option value="" disabled selected>Selecciona el departamento</option>
                 <option *ngFor="let depto of deptos" value={{depto.name}}>{{depto.name}}</option>
               </select>
-  
+
               <label for="categoria">Categoría</label>
               <select [(ngModel)]="request.category" class="form-control" id="category">
                 <option value="Libro">Libro</option>
@@ -121,24 +128,24 @@
             </div>
           </div>
         </div>
-  
+
         <button (click)="saveRequest()" class="btn btn-primary">Publicar</button>
       </div>
     </div>
   </div> -->
 
   <script>
-  $(document).on('click', '#close-preview', function(){ 
+  $(document).on('click', '#close-preview', function(){
     $('.image-preview').popover('hide');
     // Hover befor close the preview
     $('.image-preview').hover(
         function () {
            $('.image-preview').popover('show');
-        }, 
+        },
          function () {
            $('.image-preview').popover('hide');
         }
-    );    
+    );
 });
 
 $(function() {
@@ -164,27 +171,26 @@ $(function() {
         $('.image-preview-filename').val("");
         $('.image-preview-clear').hide();
         $('.image-preview-input input:file').val("");
-        $(".image-preview-input-title").text("Browse"); 
-    }); 
+        $(".image-preview-input-title").text("Browse");
+    });
     // Create the preview image
-    $(".image-preview-input input:file").change(function (){     
+    $(".image-preview-input input:file").change(function (){
         var img = $('<img/>', {
             id: 'dynamic',
             width:250,
             height:200
-        });      
+        });
         var file = this.files[0];
         var reader = new FileReader();
         // Set preview image into the popover data-content
         reader.onload = function (e) {
             $(".image-preview-input-title").text("Change");
             $(".image-preview-clear").show();
-            $(".image-preview-filename").val(file.name);            
+            $(".image-preview-filename").val(file.name);
             img.attr('src', e.target.result);
             $(".image-preview").attr("data-content",$(img)[0].outerHTML).popover("show");
-        }        
+        }
         reader.readAsDataURL(file);
-    });  
+    });
 });
 </script>
-  

@@ -36,17 +36,20 @@ export class NavbarComponent implements OnInit {
   }
 
   onSubmit(){
-    this.searchService.searchPublications(this.searchForm.value.search)
-    /*.pipe(first())
-    .subscribe(
-      data=> {
-        this.search=data;
-        console.log(data);
-        this.router.navigate(['/search-result'], { queryParams: { busqueda: this.search }});
-      },
-      error => {
-        console.log(error);
-      })*/;
-    this.router.navigate(['/search-result']);
+    // this.searchService.searchPublications(this.searchForm.value.search)
+    // /*.pipe(first())
+    // .subscribe(
+    //   data=> {
+    //     this.search=data;
+    //     console.log(data);
+    //     this.router.navigate(['/search-result'], { queryParams: { busqueda: this.search }});
+    //   },
+    //   error => {
+    //     console.log(error);
+    //   })*/;
+    // this.router.navigate(['/search-result']);
+
+    this.router.navigate(['/search-result'], { queryParams: { busqueda: this.searchForm.value.search }});
+
   }
 }

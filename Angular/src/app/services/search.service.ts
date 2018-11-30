@@ -14,17 +14,20 @@ export class SearchService {
 
   public searchPublications(search: string){
     //return this.http.get<Search>(this.API_ENDPOINT+'/searchPublications/'+search);
-    this.http.get<Search>(this.API_ENDPOINT+'/searchPublications/'+search)
-    .subscribe(
-      data => {
-        //console.log(data);
-        this.currentSearch=data;
-        console.log(this.currentSearch);
-      },
-      error =>{
-        console.log(error);
+    // this.http.get<Search>(this.API_ENDPOINT+'/searchPublications/'+search)
+    // .subscribe(
+    //   data => {
+    //     //console.log(data);
+    //     this.currentSearch=data;
+    //     console.log(this.currentSearch);
+    //   },
+    //   error =>{
+    //     console.log(error);
 
-      });
+    //   });
+    console.log(search);
+    return this.http.get<Search>(this.API_ENDPOINT+'/searchPublications/'+search);
+
   }
 
   public getCurrentSearch(){

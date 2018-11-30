@@ -17,8 +17,17 @@ export class SearchResultComponent implements OnInit {
     private searchService: SearchService) { }
 
   ngOnInit() {
-    this.searchResult=this.searchService.currentSearch;
-    console.log(this.searchResult);
+    // this.searchResult=this.searchService.currentSearch;
+    // console.log(this.searchResult);
+    let queryParam = this.router.parseUrl(this.router.url).queryParams;
+    this.searchService.searchPublications(queryParam.busqueda).subscribe(
+      data =>{
+        console.log(data);
+      },error =>{
+        console.log(error);
+
+      }
+    );
   }
 
 }

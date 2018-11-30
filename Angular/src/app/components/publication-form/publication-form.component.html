@@ -50,39 +50,27 @@
 
               <div class="col">
                   <!-- image-preview-filename input [CUT FROM HERE]-->
-                  <div class="input-group image-preview">
+
                       <input type="text" class="form-control image-preview-filename" disabled="disabled"> <!-- don't give a name === doesn't send on POST/GET -->
-                      <span class="input-group-btn">
+
                           <!-- image-preview-clear button -->
-                          <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+                          <button type="button" class="btn btn-default image-preview-clear btn-block" style="display:none;">
                               <span class="glyphicon glyphicon-remove"></span> Clear
                           </button>
                           <!-- image-preview-input -->
 
 
-
-
-
-
-
-
-
-
-                      </span>
-
-                  </div><!-- /input-group image-preview [TO HERE]-->
-
               </div>
               <div class="col">
-              <div class="btn btn-default image-preview-input">
+              <div class="btn btn-default image-preview-input btn-block">
                   <span class="glyphicon glyphicon-folder-open"></span>
-                  <span class="image-preview-input-title">Browse</span>
+                  <span class="image-preview-input-title ">Browse</span>
                   <input type="file" accept="image/png, image/jpeg, image/gif" name="filename" (change)="onFileSelected($event)"/> <!-- rename it -->
                 </div>
               </div>
 
               <div class= "col">
-                  <img [src]="url  || ''" height="50"> <br/>
+                  <img [src]="url  || ''" height="70"> <br/>
               </div>
           </div>
 

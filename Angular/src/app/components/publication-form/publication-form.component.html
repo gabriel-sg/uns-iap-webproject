@@ -58,13 +58,25 @@
                               <span class="glyphicon glyphicon-remove"></span> Clear
                           </button>
                           <!-- image-preview-input -->
-                          <div class="btn btn-default image-preview-input">
-                              <span class="glyphicon glyphicon-folder-open"></span>
-                              <span class="image-preview-input-title">Browse</span>
-                              <input type="file" accept="image/png, image/jpeg, image/gif" name="filename" (change)="onFileSelected($event)"/> <!-- rename it -->
+                          <div class="container">
+                          <div class="row">
+                            <div class="col-sm-2">
+                              <div class="btn btn-default image-preview-input">
+                                  <span class="glyphicon glyphicon-folder-open"></span>
+                                  <span class="image-preview-input-title">Browse</span>
+                                  <input type="file" accept="image/png, image/jpeg, image/gif" name="filename" (change)="onFileSelected($event)"/> <!-- rename it -->
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <img [src]="url  || ''" height="50"> <br/>
+                            </div>
                           </div>
+                          </div>
+
+                            
                       </span>
                   </div><!-- /input-group image-preview [TO HERE]--> 
+                 
               </div>
           </div>
       </div>

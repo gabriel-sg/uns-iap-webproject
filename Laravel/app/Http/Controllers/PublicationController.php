@@ -106,10 +106,9 @@ class PublicationController extends Controller
         $publication = Publication::find($id);
         $photos = Photo::where('publi_id',$id)->get();
         foreach ($photos as $photo){
-            //if(Storage::disk('public')->exists($photo->filename)){
-            //    Storage::delete('/'.$photo->filename);
-            //}
-            Storage::disk('public')->delete($photo->filename);
+            if(Storage::disk('public')->exists($photo->filename)){
+                Storage::disk('public')->delete($photo->filename);
+            }
             $photo->delete();
         }
         $publication->delete();

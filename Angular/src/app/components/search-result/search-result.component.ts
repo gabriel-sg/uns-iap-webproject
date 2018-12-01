@@ -14,7 +14,9 @@ export class SearchResultComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private searchService: SearchService) { }
+    private searchService: SearchService) { 
+      this.router.routeReuseStrategy.shouldReuseRoute= () => false;
+    }
 
   ngOnInit() {
     // this.searchResult=this.searchService.currentSearch;

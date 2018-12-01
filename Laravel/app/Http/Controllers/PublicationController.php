@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Publication;
 use App\Department;
+use App\Photo;
+use Illuminate\Support\Facades\Storage;
 
 class PublicationController extends Controller
 {
@@ -83,7 +85,7 @@ class PublicationController extends Controller
         // $publication->user_id = 1;   //Placeholder
         $publication->visible= $request->input('visible');
 
-        $publication->save();
+        $publication->update();
         echo json_encode($publication);
     }
 
@@ -102,6 +104,13 @@ class PublicationController extends Controller
     public function destroy($id)
     {
         $publication = Publication::find($id);
+        $photos = Photo::where('publi_id',$id)->get();
+        foreach ($photos as $photo){
+            if(Storage::disk('public')->exists($photo->filename)){
+                Storage::delete($photo->filename);
+            }
+            $photo->delete();
+        }
         $publication->delete();
     }
 }

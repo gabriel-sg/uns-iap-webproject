@@ -32,6 +32,7 @@ import { UserDashboardConfigurationComponent } from './components/user/user-dash
 import { NewUserComponent } from './components/new-user/new-user.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SearchResultComponent } from './components/search-result/search-result.component';
+import { PublicationItemComponent } from './components/publication-item/publication-item.component';
 
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig(
@@ -73,7 +74,8 @@ export function getAuthServiceConfigs() {
     UserDashboardConfigurationComponent,
     NewUserComponent,
     NavbarComponent,
-    SearchResultComponent
+    SearchResultComponent,
+    PublicationItemComponent
   ],
   imports: [
     BrowserModule,

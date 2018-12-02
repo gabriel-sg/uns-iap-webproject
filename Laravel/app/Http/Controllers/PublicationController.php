@@ -95,6 +95,33 @@ class PublicationController extends Controller
         echo json_encode($publication);
     }
 
+    public function getPhotos($id)
+    {
+        $photos = Photo::where('publi_id',$id)->get();
+        foreach($photos as $photo){
+            $photoURLs[]=$photo->filename;
+        }
+        return json_encode($photoURLs);
+    }
+
+    public function getLibros()
+    {
+        $libros = Publications::where('category','Libro')->get();
+        return json_encode($libros);
+    }
+
+    public function getApuntes()
+    {
+        $apuntes = Publications::where('category','Apunte')->get();
+        return json_encode($apuntes);
+    }
+
+    public function getMateriales()
+    {
+        $materiales = Publications::where('category','Material')->get();
+        return json_encode($materiales);
+    }
+
     /**
      * Remove the specified resource from storage.
      *

@@ -21,6 +21,14 @@ Route::resource('requests', 'RequestController');
 
 Route::resource('publications', 'PublicationController');
 
+Route::get('publications/photos/{id}','PublicationController@getPhotos');
+
+Route::get('publications/libros','PublicationController@getLibros');
+
+Route::get('publications/apuntes','PublicationController@getApuntes');
+
+Route::get('publications/materiales','PublicationController@getMateriales');
+
 Route::resource('departments', 'DepartmentController');
 
 Route::resource('users', 'UsersController');

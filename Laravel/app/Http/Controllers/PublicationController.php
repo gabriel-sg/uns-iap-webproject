@@ -101,25 +101,25 @@ class PublicationController extends Controller
         foreach($photos as $photo){
             $photoURLs[]=$photo->filename;
         }
-        return json_encode($photoURLs);
+        echo json_encode($photoURLs);
     }
 
     public function getLibros()
     {
-        $libros = Publications::where('category','Libro')->get();
-        return json_encode($libros);
+        $libros = Publication::where('category','Libro')->get();
+        echo json_encode($libros);
     }
 
     public function getApuntes()
     {
-        $apuntes = Publications::where('category','Apunte')->get();
-        return json_encode($apuntes);
+        $apuntes = Publication::where('category','Apunte')->get();
+        echo json_encode($apuntes);
     }
 
     public function getMateriales()
     {
-        $materiales = Publications::where('category','Material')->get();
-        return json_encode($materiales);
+        $materiales = Publication::where('category','Material')->get();
+        echo json_encode($materiales);
     }
 
     /**

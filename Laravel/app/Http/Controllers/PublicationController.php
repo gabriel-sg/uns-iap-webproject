@@ -99,7 +99,7 @@ class PublicationController extends Controller
     {
         $photos = Photo::where('publi_id',$id)->get();
         foreach($photos as $photo){
-            $photoURLs[]='intuni.test/api/'.$photo->filename;
+            $photoURLs[]='intuni.test'.Storage::url($photo->filename);
         }
         echo json_encode($photoURLs);
     }

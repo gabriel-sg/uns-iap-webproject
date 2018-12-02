@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
-import { Publication, Photo } from 'app/models';
+import { Publication } from 'app/models';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class PublicationService {
   }
 
   public getById(id: number) {
-    return this.http.get<Publication[]>(this.API_ENDPOINT + '/publications/' + id);
+    return this.http.get<Publication>(this.API_ENDPOINT + '/publications/' + id);
   }
 
   public store(publication: Publication) {
@@ -38,6 +38,10 @@ export class PublicationService {
 
   public uploadPhoto(photo: FormData){
     return this.http.post(this.API_ENDPOINT + '/test',photo);
+  }
+
+  public getPhotos(id: number){
+    return this.http.get(this.API_ENDPOINT + '/publications/photos/'+id);
   }
 
 }

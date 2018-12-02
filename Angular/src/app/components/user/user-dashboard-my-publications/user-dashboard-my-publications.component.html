@@ -1,30 +1,26 @@
+<tr *ngFor="let publication of publications">
+  <div class="card bg-light">
+    <div class="card-body">
 
-  <tr *ngFor="let publication of publications">
-<div class="card bg-light">
-  <div class="card-body">
-    
       <h5>{{publication.title}}</h5>
-    <div class="row">
-      <div class="col-sm-8">
-          <p class="lead" >{{publication.description}}</p>
+      <div class="row">
+        <div class="col-sm-8">
+          <p class="lead">{{publication.description}}</p>
+        </div>
+        <div class="col-sm-2">
+
+          <img src="http://www.crear-meme.com/public/img/memes_users/dsadas.jpg" class="img-fluid" alt="Responsive image">
+        </div>
+        <div class="col-sm-2">
+          <a class="btn btn-sm btn-secondary" href="../../components/navbar/" role="button">Modificar &raquo;</a>
+          <p></p>
+          <a class="btn btn-sm btn-secondary" href="../../components/navbar/" role="button">Republicar &raquo;</a>
+          <p></p>
+          <a class="btn btn-sm btn-secondary" href="../../components/navbar/" role="button">Aumentar Exposicion
+            (pronto!) &raquo;</a>
+        </div>
       </div>
-        <div class="col-sm-2">
-            
-            <img src="http://www.crear-meme.com/public/img/memes_users/dsadas.jpg" class="img-fluid"
-            alt="Responsive image">
-        </div>
-        <div class="col-sm-2">
-            <a class="btn btn-sm btn-secondary" href="../../components/navbar/" role="button">Modificar &raquo;</a>
-            <p></p>
-            <a class="btn btn-sm btn-secondary" href="../../components/navbar/" role="button">Republicar &raquo;</a>
-            <p></p>
-            <a class="btn btn-sm btn-secondary" href="../../components/navbar/" role="button">Aumentar Exposicion
-              (pronto!) &raquo;</a>
-          </div>
-        </div>
     </div>
   </div>
   <p></p>
-  </tr>
-
-
+</tr>

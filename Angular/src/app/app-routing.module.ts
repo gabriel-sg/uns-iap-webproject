@@ -34,7 +34,7 @@ const routes: Routes = [
   { path: 'test', component: TestComponent },
   { path: 'nuevo-usuario', component: NewUserComponent },
   { path: 'search-result', component: SearchResultComponent },
-  { path: 'publication-item', component: PublicationItemComponent },
+  { path: 'publication-item/:id', component: PublicationItemComponent },
 
   { path: 'mi-cuenta', component: UserDashboardComponent, canActivate:[AuthGuardService],
   children: [

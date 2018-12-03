@@ -31,24 +31,22 @@ class PhotoController extends Controller
 
         //$data=$request->filename;
         
-        if($request->hasFile('filename'))
-        {/*
-            foreach($request->file('filename') as $image)
-            {
-                $name=$image->getClientOriginalName();
-                $image->store('images','local');  
-                $data[] = $name;
-            }*/
-            $file= $request->filename;
-            $path= $file->store('images','public');
+        for($i=0; ;$i++)
+        {
+                if($request->hasFile('file'.$i))
+                {
+                    $file= $request->file('file'.$i);
+                    $path=$file->store('images','public');
+                    $photo = new Photo();
+                    $photo->filename=$path;
+                    $photo->publi_id=$request->publi_id;
+                    $photo->save();
+                    $urls[]='intuni.test'.Storage::url($path);
+                }
+                else break;
         }
-        $photo = new Photo();
-        $photo->filename=$path;
-        $photo->publi_id=$request->publi_id;
 
-        $photo->save();
-
-        echo json_encode('intuni.test'.(Storage::url($path)));
+        echo json_encode($urls);
     }
 
     public function getPhotos($id_user)

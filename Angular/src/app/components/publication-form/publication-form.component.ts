@@ -13,7 +13,7 @@ import { Department, Publication, Photo, User } from 'app/models'
 })
 
 export class PublicationFormComponent implements OnInit {
-  selectedFile: File =null;
+  selectedFiles: FileList =null;
   deptos: Department[] = [];
   publication: Publication = new Publication();
   currentUser: User;
@@ -23,6 +23,8 @@ export class PublicationFormComponent implements OnInit {
   publicationForm: FormGroup;
   loading = false;
   submitted = false;
+  fileError= false;
+  fileErrorText:string;
   url:string;
 
   constructor(
@@ -62,18 +64,29 @@ export class PublicationFormComponent implements OnInit {
 
   onFileSelected(event){
     console.log(event);
-    this.selectedFile = <File>event.target.files[0];
-    if(this.selectedFile.size > 2048000){
-      this.alertService.error('La imagen no puede tener un tamaño mayor que 2MB');
-      this.selectedFile=null;
-      return;
-    }
-    if(this.selectedFile.type.search('image')===-1){ 
-      this.alertService.error('Por favor seleccione archivo de tipo imagen (png, jpg, gif, ...)');
-      this.selectedFile=null;
+    this.selectedFiles = <FileList>event.target.files;
+    Array.from(this.selectedFiles).forEach(file=> {
+      console.log(file);
+      if(file.size > 2048000){
+        this.fileError=true;
+        this.fileErrorText='Las imagenes no pueden tener un tamaño mayor que 2MB';
+        return;
+      }
+      if(file.type.search('image')===-1){ 
+        this.fileError=true;
+        this.fileErrorText='Por favor seleccione archivos de tipo imagen (png, jpg, gif, ...)';
+        return;
+      }
+    });
+
+    if(this.fileError){
+      this.alertService.error(this.fileErrorText);
+      this.fileError=false;
       return;
     }
 
+
+    
     this.alertService.clear();
 
     if (event.target.files && event.target.files[0]) {
@@ -93,7 +106,7 @@ export class PublicationFormComponent implements OnInit {
     if (this.publicationForm.invalid) {
       return;
     }
-    if(!this.selectedFile){
+    if(!this.selectedFiles){
       this.alertService.error('Por favor seleccionar al menos una foto');
       return;
     }
@@ -109,8 +122,11 @@ export class PublicationFormComponent implements OnInit {
           this.publication = data;
           //this.router.navigate(['/']);
           const fd = new FormData();
-          fd.append('filename',this.selectedFile,this.selectedFile.name);
           fd.append('publi_id',this.publication.id.toString());
+          for(var i = 0; i<this.selectedFiles.length;i++){
+            fd.append('file'+i,this.selectedFiles[i],this.selectedFiles[i].name);  
+          }
+          console.log(fd);
           this.publicationService.uploadPhoto(fd)
             .pipe(first())
             .subscribe(
@@ -120,7 +136,7 @@ export class PublicationFormComponent implements OnInit {
                 this.router.navigate(['/']);
               },
               error => {
-                this.alertService.error('Error al guardar la foto');
+                this.alertService.error('Error al guardar las fotos');
                 console.log(error);
                 this.loading = false;
               });

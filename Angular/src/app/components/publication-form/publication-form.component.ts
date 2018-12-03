@@ -13,7 +13,7 @@ import { Department, Publication, Photo, User } from 'app/models'
 })
 
 export class PublicationFormComponent implements OnInit {
-  selectedFile: File =null;
+  selectedFiles: FileList =null;
   deptos: Department[] = [];
   publication: Publication = new Publication();
   currentUser: User;
@@ -23,6 +23,8 @@ export class PublicationFormComponent implements OnInit {
   publicationForm: FormGroup;
   loading = false;
   submitted = false;
+  fileError= false;
+  fileErrorText:string;
   url:string;
 
   constructor(
@@ -61,7 +63,32 @@ export class PublicationFormComponent implements OnInit {
   private f(key: string) { return this.publicationForm.controls[key]; }
 
   onFileSelected(event){
-    this.selectedFile = <File>event.target.files[0];
+    console.log(event);
+    this.selectedFiles = <FileList>event.target.files;
+    Array.from(this.selectedFiles).forEach(file=> {
+      console.log(file);
+      if(file.size > 2048000){
+        this.fileError=true;
+        this.fileErrorText='Las imagenes no pueden tener un tamaño mayor que 2MB';
+        return;
+      }
+      if(file.type.search('image')===-1){ 
+        this.fileError=true;
+        this.fileErrorText='Por favor seleccione archivos de tipo imagen (png, jpg, gif, ...)';
+        return;
+      }
+    });
+
+    if(this.fileError){
+      this.alertService.error(this.fileErrorText);
+      this.fileError=false;
+      return;
+    }
+
+
+    
+    this.alertService.clear();
+
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
       reader.onload = (event: any) => {
@@ -79,36 +106,44 @@ export class PublicationFormComponent implements OnInit {
     if (this.publicationForm.invalid) {
       return;
     }
+    if(!this.selectedFiles){
+      this.alertService.error('Por favor seleccionar al menos una foto');
+      return;
+    }
+    
     console.log(this.publicationForm.value);
     this.loading = true;
     this.publicationService.store(this.publicationForm.value)
       .pipe(first())
       .subscribe(
         data => {
-          this.alertService.success('Publicación creada', true);
+          
           // alert('Publicación creada')
           this.publication = data;
           //this.router.navigate(['/']);
           const fd = new FormData();
-          fd.append('filename',this.selectedFile,this.selectedFile.name);
           fd.append('publi_id',this.publication.id.toString());
+          for(var i = 0; i<this.selectedFiles.length;i++){
+            fd.append('file'+i,this.selectedFiles[i],this.selectedFiles[i].name);  
+          }
+          console.log(fd);
           this.publicationService.uploadPhoto(fd)
             .pipe(first())
             .subscribe(
               data => {
-                this.alertService.success('Foto cargada', true);
+                this.alertService.success('Publicación creada', true);
                 console.log(data);
                 this.router.navigate(['/']);
               },
               error => {
-                this.alertService.error('Error al guardad la foto');
+                this.alertService.error('Error al guardar las fotos');
                 console.log(error);
                 this.loading = false;
               });
 
         },
         error => {
-          this.alertService.error('Error al guardad la publicación');
+          this.alertService.error('Error al guardar la publicación');
           console.log(error);
           // alert('Ocurrio un error al guardar la publicación');
           this.loading = false;

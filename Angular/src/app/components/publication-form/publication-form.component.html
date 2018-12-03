@@ -44,8 +44,8 @@
           </div>
         </div>
 
-        <div class="container">
-            <label for="photos">Fotos</label>
+        <div>
+            <label for="photos">Fotos (Seleccionar todas de una vez)</label>
           <div class="row">
 
               <div class="col">
@@ -65,7 +65,7 @@
               <div class="btn btn-default image-preview-input btn-block">
                   <span class="glyphicon glyphicon-folder-open"></span>
                   <span class="image-preview-input-title ">Browse</span>
-                  <input type="file" accept="image/png, image/jpeg, image/gif" name="filename" (change)="onFileSelected($event)"/> <!-- rename it -->
+                  <input type="file" accept="image/*" name="filename" multiple (change)="onFileSelected($event)"/> <!-- rename it -->
                 </div>
               </div>
 

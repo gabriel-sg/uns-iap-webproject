@@ -1,0 +1,12 @@
+#carouselControls > .carousel-inner > .carousel-item > img {
+    width:100%;
+    height:100%;
+  }
+
+  #carouselControls {
+    width:640px;
+    
+  }
+
+
+

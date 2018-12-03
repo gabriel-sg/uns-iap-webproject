@@ -4,7 +4,7 @@
             <div class="col-8">
                 <h3>{{publi.title}}</h3>
                 <p></p>
-                <div #carousel id="carouselControls" class="carousel slide" data-ride="carousel">
+                <div id="myCarousel" #carousel id="carouselControls" class="carousel slide" data-ride="carousel" >
                     <div class="carousel-inner" role="listbox">
                         <div *ngFor="let image of photos, let i = index" class="carousel-item" [ngClass]="{'active' : i == 0}">
                             <img data-toggle="modal" data-target="#imageModal" [src]="image">

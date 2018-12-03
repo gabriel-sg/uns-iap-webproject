@@ -22,12 +22,17 @@ class CreateUsersTable extends Migration
             // Creating Columns
             $table->string('id',128)->primary();
             $table->string('fullname', 255);
+            $table->string('given_name', 100); // Primer nombre
+            $table->string('family_name', 100); // Apellido
             $table->string('urlImage', 255);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('phone',100)->default('Sin teléfono'); //veeeeeeeeeer
             $table->string('career', 150)->default('Sin asignar');
             $table->string('department', 100)->default('Sin asignar');
+            // flags
+            $table->boolean('isFirstLogIn')->default(TRUE);
+            $table->boolean('isLogged')->default(FALSE);
             $table->timestamps();
         });
     }

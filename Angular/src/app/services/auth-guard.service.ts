@@ -1,4 +1,8 @@
 import { Injectable } from '@angular/core';
+// import * as $ from 'jquery';
+// import * as bootstrap from 'bootstrap';
+
+
 import {
   Router,
   CanActivate,
@@ -27,8 +31,11 @@ export class AuthGuardService implements CanActivate {
       }
 
       // not logged in so redirect to login page with the return url
-      this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
-      this.alertService.error('Primero debes iniciar sesión');
+      // this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
+
+      $("#logInModal").modal('toggle');
+      this.router.navigate(['.'], { queryParams: { returnUrl: state.url }});
+      // this.alertService.error('Primero debes iniciar sesión');
       return false;
   }
 }

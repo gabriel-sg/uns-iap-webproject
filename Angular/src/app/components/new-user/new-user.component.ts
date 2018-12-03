@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Department,User } from 'app/models'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DepartmentService, UserService, AlertService } from 'app/services';
+import { DepartmentService, UserService, AlertService, AuthenticationService } from 'app/services';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 
@@ -13,25 +13,28 @@ import { first } from 'rxjs/operators';
 export class NewUserComponent implements OnInit {
   deptos: Department[] = [];
   user: User = new User();
+  currentUser: User;
 
   userForm: FormGroup;
   loading = false;
   submitted = false;
-  
+
   constructor(
     private departmentService: DepartmentService,
     private userService: UserService,
     private formBuilder: FormBuilder,
     private router: Router,
     private alertService: AlertService,
+    private authenticationService: AuthenticationService
     // private authenticationService: AuthenticationService
 
   ) { }
 
   ngOnInit() {
+    this.currentUser = this.authenticationService.currentUserValue;
     this.userForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      email: ['', Validators.required],
+      // name: ['', Validators.required],
+      // email: ['', Validators.required],
       phone: ['', Validators.required],
       career: ['', Validators.required],
       department: ['', Validators.required]
@@ -57,7 +60,7 @@ export class NewUserComponent implements OnInit {
     }
 
     this.loading = true;
-    this.userService.update(this.userForm.value,1)
+    this.userService.update(this.userForm.value)
       .pipe(first())
       .subscribe(
         data => {

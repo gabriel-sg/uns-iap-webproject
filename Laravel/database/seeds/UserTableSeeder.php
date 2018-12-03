@@ -15,7 +15,9 @@ class UserTableSeeder extends Seeder
         //
         $usuario = new User();
         $usuario->id="12345";
-        $usuario->fullname = "pepe";
+        $usuario->fullname = "Pepe Sanchez";
+        $usuario->given_name = "Pepe";
+        $usuario->family_name = "Sanchez";
         $usuario->email = "sapopepe@ejemplo.com";
         $usuario->urlImage="foto1";
         $usuario->phone = "299 5919191";

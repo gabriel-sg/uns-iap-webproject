@@ -61,7 +61,21 @@ export class PublicationFormComponent implements OnInit {
   private f(key: string) { return this.publicationForm.controls[key]; }
 
   onFileSelected(event){
+    console.log(event);
     this.selectedFile = <File>event.target.files[0];
+    if(this.selectedFile.size > 2048000){
+      this.alertService.error('La imagen no puede tener un tamaño mayor que 2MB');
+      this.selectedFile=null;
+      return;
+    }
+    if(this.selectedFile.type.search('image')===-1){ 
+      this.alertService.error('Por favor seleccione archivo de tipo imagen (png, jpg, gif, ...)');
+      this.selectedFile=null;
+      return;
+    }
+
+    this.alertService.clear();
+
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
       reader.onload = (event: any) => {
@@ -79,13 +93,18 @@ export class PublicationFormComponent implements OnInit {
     if (this.publicationForm.invalid) {
       return;
     }
+    if(!this.selectedFile){
+      this.alertService.error('Por favor seleccionar al menos una foto');
+      return;
+    }
+    
     console.log(this.publicationForm.value);
     this.loading = true;
     this.publicationService.store(this.publicationForm.value)
       .pipe(first())
       .subscribe(
         data => {
-          this.alertService.success('Publicación creada', true);
+          
           // alert('Publicación creada')
           this.publication = data;
           //this.router.navigate(['/']);
@@ -96,19 +115,19 @@ export class PublicationFormComponent implements OnInit {
             .pipe(first())
             .subscribe(
               data => {
-                this.alertService.success('Foto cargada', true);
+                this.alertService.success('Publicación creada', true);
                 console.log(data);
                 this.router.navigate(['/']);
               },
               error => {
-                this.alertService.error('Error al guardad la foto');
+                this.alertService.error('Error al guardar la foto');
                 console.log(error);
                 this.loading = false;
               });
 
         },
         error => {
-          this.alertService.error('Error al guardad la publicación');
+          this.alertService.error('Error al guardar la publicación');
           console.log(error);
           // alert('Ocurrio un error al guardar la publicación');
           this.loading = false;

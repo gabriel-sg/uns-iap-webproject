@@ -17,7 +17,8 @@
         <a class="btn btn-outline-light my-2 my-sm-0 mr-3" routerLink="/crearsolicitud">Crear solicitud<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" routerLink="/login">Ingresar <span class="sr-only">(current)</span></a>
+        <a class="nav-link pointer" data-toggle="modal" data-target="#logInModal">Ingresar <span class="sr-only">(current)</span></a>
+        <!-- <a class="nav-link" [routerLink]="[{outlets: { modal: 'login' } }]">Ingresar <span class="sr-only">(current)</span></a> -->
       </li>
     </ul>
     <ul *ngIf="currentUser" class="navbar-nav ml-auto">
@@ -25,7 +26,7 @@
         <a class="btn btn-outline-light my-2 my-sm-0 mr-3" routerLink="/crearsolicitud">Crear solicitud<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link pointer" routerLink="/mi-cuenta">Mi perfil<span class="sr-only">(current)</span></a>
+        <a class="nav-link" routerLink="/mi-cuenta">Mi perfil<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
         <a class="nav-link pointer" (click)="logout()">Salir <span class="sr-only">(current)</span></a>
@@ -34,3 +35,7 @@
 
   </div>
 </nav>
+
+
+
+

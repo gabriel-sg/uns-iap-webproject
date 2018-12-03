@@ -1,13 +1,12 @@
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
-  crossorigin="anonymous">
-<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"> -->
+<!-- <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css"> -->
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 
 
-<div class="login-form">
+<!-- <div class="login-form">
   <form method="post">
     <h2 class="text-center">Sign in</h2>
 
@@ -16,9 +15,9 @@
         <span class="icon"></span>
         <span class="buttonText">Sign in with Google</span>
       </div>
-      <!-- <div (click)="socialSignIn('google')" class="btn btn-danger btn-block"><i class="fab fa-google"></i> Sign in with <b>Google</b></div> -->
-      <!-- <div class="btn btn-primary btn-block"><i class="fab fa-facebook-f"></i> Sign in with <b>Facebook</b></div> -->
-      <!-- <div class="btn btn-info btn-block"><i class="fa fa-twitter"></i> Sign in with <b>Twitter</b></div> -->
+      <div (click)="socialSignIn('google')" class="btn btn-danger btn-block"><i class="fab fa-google"></i> Sign in with <b>Google</b></div>
+      <div class="btn btn-primary btn-block"><i class="fab fa-facebook-f"></i> Sign in with <b>Facebook</b></div>
+      <div class="btn btn-info btn-block"><i class="fa fa-twitter"></i> Sign in with <b>Twitter</b></div>
     </div>
     <div class="or-seperator"><i>or</i></div>
 
@@ -54,4 +53,36 @@
   </form>
 
   <div class="hint-text small">Don't have an account? <a href="#" class="text-success">Register Now!</a></div>
+</div> -->
+
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#logInModal">
+  Launch demo modal
+</button> -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="logInModal" tabindex="-1" role="dialog" aria-labelledby="logInModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="logInModalLabel">Sign in</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="customBtn" class="customGPlusSignIn" data-dismiss="modal" (click)="socialSignIn('google')">
+          <span class="icon"></span>
+          <span class="buttonText">Sign in with Google</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
 </div>
+
+

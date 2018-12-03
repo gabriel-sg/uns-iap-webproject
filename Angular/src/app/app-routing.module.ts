@@ -28,7 +28,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'crearsolicitud', component: RequestFormComponent, canActivate:[AuthGuardService] },
   { path: 'nueva-publicacion', component: PublicationFormComponent, canActivate:[AuthGuardService] },
-  { path: 'login', component: LoginComponent},
+  // { path: 'login', component: LoginComponent},
   { path: 'test', component: TestComponent },
   { path: 'nuevo-usuario', component: NewUserComponent },
   { path: 'search-result', component: SearchResultComponent },
@@ -48,6 +48,7 @@ const routes: Routes = [
     ]},
 
   // otherwise redirect to home
+  // TODO: redirect to 404 not found page
   { path: '**', redirectTo: '' }
 ];
 

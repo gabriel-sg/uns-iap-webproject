@@ -1,27 +1,27 @@
+<tr *ngFor="let publication of publications">
+  <div class="card bg-light">
+    <div class="card-body">
 
-  <tr *ngFor="let publication of publications">
-<div class="card bg-light">
-  <div class="card-body">
-    
-      <h5>{{publication.title}}</h5>
-    <div class="row">
-      <div class="col-sm-8">
-          <p class="lead" >{{publication.description}}</p>
+        <h5><a [routerLink]="['/publication-item',publication.id]" class="card-link">{{publication.title}}</a></h5>
+      <div class="row">
+        <div class="col-sm-8">
+          
+          <p class="lead">{{publication.description}}</p>
+        </div>
+        <div class="col-sm-2">
+        <!--  <img src="https://www.cambio16.com/wp-content/uploads/2017/08/foto-el-nino-del-meme-triunfal-reaparece-10-anos-despues.jpg" class="img-fluid" alt="Responsive image"> --> 
+          <img src={{photos.get(publication.id)}} class="img-fluid" alt="Responsive image">
+        </div>
+        <div class="col-sm-2">
+          <a class="btn btn-sm btn-secondary" href="../../components/navbar/" role="button">Modificar &raquo;</a>
+          <p></p>
+          <a class="btn btn-sm btn-secondary" href="../../components/navbar/" role="button">Republicar &raquo;</a>
+          <p></p>
+          <a class="btn btn-sm btn-secondary" href="../../components/navbar/" role="button">Aumentar Exposicion
+            (pronto!) &raquo;</a>
+        </div>
       </div>
-        <div class="col-sm-2">
-            <img src="https://www.zendalibros.com/wp-content/uploads/2017/09/james-bold-343821.jpg" class="img-fluid"
-            alt="Responsive image">
-        </div>
-        <div class="col-sm-2">
-            <a class="btn btn-sm btn-secondary" href="../../components/navbar/" role="button">Modificar &raquo;</a>
-            <p></p>
-            <a class="btn btn-sm btn-secondary" href="../../components/navbar/" role="button">Republicar &raquo;</a>
-            <p></p>
-            <a class="btn btn-sm btn-secondary" href="../../components/navbar/" role="button">Aumentar Exposicion
-              (pronto!) &raquo;</a>
-          </div>
-        </div>
     </div>
   </div>
   <p></p>
-
+</tr>

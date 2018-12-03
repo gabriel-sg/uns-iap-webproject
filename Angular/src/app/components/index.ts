@@ -15,4 +15,5 @@ export * from 'app/components/login/login.component';
 export * from 'app/components/new-user/new-user.component';
 export * from 'app/components/navbar/navbar.component';
 export * from 'app/components/search-result/search-result.component';
+export * from 'app/components/publication-item/publication-item.component';
 

@@ -1,3 +1,20 @@
-<p>
-  search-result works!
-</p>
+
+
+
+<tr *ngFor="let publication of publicaciones">
+  <div class="card bg-light">
+    <div class="card-body">
+      <h5><a [routerLink]="['/publication-item',publication.id]" class="card-link">{{publication.title}}</a></h5>
+      <div class="row">
+        <div class="col-sm-8">
+          <p class="lead">{{publication.description}}</p>
+        </div>
+        <div class="col-sm-4">
+          <img src={{photos.get(publication.id)}} class="img-fluid" alt="Responsive image"> 
+                  </div>
+
+      </div>
+    </div>
+  </div>
+  <p></p>
+</tr>

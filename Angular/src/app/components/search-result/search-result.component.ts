@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Search } from 'app/models';
-import { SearchService } from 'app/services';
+import { Search, Publication } from 'app/models';
+import { SearchService,PublicationService,AlertService } from 'app/services';
 
 @Component({
   selector: 'app-search-result',
@@ -10,8 +10,12 @@ import { SearchService } from 'app/services';
 })
 export class SearchResultComponent implements OnInit {
   searchResult: Search;
+  publicaciones: Publication [];
+  photos = new Map();
 
   constructor(
+    private alertService: AlertService,
+    private publicationService: PublicationService,
     private route: ActivatedRoute,
     private router: Router,
     private searchService: SearchService) { 
@@ -25,6 +29,15 @@ export class SearchResultComponent implements OnInit {
     this.searchService.searchPublications(queryParam.busqueda).subscribe(
       data =>{
         console.log(data);
+        this.publicaciones=data.data;
+        for (let entry of this.publicaciones) {
+          this.publicationService.getPhotos(entry.id).subscribe(data => {
+            this.photos.set(entry.id,data[0]);
+          },(error) => {
+            console.log(error);
+            this.alertService.error('Error al obtener las fotos', false);
+          });
+        }
       },error =>{
         console.log(error);
 

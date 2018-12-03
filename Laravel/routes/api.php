@@ -46,3 +46,7 @@ Route::post('users/login','UsersController@login');
 Route::put('users/logout/{id}','UsersController@logout');
 
 Route::post('test','TestController@image');
+
+Route::post('photos/upload','PhotoController@image');
+
+Route::delete('photos/{id}','PhotoController@removePhoto');

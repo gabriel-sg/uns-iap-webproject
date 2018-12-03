@@ -43,4 +43,6 @@ Route::get('users/getPublications/{id}','UsersController@getPublications');
 
 Route::post('users/login','UsersController@login');
 
+Route::put('users/logout/{id}','UsersController@logout');
+
 Route::post('test','TestController@image');

@@ -6,6 +6,7 @@ import { map, first } from "rxjs/operators";
 import { User } from "app/models";
 import { environment } from "environments/environment";
 import { AuthService, GoogleLoginProvider } from "ng-dynami-social-login";
+import { UserService } from "./user.service";
 
 @Injectable({ providedIn: "root" })
 
@@ -16,7 +17,8 @@ export class AuthenticationService {
 
   constructor(
     private http: HttpClient,
-    private socialAuthService: AuthService
+    private socialAuthService: AuthService,
+    private userService: UserService
   ) {
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem("currentUser"))
@@ -47,14 +49,15 @@ export class AuthenticationService {
       // Authenticate user in backend
     });
 
-    return this.http.post<any>(this.apiUrl + "/users/login",  userInfo ).pipe(
+    console.log({id_token: userInfo.idToken});
+    return this.http.post<User>(this.apiUrl + "/users/login",  {id_token: userInfo.idToken}).pipe(
       map(user => {
         if (user) {
           // store user details in local storage to keep user logged in between page refreshes
           // console.log(user);
           localStorage.setItem("currentUser", JSON.stringify(user));
           this.currentUserSubject.next(user);
-        return user;
+          return user;
         }
       })
     ).toPromise();
@@ -62,12 +65,12 @@ export class AuthenticationService {
 
   logout() {
     // remove user from local storage to log user out
+    this.userService.logout(this.currentUserSubject.value);
     localStorage.removeItem("currentUser");
     this.currentUserSubject.next(null);
     this.socialAuthService.signOut()
       // .then( data => {alert('log out!')})
       .catch( error => {alert('Error: intentaste salir sin haber iniciado sesion?')});
 
-    // TODO: enviar algo a la base de datos?
   }
 }

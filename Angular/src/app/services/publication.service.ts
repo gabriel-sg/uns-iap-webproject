@@ -32,7 +32,7 @@ export class PublicationService {
     return this.http.delete(this.API_ENDPOINT + '/publications/' + id);
   }
 
-  public getPublications(user_id: number) {
+  public getPublications(user_id: string) {
     return this.http.get<Publication[]>(this.API_ENDPOINT + '/users/getPublications/' + user_id );
   }
 

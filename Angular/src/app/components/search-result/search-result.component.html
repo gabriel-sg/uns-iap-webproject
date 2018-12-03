@@ -1,4 +1,7 @@
-<tr *ngFor="let publication of searchResult.data">
+
+
+
+<tr *ngFor="let publication of publicaciones">
   <div class="card bg-light">
     <div class="card-body">
       <h5><a [routerLink]="['/publication-item',publication.id]" class="card-link">{{publication.title}}</a></h5>
@@ -16,4 +19,3 @@
   </div>
   <p></p>
 </tr>
-

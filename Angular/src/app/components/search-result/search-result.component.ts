@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Search } from 'app/models';
+import { Search, Publication } from 'app/models';
 import { SearchService,PublicationService,AlertService } from 'app/services';
 
 @Component({
@@ -10,7 +10,7 @@ import { SearchService,PublicationService,AlertService } from 'app/services';
 })
 export class SearchResultComponent implements OnInit {
   searchResult: Search;
-
+  publicaciones: Publication [];
   photos = new Map();
 
   constructor(
@@ -29,8 +29,8 @@ export class SearchResultComponent implements OnInit {
     this.searchService.searchPublications(queryParam.busqueda).subscribe(
       data =>{
         console.log(data);
-        this.searchResult=data;
-        for (let entry of this.searchResult.data) {
+        this.publicaciones=data.data;
+        for (let entry of this.publicaciones) {
           this.publicationService.getPhotos(entry.id).subscribe(data => {
             this.photos.set(entry.id,data[0]);
           },(error) => {

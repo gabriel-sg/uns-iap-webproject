@@ -40,4 +40,17 @@ class TestController extends Controller
         //return json_encode($photo);
         echo json_encode('intuni.test'.(Storage::url($path)));
     }
+
+    public function getPhotos($id)
+    {
+        $photo = Photo::where('id',$id)->get();
+        echo json_encode($photo);
+    }
+
+    public function show($id)
+    {
+        $photo = Photo::where('id',$id)->get();
+        echo json_encode($photo);
+    }
+
 }

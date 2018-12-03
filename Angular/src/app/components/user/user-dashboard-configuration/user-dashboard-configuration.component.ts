@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Department, User } from 'app/models';
-import { DepartmentService, UserService, AlertService } from 'app/services';
+import { DepartmentService, UserService, AlertService, AuthenticationService } from 'app/services';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
@@ -12,7 +12,7 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./user-dashboard-configuration.component.css']
 })
 export class UserDashboardConfigurationComponent implements OnInit {
-  users: User[];
+  currentUser: User;
   deptos: Department[] = [];
   userForm: FormGroup;
   loading = false;
@@ -23,18 +23,14 @@ export class UserDashboardConfigurationComponent implements OnInit {
     private alertService: AlertService,
     private departmentService: DepartmentService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private authenticationService: AuthenticationService
     ) { }
 
   ngOnInit()  {
     // Obtengo El usuario
-    this.userService.getById(1).subscribe(data => {
-      this.users = data;
-    },(error) => {
-      console.log(error);
-      this.alertService.error('Error al obtener el usuario', false);
-    });
-  
+    this.currentUser = this.authenticationService.currentUserValue;
+
     this.userForm = this.formBuilder.group({
       name: ['', Validators.required],
       email: ['', Validators.required],
@@ -50,7 +46,7 @@ export class UserDashboardConfigurationComponent implements OnInit {
       this.alertService.error('Error al solicitar los departamentos', false);
       // alert('Ocurrio un error al solicitar los departamentos');
     });
-  
+
   }
 
   private f(key: string) { return this.userForm.controls[key]; }

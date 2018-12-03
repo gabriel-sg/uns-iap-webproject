@@ -16,7 +16,7 @@ export class UserService {
     return this.http.get<User[]>(this.API_ENDPOINT + '/users');
   }
 
-  public getById(id: number) {
+  public getById(id: string) {
     return this.http.get<User[]>(this.API_ENDPOINT + '/users/' + id);
   }
 
@@ -24,15 +24,19 @@ export class UserService {
     return this.http.post( this.API_ENDPOINT + '/users', user);
   }
 
-  public update(user: User, id:number) {
+  public update(user: User) {
     return this.http.put(this.API_ENDPOINT + '/users/'+ user.id, user);
   }
 
-  public deleteById(id: number) {
+  public deleteById(id: string) {
     return this.http.delete(this.API_ENDPOINT + '/users/' + id);
   }
 
-  public getRequests(user_id: number) {
+  public logout(user: User){
+    return this.http.put(this.API_ENDPOINT + '/users/logout/' + user.id, user).subscribe( );
+  }
+
+  public getRequests(user_id: string) {
     return this.http.get<Request[]>(this.API_ENDPOINT + '/users/users/' + user_id);
   }
 

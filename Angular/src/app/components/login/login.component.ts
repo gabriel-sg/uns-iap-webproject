@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Subscription, from } from 'rxjs';
-import { first } from 'rxjs/operators';
+import { Component,  } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+import * as $ from 'jquery';
+import * as bootstrap from 'bootstrap';
 
 import { User } from 'app/models';
 import { AlertService, AuthenticationService } from 'app/services';
@@ -12,34 +13,39 @@ import { AlertService, AuthenticationService } from 'app/services';
   styleUrls: ['./login.component.css']
 })
 
-export class LoginComponent implements OnInit {
+export class LoginComponent  {
   currentUser: User;
   currentUserSubscription: Subscription;
 
   constructor(
     private authenticationService: AuthenticationService,
     private router: Router,
+    private route: ActivatedRoute,
     private alertService: AlertService
-  ) {
-    // redirect to home if already logged in
-    if (this.authenticationService.currentUserValue) {
-      this.router.navigate(['/mi-cuenta']);
-    }
-  }
+    ) {
 
-  ngOnInit() {
   }
 
   public socialSignIn(socialPlatform: string) {
     this.authenticationService.login(socialPlatform).then(
-      data => {
+      user => {
         // alert('Log in exitoso!');
-        console.log(this.router.parseUrl(this.router.url).queryParams);
-        let queryParam = this.router.parseUrl(this.router.url).queryParams;
-        if(queryParam){
-          this.router.navigate([queryParam.returnUrl]);
-        }else{
-          this.router.navigate(['/mi-cuenta']);
+        if(user){
+          if(user.isFirstLogIn){
+            this.router.navigate(['/nuevo-usuario']);
+          }
+          else{
+            let queryParam = this.router.parseUrl(this.router.url).queryParams;
+            // console.log(queryParam);
+            if(this.isEmpty(queryParam)){
+              this.router.navigate(['/mi-cuenta']);
+            }else{
+              this.router.navigate([queryParam.returnUrl]);
+            }
+          }
+        }
+        else{ // El backend no puedo autenticar al usuario
+          this.alertService.error('Uuuups, log in fail');
         }
       },
       error => {
@@ -50,5 +56,15 @@ export class LoginComponent implements OnInit {
 
   }
 
+
+  private isEmpty(obj) {
+    for(var key in obj) {
+        if(obj.hasOwnProperty(key))
+            return false;
+    }
+    return true;
+  }
 }
+
+
 

@@ -17,7 +17,7 @@ export class UserService {
   }
 
   public getById(id: string) {
-    return this.http.get<User[]>(this.API_ENDPOINT + '/users/' + id);
+    return this.http.get<User>(this.API_ENDPOINT + '/users/' + id);
   }
 
   public store(user: User) {

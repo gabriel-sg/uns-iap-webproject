@@ -4,7 +4,7 @@ export class Publication{
   description: string;
   visible:boolean;
   category: string;
-  user_id: number;
+  user_id: string;
   department_id: number;
   created_at: string;
   updated_at: string;
@@ -15,7 +15,7 @@ export class Publication{
     this.description = '';
     this.visible = true ;
     this.category = '';
-    this.user_id =0 ;
+    this.user_id ='' ;
     this.department_id =0 ;
     this.created_at = '';
     this.updated_at = '';

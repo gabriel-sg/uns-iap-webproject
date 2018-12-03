@@ -10,6 +10,7 @@ export class User{
   career: string;
   department: string;
   isFirstLogIn: boolean;
+  isLogged: boolean;
   created_at: string;
   updated_at: string;
 
@@ -25,6 +26,7 @@ export class User{
     this.career = '';
     this.department = '';
     this.isFirstLogIn = true;
+    this.isLogged = true;
     this.created_at = '';
     this.updated_at = '';
   }

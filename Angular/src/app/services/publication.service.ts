@@ -37,7 +37,7 @@ export class PublicationService {
   }
 
   public uploadPhoto(photo: FormData){
-    return this.http.post(this.API_ENDPOINT + '/test',photo);
+    return this.http.post(this.API_ENDPOINT + '/photos/upload',photo);
   }
 
   public getPhotos(id: number){

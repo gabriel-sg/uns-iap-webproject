@@ -109,23 +109,25 @@ class UsersController extends Controller
         //Dejo la validacion momentaneamente porque no se si se valida tanto en el
         // front como en el back end
     $validateData = $request->validate([
-      'fullname' => 'required|max:140',
+      // 'fullname' => 'required|max:140',
       'phone' => 'required',
       'career' => 'required',
       'department' => 'required'
     ]);
 
     $user = User::find($id);
+    if($user){
+      // $user->fullname = $request->input('fullname');
+      $user->phone = $request->input('phone');
+          //$department = Department::where('name',$request->input('department'))->first();
+          //$user->department_id = $department->id;
+      $user->career = $request->input('career');
+      $user->department = $request->input('department');
 
-    $user->fullname = $request->input('fullname');
-    $user->phone = $request->input('phone');
-        //$department = Department::where('name',$request->input('department'))->first();
-        //$user->department_id = $department->id;
-    $user->department = $request->input('department');
-    $user->career = $request->input('career');
-
-    $user->save();
-    echo json_encode($user);
+      $user->save();
+    }
+    // echo json_encode($user);
+    return $user;
   }
 
   public function getPublications($id)

@@ -12,7 +12,6 @@ import { first } from 'rxjs/operators';
 })
 export class NewUserComponent implements OnInit {
   deptos: Department[] = [];
-  user: User = new User();
   currentUser: User;
 
   userForm: FormGroup;
@@ -33,6 +32,7 @@ export class NewUserComponent implements OnInit {
   ngOnInit() {
     this.currentUser = this.authenticationService.currentUserValue;
     this.userForm = this.formBuilder.group({
+      id: [this.currentUser.id],
       // name: ['', Validators.required],
       // email: ['', Validators.required],
       phone: ['', Validators.required],
@@ -64,12 +64,13 @@ export class NewUserComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this.alertService.success('Publicación creada', true);
+          this.alertService.success('Datos actualizados', true);
           // alert('Publicación creada')
-          this.router.navigate(['/']);
+          console.log(data);
+          this.router.navigate(['/mi-cuenta']);
         },
         error => {
-          this.alertService.error('Error al guardad la publicación');
+          this.alertService.error('Error al actualizar los datos');
           console.log(error);
           // alert('Ocurrio un error al guardar la publicación');
           this.loading = false;

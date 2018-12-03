@@ -69,24 +69,27 @@ class PublicationController extends Controller
         $validateData = $request->validate([
             'title' => 'required|max:140',
             'description' => 'required',
-            'department' => 'required',
+            'department_id' => 'required',
             'category' => 'required',
             'visible' => 'required'
         ]);
 
         $publication = Publication::find($id);
 
-        $publication->title = $request->input('title');
-        $publication->description = $request->input('description');
-        $department = Department::where('name',$request->input('department'))->first();
-        $publication->department_id = $department->id;
-        $publication->category = $request->input('category');
-        $requestEntry->user_id = $request->input('user_id');
-        // $publication->user_id = 1;   //Placeholder
-        $publication->visible= $request->input('visible');
+        if($publication){
+          $publication->title = $request->input('title');
+          $publication->description = $request->input('description');
+          // $department = Department::where('name',$request->input('department_id'))->first();
+          // $publication->department_id = $department->id;
+          $publication->department_id = $request->input('department_id');
+          $publication->category = $request->input('category');
+          $publication->user_id = $request->input('user_id');
+          $publication->visible= $request->input('visible');
 
-        $publication->update();
-        echo json_encode($publication);
+          $publication->update();
+        }
+        // echo json_encode($publication);
+        return $publication;
     }
 
     public function show($id)

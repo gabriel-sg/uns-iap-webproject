@@ -23,9 +23,7 @@ export class LoginComponent  {
     private route: ActivatedRoute,
     private alertService: AlertService
     ) {
-      if (this.authenticationService.currentUserValue) {
-        this.router.navigate(['/mi-cuenta']);
-      }
+
   }
 
   public socialSignIn(socialPlatform: string) {

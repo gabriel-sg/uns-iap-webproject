@@ -11,7 +11,7 @@ import { environment } from 'environments/environment';
 })
 
 export class TestComponent implements OnInit {
-  selectedFile: File =null;
+  selectedFiles: FileList =null;
   API_ENDPOINT = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
@@ -55,13 +55,16 @@ export class TestComponent implements OnInit {
   }
 
   onFileSelected(event){
-    this.selectedFile = <File>event.target.files[0];
+    this.selectedFiles = <FileList>event.target.files;
     console.log(event);
   }
 
   onUpload(){
     const fd = new FormData();
-    fd.append('filename',this.selectedFile,this.selectedFile.name);
+    for(var i = 0; i<this.selectedFiles.length;i++){
+      fd.append('file'+i,this.selectedFiles[i],this.selectedFiles[i].name);  
+    }
+    console.log(fd);
     this.http.post(this.API_ENDPOINT + '/test',fd)
       .subscribe(res => {
         console.log(res);

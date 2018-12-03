@@ -1,8 +1,9 @@
-<tr *ngFor="let publi of publicacion">
+
     <div class="container-fluid">
         <div class="row">
+                
             <div class="col-8">
-                <h3>{{publi.title}}</h3>
+                <h3>{{publicacion?.title}}</h3>
                 <p></p>
                 <div id="myCarousel" #carousel id="carouselControls" class="carousel slide" data-ride="carousel" >
                     <div class="carousel-inner" role="listbox">
@@ -21,18 +22,20 @@
                 </div>
                 <p></p>
                 <h5>Descripcion</h5>
-                {{publi.description}}
+                {{publicacion?.description}}
 
             </div>
+               
             <div class="col-4">
+                    
                 <div class="p-3 mb-2 bg-light text-dark">
 
-                    <h3>
-                        <p class="text-center">Nombre del Usuario</p>
-                    </h3>
-                    <h3>
-                        <p class="text-center">Telefono de Contacto</p>
-                    </h3>
+                    <h4>
+                        <p class="text-center">¡Comunicate con {{usuario?.given_name}}!</p>
+                    </h4>
+                    <h4>
+                        <p class="text-center">Telefono: {{usuario?.phone}}</p>
+                    </h4>
                     <p class="text-center">Enviale un correo! (pronto!)</p>
                     <form id="contact-form" method="post" action="contact.php" role="form">
 
@@ -85,8 +88,7 @@
                     </form>
 
                 </div>
+                   
             </div>
         </div>
     </div>
-
-</tr>

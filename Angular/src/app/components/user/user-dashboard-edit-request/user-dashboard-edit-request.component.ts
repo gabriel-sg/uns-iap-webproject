@@ -1,27 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
+import { first, tap } from 'rxjs/operators';
 
 import { DepartmentService, PublicationService, AlertService, AuthenticationService } from 'app/services';
 import { Department, Publication, Photo, User } from 'app/models'
+import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-publication-form',
-  templateUrl: './publication-form.component.html',
-  styleUrls: ['./publication-form.component.css']
+  selector: 'app-user-dashboard-edit-request',
+  templateUrl: './user-dashboard-edit-request.component.html',
+  styleUrls: ['./user-dashboard-edit-request.component.css']
 })
 
-export class PublicationFormComponent implements OnInit {
+export class UserDashboardEditRequestComponent implements OnInit {
   selectedFiles: FileList =null;
-  deptos: Department[] = [];
-  publication: Publication = new Publication();
+  deptos: Department[];
+  currentPublication: Publication;
+  currentPublicationObs: Observable<Publication>;
   currentUser: User;
+  publiId = 0;
 
   //photo: Photo = new Photo();
 
   publicationForm: FormGroup;
-  loading = false;
+  loadingForm = false;
   submitted = false;
   fileError= false;
   fileErrorText:string;
@@ -32,13 +35,18 @@ export class PublicationFormComponent implements OnInit {
     private publicationService: PublicationService,
     private formBuilder: FormBuilder,
     private router: Router,
+    private route: ActivatedRoute,
     private alertService: AlertService,
     private authenticationService: AuthenticationService
-  ) { }
+  ) {
+    this.route.queryParams.subscribe(params => {
+      this.publiId = params["id"];
+  });
+
+  }
 
 
-
-  ngOnInit() {
+  async ngOnInit() {
     this.currentUser = this.authenticationService.currentUserValue;
 
     this.publicationForm = this.formBuilder.group({
@@ -46,16 +54,27 @@ export class PublicationFormComponent implements OnInit {
       description: ['', Validators.required],
       department_id: ['', Validators.required],
       category: ['', Validators.required],
-      user_id: [this.currentUser.id]
+      user_id: [this.currentUser.id],
+      visible: [true],
+      id: [this.publiId]
     });
 
-    // TODO: ver como manejar los mensajes de error. Capaz conviene que lo haga el servicio.
+    // Get departments and then publication by id
     this.departmentService.getAll().subscribe(data => {
       this.deptos = data;
+      this.currentPublicationObs = this.publicationService.getById(this.publiId).pipe(
+        tap(publication => {
+          this.publicationForm.patchValue(publication[0]);
+          // console.log(publication);
+          // this.publicationForm.patchValue({department: this.deptos[publication[0].department_id-1].name});
+          this.currentPublication = publication[0];
+        })
+      );
     }, (error) => {
-      console.log(error);
       this.alertService.error('Error al solicitar los departamentos', false);
+      console.log(error);
     });
+
   }
 
 
@@ -112,17 +131,17 @@ export class PublicationFormComponent implements OnInit {
     }
 
     console.log(this.publicationForm.value);
-    this.loading = true;
-    this.publicationService.store(this.publicationForm.value)
+    this.loadingForm = true;
+    this.publicationService.update(this.publicationForm.value)
       .pipe(first())
       .subscribe(
-        data => {
+        success => {
 
           // alert('Publicación creada')
-          this.publication = data;
+          // console.log(this.currentPublication);
           //this.router.navigate(['/']);
           const fd = new FormData();
-          fd.append('publi_id',this.publication.id.toString());
+          fd.append('publi_id',this.currentPublication.id.toString());
           for(var i = 0; i<this.selectedFiles.length;i++){
             fd.append('file'+i,this.selectedFiles[i],this.selectedFiles[i].name);
           }
@@ -131,24 +150,26 @@ export class PublicationFormComponent implements OnInit {
             .pipe(first())
             .subscribe(
               data => {
-                this.alertService.success('Publicación creada', true);
+                this.alertService.success('Publicación actualizada', true);
                 console.log(data);
                 this.router.navigate(['/mi-cuenta/mis-publicaciones']);
               },
               error => {
-                this.alertService.error('Error al guardar las fotos');
+                this.alertService.error('Error al actualizar las fotos');
                 console.log(error);
-                this.loading = false;
+                this.loadingForm = false;
               });
 
         },
         error => {
-          this.alertService.error('Error al guardar la publicación');
+          this.alertService.error('Error al actualizar la publicación');
           console.log(error);
           // alert('Ocurrio un error al guardar la publicación');
-          this.loading = false;
+          this.loadingForm = false;
         });
 
   }
 
 }
+
+

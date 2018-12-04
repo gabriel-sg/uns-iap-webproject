@@ -71,8 +71,8 @@ export class UserDashboardEditPublicationComponent implements OnInit {
         })
       );
     }, (error) => {
-      console.log(error);
       this.alertService.error('Error al solicitar los departamentos', false);
+      console.log(error);
     });
 
   }
@@ -138,7 +138,7 @@ export class UserDashboardEditPublicationComponent implements OnInit {
         success => {
 
           // alert('Publicación creada')
-          console.log(this.currentPublication);
+          // console.log(this.currentPublication);
           //this.router.navigate(['/']);
           const fd = new FormData();
           fd.append('publi_id',this.currentPublication.id.toString());

@@ -11,6 +11,7 @@ export * from 'app/components/user/user-dashboard-messages/user-dashboard-messag
 export * from 'app/components/user/user-dashboard-my-requests/user-dashboard-my-requests.component';
 export * from 'app/components/user/user-dashboard-my-publications/user-dashboard-my-publications.component';
 export * from 'app/components/user/user-dashboard-edit-publication/user-dashboard-edit-publication.component';
+export * from 'app/components/user/user-dashboard-edit-request/user-dashboard-edit-request.component';
 export * from 'app/components/publication-form/publication-form.component';
 export * from 'app/components/login/login.component';
 export * from 'app/components/new-user/new-user.component';

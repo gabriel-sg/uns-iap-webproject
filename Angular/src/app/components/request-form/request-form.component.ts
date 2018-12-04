@@ -38,7 +38,7 @@ export class RequestFormComponent implements OnInit {
     this.requestForm = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-      department: ['', Validators.required],
+      department_id: ['', Validators.required],
       category: ['', Validators.required],
       user_id: [this.currentUser.id]
     });

@@ -1,8 +1,10 @@
-<tr *ngFor="let publication of publications">
+<div *ngFor="let publication of publications">
   <div class="card bg-light">
-    <div class="card-body">
 
-        <h5><a [routerLink]="['/publication-item',publication.id]" class="card-link">{{publication.title}}</a></h5>
+    <div class="card-header">
+      <h5><a [routerLink]="['/publication-item',publication.id]" class="card-link">{{publication.title}}</a></h5>
+    </div>
+    <div class="card-body">
       <div class="row">
         <div class="col-md-7">
           <p class="lead">{{publication.description}}</p>
@@ -22,4 +24,4 @@
     </div>
   </div>
   <p></p>
-</tr>
+</div>

@@ -21,12 +21,12 @@
           <div class="col-12">
             <div class="form-group">
               <label for="department">Departamento</label>
-              <select formControlName="department" class="form-control" [ngClass]="{ 'is-invalid': submitted && f('department').errors }">
+              <select formControlName="department_id" class="form-control" [ngClass]="{ 'is-invalid': submitted && f('department_id').errors }">
                 <option value="" hidden>Seleccione el departamento</option>
-                <option *ngFor="let depto of deptos" value={{depto.name}}>{{depto.name}}</option>
+                <option *ngFor="let depto of deptos" value={{depto.id}}>{{depto.name}}</option>
               </select>
-              <div *ngIf="submitted && f('department').errors" class="invalid-feedback">
-                <div *ngIf="f('department').errors['required']">Selecciona un departamento</div>
+              <div *ngIf="submitted && f('department_id').errors" class="invalid-feedback">
+                <div *ngIf="f('department_id').errors['required']">Selecciona un departamento</div>
               </div>
             </div>
             <div class="form-group">

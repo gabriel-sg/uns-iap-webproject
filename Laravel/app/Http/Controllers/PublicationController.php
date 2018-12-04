@@ -34,7 +34,7 @@ class PublicationController extends Controller
         $validateData = $request->validate([
             'title' => 'required|max:140',
             'description' => 'required',
-            'department' => 'required',
+            'department_id' => 'required',
             'category' => 'required',
             // 'visible' => 'required' // Se puede dejar siempre en true cuando se crea
         ]);
@@ -43,8 +43,9 @@ class PublicationController extends Controller
 
         $publication->title = $request->input('title');
         $publication->description = $request->input('description');
-        $department = Department::where('name',$request->input('department'))->first();
-        $publication->department_id = $department->id;
+        // $department = Department::where('name',$request->input('department'))->first();
+        // $publication->department_id = $department->id;
+        $publication->department_id = $request->input('department_id');
         $publication->category = $request->input('category');
         $publication->visible = true; // A criterio si dejarlo asi o que venga del front
         $publication->user_id = $request->input('user_id');

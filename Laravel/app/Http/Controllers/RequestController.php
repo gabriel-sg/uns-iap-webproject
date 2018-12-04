@@ -33,7 +33,7 @@ class RequestController extends Controller
       $validateData = $request->validate([
           'title' => 'required|max:140',
           'description' => 'required',
-          'department' => 'required',
+          'department_id' => 'required',
           'category' => 'required'
       ]);
 
@@ -41,8 +41,9 @@ class RequestController extends Controller
 
       $requestEntry->title = $request->input('title');
       $requestEntry->description = $request->input('description');
-      $department = Department::where('name',$request->input('department'))->first();
-      $requestEntry->department_id = $department->id;
+      // $department = Department::where('name',$request->input('department'))->first();
+      // $requestEntry->department_id = $department->id;
+      $requestEntry->department_id = $request->input('department_id');
       $requestEntry->category = $request->input('category');
       $requestEntry->user_id = $request->input('user_id');
       // $requestEntry->user_id = 1;   //Placeholder
@@ -66,7 +67,7 @@ class RequestController extends Controller
         $validateData = $request->validate([
             'title' => 'required|max:140',
             'description' => 'required',
-            'department' => 'required',
+            'department_id' => 'required',
             'category' => 'required'
         ]);
 
@@ -74,8 +75,9 @@ class RequestController extends Controller
 
         $requestEntry->title = $request->input('title');
         $requestEntry->description = $request->input('description');
-        $department = Department::where('name',$request->input('department'))->first();
-        $requestEntry->department_id = $department->id;
+        // $department = Department::where('name',$request->input('department'))->first();
+        // $requestEntry->department_id = $department->id;
+        $requestEntry->department_id = $request->input('department_id');
         $requestEntry->category = $request->input('category');
         $requestEntry->user_id = $request->input('user_id');
         // $requestEntry->user_id = 1;   //Placeholder

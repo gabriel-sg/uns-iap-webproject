@@ -1,40 +1,50 @@
-<tr *ngFor="let publication of publicaciones">
+<div *ngIf="loading">
+<img  class="rounded mx-auto d-block" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==">
+</div>
+<div *ngIf="!loading">
   <div *ngIf="publicaciones.length >0">
-    <div class="card bg-light">
-      <div class="card-body">
-        <h5><a [routerLink]="['/publication-item',publication.id]" class="card-link">{{publication.title}}</a></h5>
-        <div class="row">
-          <div class="col-sm-8">
-            <p class="lead">{{publication.description}}</p>
+    <div *ngFor="let publication of publicaciones">
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+          <div class="card bg-light mb-3">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-8">
+                  <p class="card-title">{{publication.title}}</p>
+                  <p class="lead">{{publication.description}}</p>
+                </div>
+                <div class="col-md-4">
+                  <img src={{photos.get(publication.id)}} class="img-fluid" alt="Responsive image">
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="col-sm-4">
-            <img src={{photos.get(publication.id)}} class="img-fluid" alt="Responsive image">
-          </div>
+        </div>
+        <div class="col-md-1"></div>
+      </div>
+    </div>
+  </div>
 
+  <div *ngIf="publicaciones.length == 0">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="error-template">
+            <h1>
+              Oops!</h1>
+            <h2>
+              No hemos encontrado publicaciones con esas palabras</h2>
+            <div class="error-details">
+              ¡Intenta con otras palabas!
+            </div>
+            <div class="error-actions">
+              <a routerLink="/" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span>
+                Inicio </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</tr>
-
-<div *ngIf="publicaciones.length == 0">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="error-template">
-                    <h1>
-                        Oops!</h1>
-                    <h2>
-                        No hemos encontrado publicaciones con esas palabras</h2>
-                    <div class="error-details">
-                        ¡Intenta con otras palabas!
-                    </div>
-                    <div class="error-actions">
-                        <a href="/" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span>
-                            Inicio </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>

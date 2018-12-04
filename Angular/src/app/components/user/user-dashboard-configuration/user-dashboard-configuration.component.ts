@@ -32,11 +32,12 @@ export class UserDashboardConfigurationComponent implements OnInit {
     this.currentUser = this.authenticationService.currentUserValue;
 
     this.userForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      email: ['', Validators.required],
-      phone: ['', Validators.required],
-      career: ['', Validators.required],
-      department: ['', Validators.required]
+      // name: ['', Validators.required],
+      // email: ['', Validators.required],
+      phone: [this.currentUser.phone, Validators.required],
+      career: [this.currentUser.career, Validators.required],
+      department: [this.currentUser.department, Validators.required],
+      id: [this.currentUser.id]
     });
 
     this.departmentService.getAll().subscribe(data => {
@@ -60,16 +61,17 @@ export class UserDashboardConfigurationComponent implements OnInit {
     }
 
     this.loading = true;
-    this.userService.store(this.userForm.value)
+    this.userService.update(this.userForm.value)
       .pipe(first())
       .subscribe(
         data => {
-          this.alertService.success('Publicación creada', true);
+          this.alertService.success('Datos actualizados');
           // alert('Publicación creada')
-          this.router.navigate(['/']);
+          // this.router.navigate(['/mi-cuenta']);
+          this.loading = false;
         },
         error => {
-          this.alertService.error('Error al guardad la publicación');
+          this.alertService.error('No se pudieron actualizar los datos');
           console.log(error);
           // alert('Ocurrio un error al guardar la publicación');
           this.loading = false;

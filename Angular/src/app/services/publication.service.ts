@@ -9,6 +9,7 @@ import { Publication } from 'app/models';
 
 export class PublicationService {
   API_ENDPOINT = environment.apiUrl;
+  public auxPublication: Publication;
 
   constructor(private http: HttpClient) { }
 

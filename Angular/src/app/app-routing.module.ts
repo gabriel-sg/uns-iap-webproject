@@ -19,7 +19,8 @@ import {
   UserDashboardMyPublicationsComponent,
   LoginComponent,
   SearchResultComponent,
-  
+  UserDashboardEditPublicationComponent,
+
 } from 'app/components';
 
 import { AuthGuardService } from './services/auth-guard.service';
@@ -46,6 +47,8 @@ const routes: Routes = [
       { path: 'ayuda', component:  UserDashboardHelpComponent },
       { path: 'contactenos', component: UserDashboardContactUsComponent },
       { path: 'configuracion', component: UserDashboardConfigurationComponent },
+      { path: 'edit-publication', component: UserDashboardEditPublicationComponent },
+
 
 
     ]},

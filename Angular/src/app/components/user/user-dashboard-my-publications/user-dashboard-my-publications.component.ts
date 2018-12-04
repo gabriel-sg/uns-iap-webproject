@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Publication, User, Photo } from 'app/models';
 import { PublicationService, AlertService, AuthenticationService, PhotoService } from 'app/services';
 import { Observable } from 'rxjs';
@@ -17,6 +18,7 @@ export class UserDashboardMyPublicationsComponent implements OnInit {
 
   constructor(
     private publicationService: PublicationService,
+    private router: Router,
     private alertService: AlertService,
     private authenticationService: AuthenticationService,
     private photoService: PhotoService) { }
@@ -54,7 +56,8 @@ export class UserDashboardMyPublicationsComponent implements OnInit {
   }
 
   private modificar(publicationId: number) {
-
+    // this.publicationService.auxPublication = publication;
+    this.router.navigate(['/mi-cuenta/edit-publication'], { queryParams: { id: publicationId }});
   }
 
   private pausar(publication: Publication) {

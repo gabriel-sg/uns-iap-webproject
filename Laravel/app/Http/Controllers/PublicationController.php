@@ -71,6 +71,7 @@ class PublicationController extends Controller
             'description' => 'required',
             'department_id' => 'required',
             'category' => 'required',
+            'user_id' => 'required',
             'visible' => 'required'
         ]);
 
@@ -79,14 +80,14 @@ class PublicationController extends Controller
         if($publication){
           $publication->title = $request->input('title');
           $publication->description = $request->input('description');
-          // $department = Department::where('name',$request->input('department_id'))->first();
+          // $department = Department::where('name',$request->input('department'))->first();
           // $publication->department_id = $department->id;
           $publication->department_id = $request->input('department_id');
           $publication->category = $request->input('category');
           $publication->user_id = $request->input('user_id');
           $publication->visible= $request->input('visible');
 
-          $publication->update();
+          $publication->save();
         }
         // echo json_encode($publication);
         return $publication;

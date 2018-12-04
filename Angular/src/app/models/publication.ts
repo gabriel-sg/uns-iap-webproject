@@ -20,4 +20,6 @@ export class Publication{
     this.created_at = '';
     this.updated_at = '';
   }
+
+
 }

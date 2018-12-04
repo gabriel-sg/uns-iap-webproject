@@ -76,7 +76,7 @@ export class RequestFormComponent implements OnInit {
         data => {
           this.alertService.success('Solicitud creada', true);
           // alert('Solicitud creada')
-          this.router.navigate(['/']);
+          this.router.navigate(['/mi-cuenta/mis-solicitudes']);
         },
         error => {
           this.alertService.error('Error al guardad la solicitud');

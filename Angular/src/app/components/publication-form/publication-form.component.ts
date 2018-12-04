@@ -72,7 +72,7 @@ export class PublicationFormComponent implements OnInit {
         this.fileErrorText='Las imagenes no pueden tener un tamaño mayor que 2MB';
         return;
       }
-      if(file.type.search('image')===-1){ 
+      if(file.type.search('image')===-1){
         this.fileError=true;
         this.fileErrorText='Por favor seleccione archivos de tipo imagen (png, jpg, gif, ...)';
         return;
@@ -86,7 +86,7 @@ export class PublicationFormComponent implements OnInit {
     }
 
 
-    
+
     this.alertService.clear();
 
     if (event.target.files && event.target.files[0]) {
@@ -110,21 +110,21 @@ export class PublicationFormComponent implements OnInit {
       this.alertService.error('Por favor seleccionar al menos una foto');
       return;
     }
-    
+
     console.log(this.publicationForm.value);
     this.loading = true;
     this.publicationService.store(this.publicationForm.value)
       .pipe(first())
       .subscribe(
         data => {
-          
+
           // alert('Publicación creada')
           this.publication = data;
           //this.router.navigate(['/']);
           const fd = new FormData();
           fd.append('publi_id',this.publication.id.toString());
           for(var i = 0; i<this.selectedFiles.length;i++){
-            fd.append('file'+i,this.selectedFiles[i],this.selectedFiles[i].name);  
+            fd.append('file'+i,this.selectedFiles[i],this.selectedFiles[i].name);
           }
           console.log(fd);
           this.publicationService.uploadPhoto(fd)
@@ -133,7 +133,7 @@ export class PublicationFormComponent implements OnInit {
               data => {
                 this.alertService.success('Publicación creada', true);
                 console.log(data);
-                this.router.navigate(['/']);
+                this.router.navigate(['/mi-cuenta/mis-publicaciones']);
               },
               error => {
                 this.alertService.error('Error al guardar las fotos');

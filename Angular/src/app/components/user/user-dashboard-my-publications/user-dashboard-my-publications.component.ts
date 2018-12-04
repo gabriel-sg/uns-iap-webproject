@@ -58,15 +58,25 @@ export class UserDashboardMyPublicationsComponent implements OnInit {
   }
 
   private pausar(publication: Publication) {
-    publication.visible = !publication.visible;
-    this.publicationService.update(publication).subscribe(
+    // Solucion momentanea para que la viste no se actualize antes que el backend
+    const publi = new Publication;
+    publi.id = publication.id;
+    publi.title = publication.title;
+    publi.description = publication.description;
+    publi.visible = !publication.visible;
+    publi.category = publication.category;
+    publi.user_id = publication.user_id;
+    publi.department_id = publication.department_id;
+
+    this.publicationService.update(publi).subscribe(
       success => {
         if(publication.visible){
-          this.alertService.success("Publicación reanudada.");
-        }
-        else{
           this.alertService.success("Publicación pausada.");
         }
+        else{
+          this.alertService.success("Publicación reanudada.");
+        }
+        publication.visible = !publication.visible;
       }, error => {
         publication.visible = !publication.visible;
         this.alertService.error("No se pudo actualizar la publicación.")
@@ -74,6 +84,7 @@ export class UserDashboardMyPublicationsComponent implements OnInit {
       }
     );
   }
+
 
 
 

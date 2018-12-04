@@ -132,13 +132,13 @@ class UsersController extends Controller
 
   public function getPublications($id)
   {
-    $publications = Publication::where('user_id', $id)->get();
+    $publications = Publication::where('user_id', $id)->orderBy('updated_at','desc')->get();
     echo json_encode($publications);
   }
 
   public function getRequests($id)
   {
-    $requests = RequestModel::where('user_id', $id)->get();
+    $requests = RequestModel::where('user_id', $id)->orderBy('updated_at','desc')->get();
     echo json_encode($requests);
   }
 }

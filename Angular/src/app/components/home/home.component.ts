@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RequestService, AlertService } from 'app/services';
-import { Request } from 'app/models';
+import { RequestService, AlertService, UserService, DepartmentService } from 'app/services';
+import { Request, Department, User } from 'app/models';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,11 +11,16 @@ import { Router } from '@angular/router';
 
 export class HomeComponent implements OnInit {
   requests: Request[];
+  departments: Department[] = [];
+  user: User;
+  haydeptos:boolean;
 
   constructor(
     private requestService: RequestService,
     private alertService: AlertService,
     private router:Router,
+    private userService: UserService,
+    private departmentService: DepartmentService
     ) { }
 
   ngOnInit() {
@@ -26,6 +31,13 @@ export class HomeComponent implements OnInit {
       console.log(error);
       this.alertService.error('Error al obtener las solicitudes', false);
     });
+    this.departmentService.getAll().subscribe(data => {
+      this.departments = data;
+      this.haydeptos=true;
+    }, error =>{
+      console.log(error);
+      this.alertService.error('Error al obtener los departamentos', false);
+    })
   }
 
   libros(){
@@ -38,6 +50,16 @@ export class HomeComponent implements OnInit {
 
   material(){
     this.router.navigate(['/search-result'], { queryParams: { busqueda: 'Material' }});
+  }
+
+  userData(user_id){
+    this.userService.getById(user_id).subscribe(
+      data=>{
+        this.user=data[0];
+    },
+      error=>{
+        console.log(error);
+    });
   }
 
 }

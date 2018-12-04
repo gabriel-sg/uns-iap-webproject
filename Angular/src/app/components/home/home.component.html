@@ -23,18 +23,18 @@
                     <div class="row">
                       <div class="col-md-4">
                         <h2>Libros</h2>
-                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                        <p><button class="btn btn-primary " (click)="libros()" role="button">Ver mas &raquo;</button></p>
+                        <p>Aquí encontrarás material bibliográfico útil para tus materias, ya sea fotocopiado o en su estado original.</p>
+                        <p><button class="btn btn-primary " (click)="libros()" role="button">Ver más &raquo;</button></p>
                       </div>
                       <div class="col-md-4">
                         <h2>Apuntes</h2>
-                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                        <p><button class="btn btn-primary" (click)="apuntes()" role="button">Ver mas &raquo;</button></p>
+                        <p>Aquí encontrarás apuntes realizados por otros estudiantes, para ayudarte en tus materias.</p>
+                        <p><button class="btn btn-primary" (click)="apuntes()" role="button">Ver más &raquo;</button></p>
                       </div>
                       <div class="col-md-4">
                         <h2>Material</h2>
-                        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-                        <p><button class="btn btn-primary" (click)="material()" role="button">Ver mas &raquo;</button></p>
+                        <p>Aquí encontrarás material específico, como gafas de laboratorio o reglas de diseño, entre otros.</p>
+                        <p><button class="btn btn-primary" (click)="material()" role="button">Ver más &raquo;</button></p>
                       </div>
                     </div>
 
@@ -45,29 +45,54 @@
         </div>
       </section>
 
-
+      <section>
+          
+      </section>
 
       <section id="Solicitudes">
           <div id="cover-caption">
               <h1>Solicitudes</h1>
-              <div class="jumbotron">
-                  <table class="table">
-                      <thead>
-                        <tr>
-                          <th scope="col">Solicitud</th>
-                          <th scope="col">Descripción</th>
-                          <th scope="col">Contacto</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr *ngFor="let request of requests">
-                          <!-- <th scope="row">{{request.title}}</th> -->
-                          <td width="40%">{{request.title}}</td>
-                          <td width="40%">{{request.description}}</td>
-                          <td width="20%">{{request.user_id}}</td>
-                        </tr>
-                      </tbody>
-                    </table>
+              <div id="accordion">
+                  <span *ngFor="let request of requests; index as i">
+                    <div class="card">
+                      <div class="card-header" [attr.id]="'prefix'+ i">
+                        <h5 class="mb-0">
+                          <button class="btn btn-link collapsed" (click)="userData(request.user_id)" data-toggle="collapse" [attr.data-target]="'#' + 'suffix' +i" aria-expanded="false" [attr.aria-controls]="'suffix' + i">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">#{{request.id}}</div>
+                                    <div class="col">{{request.title}}</div>
+                                </div>
+                            </div>
+                          </button>
+                        </h5>
+                      </div>
+                  
+                      <div [attr.id]="'suffix' + i" class="collapse" [attr.aria-labelledby]="'prefix' + i" data-parent="#accordion">
+                        <div class="card-body">
+                          <div class="container-fluid">
+                              <dl class="row">
+                                  <dt class="col-sm-3">Descripción:</dt>
+                                  <dd class="col-sm-9">{{request.description}}</dd>
+                                  <dt class="col-sm-3">Departamento:</dt>
+                                  <dd class="col-sm-9">{{haydeptos?departments[request.department_id-1].name:vacio}}</dd>
+                                  <dt class="col-sm-3">Nombre:</dt>
+                                  <dd class="col-sm-9">{{user?.fullname}}</dd>
+                                  <dt class="col-sm-3">Teléfono:</dt>
+                                  <dd class="col-sm-9">{{user?.phone}}</dd>
+                                  <dt class="col-sm-3">Email:</dt>
+                                  <dd class="col-sm-9">{{user?.email}}</dd>
+                                  <dt class="col-sm-3">Creado:</dt>
+                                  <dd class="col-sm-9">{{request.created_at}}</dd>
+                                  <dt class="col-sm-3">Editado:</dt>
+                                  <dd class="col-sm-9">{{request.updated_at}}</dd>
+                              </dl>
+                          </div>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </span>
                 </div>
           </div>
         </section>

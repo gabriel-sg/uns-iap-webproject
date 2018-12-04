@@ -69,11 +69,11 @@ export class PublicationFormComponent implements OnInit {
   onFileSelected(event) {
     // console.log(event);
     this.selectedFiles = <FileList>event.target.files;
-    if(this.selectedFiles.length > 4){
+    if (this.selectedFiles.length > 4) {
       this.fileError = true;
       this.fileErrorText = 'Solo se puede subir hasta 4 fotos';
     }
-    else{
+    else {
       Array.from(this.selectedFiles).forEach(file => {
         console.log(file);
         if (file.size > 2048000) {
@@ -102,75 +102,75 @@ export class PublicationFormComponent implements OnInit {
         this.auxFilesUrl = [];
         this.selectedFiles = <FileList>event.target.files;
         Array.from(this.selectedFiles).forEach(file => {
-            var reader = new FileReader();
-            reader.onload = (event: any) => {
-              this.auxFilesUrl.push(event.target.result);
-            }
-            reader.readAsDataURL(file);
-          });
-          this.filesUrl = this.auxFilesUrl;
-        }
-    }
-
-    }
-
-    onSubmit() {
-      this.submitted = true;
-
-      // stop here if form is invalid
-      if (this.publicationForm.invalid) {
-        return;
+          var reader = new FileReader();
+          reader.onload = (event: any) => {
+            this.auxFilesUrl.push(event.target.result);
+          }
+          reader.readAsDataURL(file);
+        });
+        this.filesUrl = this.auxFilesUrl;
       }
-      if (!this.selectedFiles) {
-        this.alertService.error('Por favor seleccionar al menos una foto');
-        return;
-      }
-
-      console.log(this.publicationForm.value);
-      this.loading = true;
-      this.publicationService.store(this.publicationForm.value)
-        .pipe(first())
-        .subscribe(
-          data => {
-
-            // alert('Publicación creada')
-            this.publication = data;
-            //this.router.navigate(['/']);
-            const fd = new FormData();
-            fd.append('publi_id', this.publication.id.toString());
-            for (var i = 0; i < this.selectedFiles.length; i++) {
-              fd.append('file' + i, this.selectedFiles[i], this.selectedFiles[i].name);
-            }
-            console.log(fd);
-            this.publicationService.uploadPhoto(fd)
-              .pipe(first())
-              .subscribe(
-                data => {
-                  this.alertService.success('Publicación creada', true);
-                  console.log(data);
-                  this.router.navigate(['/mi-cuenta/mis-publicaciones']);
-                },
-                error => {
-                  this.publicationService.deleteById(this.publication.id).subscribe(
-                    success => {
-                      // console.log("Exito");
-                    }, error => {
-                      console.log(error);
-                    }
-                  )
-                  this.alertService.error('Error al guardar las fotos, no se pudo crear la publicacion');
-                  console.log(error);
-                  this.loading = false;
-                });
-
-          },
-          error => {
-            this.alertService.error('Error al guardar la publicación');
-            console.log(error);
-            // alert('Ocurrio un error al guardar la publicación');
-            this.loading = false;
-          });
-
     }
 
   }
+
+  onSubmit() {
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.publicationForm.invalid) {
+      return;
+    }
+    if (!this.selectedFiles) {
+      this.alertService.error('Por favor seleccionar al menos una foto');
+      return;
+    }
+
+    console.log(this.publicationForm.value);
+    this.loading = true;
+    this.publicationService.store(this.publicationForm.value)
+      .pipe(first())
+      .subscribe(
+        data => {
+
+          // alert('Publicación creada')
+          this.publication = data;
+          //this.router.navigate(['/']);
+          const fd = new FormData();
+          fd.append('publi_id', this.publication.id.toString());
+          for (var i = 0; i < this.selectedFiles.length; i++) {
+            fd.append('file' + i, this.selectedFiles[i], this.selectedFiles[i].name);
+          }
+          console.log(fd);
+          this.publicationService.uploadPhoto(fd)
+            .pipe(first())
+            .subscribe(
+              data => {
+                this.alertService.success('Publicación creada', true);
+                console.log(data);
+                this.router.navigate(['/mi-cuenta/mis-publicaciones']);
+              },
+              error => {
+                this.publicationService.deleteById(this.publication.id).subscribe(
+                  success => {
+                    // console.log("Exito");
+                  }, error => {
+                    console.log(error);
+                  }
+                )
+                this.alertService.error('Error al guardar las fotos, no se pudo crear la publicacion');
+                console.log(error);
+                this.loading = false;
+              });
+
+        },
+        error => {
+          this.alertService.error('Error al guardar la publicación');
+          console.log(error);
+          // alert('Ocurrio un error al guardar la publicación');
+          this.loading = false;
+        });
+
+  }
+
+}

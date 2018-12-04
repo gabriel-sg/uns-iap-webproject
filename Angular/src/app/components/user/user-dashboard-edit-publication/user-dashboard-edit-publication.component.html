@@ -1,21 +1,21 @@
-
 <div class="row">
-  <div class="col-6">
+  <div class="col-7">
     <!-- <h2>Editar publicación</h2> -->
-    <form [formGroup]="publicationForm" *ngIf="(currentPublicationObs | async); else loading" (ngSubmit)="onSubmit()" class="form-group">
+    <form [formGroup]="publicationForm" *ngIf="(currentPublicationObs | async); else loading" (ngSubmit)="onSubmit()"
+      class="form-group">
       <div class="form-group">
-          <label for="title">Título</label>
-          <input type="text" formControlName="title" class="form-control" [ngClass]="{ 'is-invalid': submitted && f('title').errors }" />
-          <div *ngIf="submitted && f('title').errors" class="invalid-feedback">
-            <div *ngIf="f('title').errors['required']">Ingresa un título</div>
-          </div>
+        <label for="title">Título</label>
+        <input type="text" formControlName="title" class="form-control" [ngClass]="{ 'is-invalid': submitted && f('title').errors }" />
+        <div *ngIf="submitted && f('title').errors" class="invalid-feedback">
+          <div *ngIf="f('title').errors['required']">Ingresa un título</div>
         </div>
-        <div class="form-group">
-          <label for="description">Descripción</label>
-          <textarea type="text" formControlName="description" class="form-control" rows="3" [ngClass]="{ 'is-invalid': submitted && f('description').errors }" ></textarea>
-          <div *ngIf="submitted && f('description').errors" class="invalid-feedback">
-            <div *ngIf="f('description').errors['required']">Ingresa una descripción</div>
-          </div>
+      </div>
+      <div class="form-group">
+        <label for="description">Descripción</label>
+        <textarea type="text" formControlName="description" class="form-control" rows="3" [ngClass]="{ 'is-invalid': submitted && f('description').errors }"></textarea>
+        <div *ngIf="submitted && f('description').errors" class="invalid-feedback">
+          <div *ngIf="f('description').errors['required']">Ingresa una descripción</div>
+        </div>
       </div>
       <div class="form-row">
         <div class="col-12">
@@ -45,38 +45,42 @@
       </div>
 
       <div>
-          <label for="photos">Fotos (Seleccionar todas de una vez)</label>
-        <div class="row">
+        <label for="photos">Fotos (max: 4)</label>
+        <div class="row mb-3">
 
-            <div class="col">
-                <!-- image-preview-filename input [CUT FROM HERE]-->
-
-                    <input type="text" class="form-control image-preview-filename" disabled="disabled"> <!-- don't give a name === doesn't send on POST/GET -->
-
-                        <!-- image-preview-clear button -->
-                        <button type="button" class="btn btn-default image-preview-clear btn-block" style="display:none;">
-                            <span class="glyphicon glyphicon-remove"></span> Clear
-                        </button>
-                        <!-- image-preview-input -->
-
-
-            </div>
-            <div class="col">
+          <div class="col-4">
             <div class="btn btn-default image-preview-input btn-block">
-                <span class="glyphicon glyphicon-folder-open"></span>
-                <span class="image-preview-input-title ">Browse</span>
-                <input type="file" accept="image/*" name="filename" multiple (change)="onFileSelected($event)"/> <!-- rename it -->
-              </div>
+              <span class="glyphicon glyphicon-folder-open"></span>
+              <span class="image-preview-input-title ">Browse</span>
+              <input type="file" accept="image/*" name="filename" multiple (change)="onFileSelected($event)" />
+              <!-- rename it -->
             </div>
+          </div>
+          <div class="col">
+            <!-- image-preview-filename input [CUT FROM HERE]-->
 
-            <div class= "col">
-                <img [src]="url  || ''" height="70"> <br/>
-            </div>
+            <input type="text" class="form-control image-preview-filename" disabled="disabled" style="display: none;">
+            <!-- don't give a name === doesn't send on POST/GET -->
+
+            <!-- image-preview-clear button -->
+            <button type="button" class="btn btn-default image-preview-clear btn-block" style="display:none;">
+              <span class="glyphicon glyphicon-remove"></span> Clear
+            </button>
+            <!-- image-preview-input -->
+
+          </div>
+
+
+        </div>
+        <div class="row">
+          <div class="col-auto mb-3" *ngFor="let url of filesUrl">
+            <img [src]="url  || ''" height="70">
+          </div>
         </div>
 
-    </div>
+      </div>
 
-    <p></p>
+      <p></p>
 
       <div class="form-group">
         <button [disabled]="loadingForm" class="btn btn-primary">Actualizar</button>
@@ -127,62 +131,62 @@
 </div> -->
 
 <script>
-$(document).on('click', '#close-preview', function(){
-  $('.image-preview').popover('hide');
-  // Hover befor close the preview
-  $('.image-preview').hover(
+  $(document).on('click', '#close-preview', function () {
+    $('.image-preview').popover('hide');
+    // Hover befor close the preview
+    $('.image-preview').hover(
       function () {
-         $('.image-preview').popover('show');
+        $('.image-preview').popover('show');
       },
-       function () {
-         $('.image-preview').popover('hide');
+      function () {
+        $('.image-preview').popover('hide');
       }
-  );
-});
+    );
+  });
 
-$(function() {
-  // Create the close button
-  var closebtn = $('<button/>', {
-      type:"button",
+  $(function () {
+    // Create the close button
+    var closebtn = $('<button/>', {
+      type: "button",
       text: 'x',
       id: 'close-preview',
       style: 'font-size: initial;',
-  });
-  closebtn.attr("class","close pull-right");
-  // Set the popover default content
-  $('.image-preview').popover({
-      trigger:'manual',
-      html:true,
-      title: "<strong>Preview</strong>"+$(closebtn)[0].outerHTML,
+    });
+    closebtn.attr("class", "close pull-right");
+    // Set the popover default content
+    $('.image-preview').popover({
+      trigger: 'manual',
+      html: true,
+      title: "<strong>Preview</strong>" + $(closebtn)[0].outerHTML,
       content: "There's no image",
-      placement:'bottom'
-  });
-  // Clear event
-  $('.image-preview-clear').click(function(){
-      $('.image-preview').attr("data-content","").popover('hide');
+      placement: 'bottom'
+    });
+    // Clear event
+    $('.image-preview-clear').click(function () {
+      $('.image-preview').attr("data-content", "").popover('hide');
       $('.image-preview-filename').val("");
       $('.image-preview-clear').hide();
       $('.image-preview-input input:file').val("");
       $(".image-preview-input-title").text("Browse");
-  });
-  // Create the preview image
-  $(".image-preview-input input:file").change(function (){
+    });
+    // Create the preview image
+    $(".image-preview-input input:file").change(function () {
       var img = $('<img/>', {
-          id: 'dynamic',
-          width:250,
-          height:200
+        id: 'dynamic',
+        width: 250,
+        height: 200
       });
       var file = this.files[0];
       var reader = new FileReader();
       // Set preview image into the popover data-content
       reader.onload = function (e) {
-          $(".image-preview-input-title").text("Change");
-          $(".image-preview-clear").show();
-          $(".image-preview-filename").val(file.name);
-          img.attr('src', e.target.result);
-          $(".image-preview").attr("data-content",$(img)[0].outerHTML).popover("show");
+        $(".image-preview-input-title").text("Change");
+        $(".image-preview-clear").show();
+        $(".image-preview-filename").val(file.name);
+        img.attr('src', e.target.result);
+        $(".image-preview").attr("data-content", $(img)[0].outerHTML).popover("show");
       }
       reader.readAsDataURL(file);
+    });
   });
-});
 </script>

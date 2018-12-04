@@ -29,6 +29,8 @@ export class UserDashboardEditPublicationComponent implements OnInit {
   fileError= false;
   fileErrorText:string;
   url:string;
+  filesUrl: string[];
+  auxFilesUrl: string[];
 
   constructor(
     private departmentService: DepartmentService,
@@ -81,41 +83,52 @@ export class UserDashboardEditPublicationComponent implements OnInit {
   // convenience getter for easy access to form fields
   private f(key: string) { return this.publicationForm.controls[key]; }
 
-  onFileSelected(event){
-    console.log(event);
+  onFileSelected(event) {
+    // console.log(event);
     this.selectedFiles = <FileList>event.target.files;
-    Array.from(this.selectedFiles).forEach(file=> {
-      console.log(file);
-      if(file.size > 2048000){
-        this.fileError=true;
-        this.fileErrorText='Las imagenes no pueden tener un tamaño mayor que 2MB';
-        return;
-      }
-      if(file.type.search('image')===-1){
-        this.fileError=true;
-        this.fileErrorText='Por favor seleccione archivos de tipo imagen (png, jpg, gif, ...)';
-        return;
-      }
-    });
+    if (this.selectedFiles.length > 4) {
+      this.fileError = true;
+      this.fileErrorText = 'Solo se puede subir hasta 4 fotos';
+    }
+    else {
+      Array.from(this.selectedFiles).forEach(file => {
+        console.log(file);
+        if (file.size > 2048000) {
+          this.fileError = true;
+          this.fileErrorText = 'Las imagenes no pueden tener un tamaño mayor que 2MB';
+          return;
+        }
+        if (file.type.search('image') === -1) {
+          this.fileError = true;
+          this.fileErrorText = 'Por favor seleccione archivos de tipo imagen (png, jpg, gif, ...)';
+          return;
+        }
 
-    if(this.fileError){
+      });
+    }
+
+    if (this.fileError) {
       this.alertService.error(this.fileErrorText);
-      this.fileError=false;
+      this.fileError = false;
       return;
     }
-
-
-
-    this.alertService.clear();
-
-    if (event.target.files && event.target.files[0]) {
-      var reader = new FileReader();
-      reader.onload = (event: any) => {
-      this.url = event.target.result;
+    else {
+      this.alertService.clear();
+      console.log(event.target);
+      if (event.target.files) {
+        this.auxFilesUrl = [];
+        this.selectedFiles = <FileList>event.target.files;
+        Array.from(this.selectedFiles).forEach(file => {
+          var reader = new FileReader();
+          reader.onload = (event: any) => {
+            this.auxFilesUrl.push(event.target.result);
+          }
+          reader.readAsDataURL(file);
+        });
+        this.filesUrl = this.auxFilesUrl;
       }
-    reader.readAsDataURL(event.target.files[0]);
     }
-    console.log(event);
+
   }
 
   onSubmit() {

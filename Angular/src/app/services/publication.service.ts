@@ -45,4 +45,8 @@ export class PublicationService {
     return this.http.get(this.API_ENDPOINT + '/publications/photos/'+id);
   }
 
+  public deleteAllPhotos(id: number){
+    return this.http.delete(this.API_ENDPOINT + '/publications/photos/' + id);
+  }
+
 }

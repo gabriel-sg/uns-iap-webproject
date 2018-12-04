@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
 })
 
 export class UserDashboardEditPublicationComponent implements OnInit {
-  selectedFiles: FileList =null;
+  selectedFiles: FileList = null;
   deptos: Department[];
   currentPublication: Publication;
   currentPublicationObs: Observable<Publication>;
@@ -26,9 +26,9 @@ export class UserDashboardEditPublicationComponent implements OnInit {
   publicationForm: FormGroup;
   loadingForm = false;
   submitted = false;
-  fileError= false;
-  fileErrorText:string;
-  url:string;
+  fileError = false;
+  fileErrorText: string;
+  url: string;
   filesUrl: string[];
   auxFilesUrl: string[];
 
@@ -43,7 +43,7 @@ export class UserDashboardEditPublicationComponent implements OnInit {
   ) {
     this.route.queryParams.subscribe(params => {
       this.publiId = params["id"];
-  });
+    });
 
   }
 
@@ -138,40 +138,44 @@ export class UserDashboardEditPublicationComponent implements OnInit {
     if (this.publicationForm.invalid) {
       return;
     }
-    if(!this.selectedFiles){
+    if (!this.selectedFiles) {
       this.alertService.error('Por favor seleccionar al menos una foto');
       return;
     }
 
-    console.log(this.publicationForm.value);
     this.loadingForm = true;
     this.publicationService.update(this.publicationForm.value)
       .pipe(first())
       .subscribe(
         success => {
+          // Borro las fotos anteriores
+          this.publicationService.deleteAllPhotos(this.publiId).subscribe(
+            success => {
+              console.log("Fotos borradas");
+              const fd = new FormData();
+              fd.append('publi_id', this.currentPublication.id.toString());
+              for (var i = 0; i < this.selectedFiles.length; i++) {
+                fd.append('file' + i, this.selectedFiles[i], this.selectedFiles[i].name);
+              }
+              console.log(fd);
+              this.publicationService.uploadPhoto(fd)
+                .pipe(first())
+                .subscribe(
+                  data => {
 
-          // alert('Publicación creada')
-          // console.log(this.currentPublication);
-          //this.router.navigate(['/']);
-          const fd = new FormData();
-          fd.append('publi_id',this.currentPublication.id.toString());
-          for(var i = 0; i<this.selectedFiles.length;i++){
-            fd.append('file'+i,this.selectedFiles[i],this.selectedFiles[i].name);
-          }
-          console.log(fd);
-          this.publicationService.uploadPhoto(fd)
-            .pipe(first())
-            .subscribe(
-              data => {
-                this.alertService.success('Publicación actualizada', true);
-                console.log(data);
-                this.router.navigate(['/mi-cuenta/mis-publicaciones']);
-              },
-              error => {
-                this.alertService.error('Error al actualizar las fotos');
-                console.log(error);
-                this.loadingForm = false;
-              });
+                    this.alertService.success('Publicación actualizada', true);
+                    this.router.navigate(['/mi-cuenta/mis-publicaciones']);
+                  },
+                  error => {
+                    this.alertService.error('Error al actualizar las fotos');
+                    console.log(error);
+                    this.loadingForm = false;
+                  });
+            }, error => {
+              console.log(error);
+            });
+
+
 
         },
         error => {

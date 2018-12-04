@@ -50,3 +50,5 @@ Route::post('test','TestController@image');
 Route::post('photos/upload','PhotoController@image');
 
 Route::delete('photos/{id}','PhotoController@removePhoto');
+
+Route::delete('publications/photos/{id}','PublicationController@removeAllPhotos');

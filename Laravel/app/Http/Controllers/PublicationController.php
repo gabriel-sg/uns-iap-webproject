@@ -151,4 +151,14 @@ class PublicationController extends Controller
         }
         $publication->delete();
     }
+
+    public function removeAllPhotos($id){
+      $photos = Photo::where('publi_id',$id)->get();
+        foreach ($photos as $photo){
+            if(Storage::disk('public')->exists($photo->filename)){
+                Storage::disk('public')->delete($photo->filename);
+            }
+            $photo->delete();
+        }
+    }
 }

@@ -23,11 +23,11 @@ Route::resource('publications', 'PublicationController');
 
 Route::get('publications/photos/{id}','PublicationController@getPhotos');
 
-Route::get('publications/libros','PublicationController@getLibros');
+Route::get('publications/show/libros','PublicationController@libros');
 
-Route::get('publications/apuntes','PublicationController@getApuntes');
+Route::get('publications/show/apuntes','PublicationController@apuntes');
 
-Route::get('publications/materiales','PublicationController@getMateriales');
+Route::get('publications/show/materiales','PublicationController@materiales');
 
 Route::resource('departments', 'DepartmentController');
 

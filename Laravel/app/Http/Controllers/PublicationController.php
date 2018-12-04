@@ -109,21 +109,27 @@ class PublicationController extends Controller
         echo json_encode($photoURLs);
     }
 
-    public function getLibros()
+    public function libros()
     {
-        $libros = Publication::where('category','Libro')->get();
+        $libros = Publication::where('category','Libro')
+        ->orderBy('updated_at','desc')
+        ->paginate(10);
         echo json_encode($libros);
     }
 
-    public function getApuntes()
+    public function apuntes()
     {
-        $apuntes = Publication::where('category','Apunte')->get();
+        $apuntes = Publication::where('category','Apunte')
+        ->orderBy('updated_at','desc')
+        ->paginate(10);
         echo json_encode($apuntes);
     }
 
-    public function getMateriales()
+    public function materiales()
     {
-        $materiales = Publication::where('category','Material')->get();
+        $materiales = Publication::where('category','Material')
+        ->orderBy('updated_at','desc')
+        ->paginate(10);
         echo json_encode($materiales);
     }
 

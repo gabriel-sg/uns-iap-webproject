@@ -18,6 +18,6 @@ class Publication extends Model
     public function toSearchableArray()
     {
         $array = $this->toArray();        
-        return array('title' => $array['title'],'description' => $array['description']);
+        return array('title' => $array['title'],'description' => $array['description'],'category' => $array['category']);
     } 
 }

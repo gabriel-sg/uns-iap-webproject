@@ -50,7 +50,7 @@ export class NavbarComponent implements OnInit {
     // this.router.navigate(['/search-result']);
     
     if(this.searchForm.value.search.trim()){
-           this.router.navigate(['/search-result'], { queryParams: { busqueda: this.searchForm.value.search }});
+           this.router.navigate(['/search-result'], { queryParams: { type: 'busqueda' , busqueda: this.searchForm.value.search }});
     }
 
   }

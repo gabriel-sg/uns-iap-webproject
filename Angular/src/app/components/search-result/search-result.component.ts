@@ -28,24 +28,57 @@ export class SearchResultComponent implements OnInit {
     // console.log(this.searchResult);
     this.loading = true;
     let queryParam = this.router.parseUrl(this.router.url).queryParams;
-    this.searchService.searchPublications(queryParam.busqueda).subscribe(
-      data => {
-        console.log(data);
-        this.publicaciones = data.data;
-        for (let entry of this.publicaciones) {
-          this.publicationService.getPhotos(entry.id).subscribe(data => {
-            this.photos.set(entry.id, data[0]);
-          }, (error) => {
-            console.log(error);
-            this.alertService.error('Error al obtener las fotos', false);
-          });
-        }
-        this.loading = false;
+    if(queryParam.type === 'busqueda'){
+      this.searchService.searchPublications(queryParam.busqueda).subscribe(
+        data => {
+          console.log(data);
+          this.publicaciones = data.data;
+          for (let entry of this.publicaciones) {
+            this.publicationService.getPhotos(entry.id).subscribe(data => {
+              this.photos.set(entry.id, data[0]);
+            }, (error) => {
+              console.log(error);
+              this.alertService.error('Error al obtener las fotos', false);
+            });
+          }
+          this.loading = false;
+        }, error => {
+          console.log(error);
+      });
+    }
+    else if(queryParam.type === 'nuevas-publicaciones'){
+      this.publicationService.getAll().subscribe(
+        data=> {
+          console.log(data);
+          this.publicaciones = data.data;
+          for (let entry of this.publicaciones) {
+            this.publicationService.getPhotos(entry.id).subscribe(data => {
+              this.photos.set(entry.id, data[0]);
+            }, (error) => {
+              console.log(error);
+              this.alertService.error('Error al obtener las fotos', false);
+            });
+          }
+          this.loading = false;
       }, error => {
         console.log(error);
-
-      }
-    );
+        this.alertService.error('Error al obtener las nuevas publicaciones',false);
+      });
+    }
+    else if(queryParam.type === 'category'){
+      this.publicationService.getByCategory(queryParam.busqueda).subscribe(data => {
+        this.publicaciones = data.data;
+          for (let entry of this.publicaciones) {
+            this.publicationService.getPhotos(entry.id).subscribe(data => {
+              this.photos.set(entry.id, data[0]);
+            }, (error) => {
+              console.log(error);
+              this.alertService.error('Error al obtener las fotos', false);
+            });
+          }
+          this.loading = false;
+      })
+    }
   }
 
 }

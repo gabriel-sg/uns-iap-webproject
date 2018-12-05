@@ -9,7 +9,7 @@
               <div class="container">
                 <h1 class="display-3">¡Bienvenidos!</h1>
                 <p>En Intercambios Universitarios encontraras todo el material que necesites para tu carrera</p>
-                <p><a class="btn btn-primary btn-lg" href="#" role="button">¡Crea tu cuenta ahora! &raquo;</a></p>
+                <p><button class="btn btn-primary btn-lg" (click)="nuevasPublicaciones()" role="button">¡Ver las últimas publicaciones! &raquo;</button></p>
               </div>
             </div>
       </div>
@@ -24,17 +24,17 @@
                       <div class="col-md-4">
                         <h2>Libros</h2>
                         <p>Aquí encontrarás material bibliográfico útil para tus materias, ya sea fotocopiado o en su estado original.</p>
-                        <p><button class="btn btn-primary " (click)="libros()" role="button">Ver más &raquo;</button></p>
+                        <p><button class="btn btn-primary " (click)="category('Libro')" role="button">Ver más &raquo;</button></p>
                       </div>
                       <div class="col-md-4">
                         <h2>Apuntes</h2>
                         <p>Aquí encontrarás apuntes realizados por otros estudiantes, para ayudarte en tus materias.</p>
-                        <p><button class="btn btn-primary" (click)="apuntes()" role="button">Ver más &raquo;</button></p>
+                        <p><button class="btn btn-primary" (click)="category('Apunte')" role="button">Ver más &raquo;</button></p>
                       </div>
                       <div class="col-md-4">
                         <h2>Material</h2>
                         <p>Aquí encontrarás material específico, como gafas de laboratorio o reglas de diseño, entre otros.</p>
-                        <p><button class="btn btn-primary" (click)="material()" role="button">Ver más &raquo;</button></p>
+                        <p><button class="btn btn-primary" (click)="category('Material')" role="button">Ver más &raquo;</button></p>
                       </div>
                     </div>
 

@@ -40,16 +40,9 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  libros(){
-    this.router.navigate(['/search-result'], { queryParams: { busqueda: 'Libro' }});
-  }
-
-  apuntes(){
-    this.router.navigate(['/search-result'], { queryParams: { busqueda: 'Apunte' }});
-  }
-
-  material(){
-    this.router.navigate(['/search-result'], { queryParams: { busqueda: 'Material' }});
+  category(category){
+    console.log(category);
+    this.router.navigate(['/search-result'], { queryParams: { type: 'category', busqueda: category }});
   }
 
   userData(user_id){
@@ -60,6 +53,10 @@ export class HomeComponent implements OnInit {
       error=>{
         console.log(error);
     });
+  }
+
+  nuevasPublicaciones(){
+    this.router.navigate(['/search-result'], { queryParams: { type: 'nuevas-publicaciones'}});
   }
 
 }

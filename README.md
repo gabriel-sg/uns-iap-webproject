@@ -2,7 +2,7 @@
 
 Proyecto web para la materia de Ingeniería de Aplicaciones, en la **Universidad Nacional del Sur**.
 
-<p align="center"><img src="repoassets/captura_home_page.png" alt="screenshot" width="960" height="430"></p>
+<p align="center"><img src="repoassets/home_page.png" alt="screenshot" width="960" height="430"></p>
 <p></p>
 
 ### Equipo de Trabajo

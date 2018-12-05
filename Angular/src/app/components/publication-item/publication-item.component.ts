@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap, } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { PublicationService, AlertService, UserService} from 'app/services';
-import { Publication, User } from 'app/models';
+import { PublicationService, AlertService, UserService, DepartmentService} from 'app/services';
+import { Publication, User, Department } from 'app/models';
 
 @Component({
   selector: 'app-publication-item',
@@ -15,13 +15,16 @@ export class PublicationItemComponent implements OnInit {
   publicacion: Publication;
   mapeo = new Map();
   photos : String [];
+  haydeptos:boolean;
+  departments: Department[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private alertService: AlertService,
     private publicationService: PublicationService,
-    private userService: UserService
+    private userService: UserService,
+    private departmentService: DepartmentService
   ) { }
 
   ngOnInit()  {
@@ -48,6 +51,13 @@ export class PublicationItemComponent implements OnInit {
     },(error) => {
       console.log(error);
       this.alertService.error('Error al obtener las solicitudes', false);
+    });
+    this.departmentService.getAll().subscribe(data => {
+      this.departments = data;
+      this.haydeptos=true;
+    }, error =>{
+      console.log(error);
+      this.alertService.error('Error al obtener los departamentos', false);
     });
 
 

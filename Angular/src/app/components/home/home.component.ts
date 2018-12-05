@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
     }, error =>{
       console.log(error);
       this.alertService.error('Error al obtener los departamentos', false);
-    })
+    });
   }
 
   category(category){

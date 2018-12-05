@@ -23,6 +23,16 @@
                 <p></p>
                 <h5>Descripcion</h5>
                 {{publicacion?.description}}
+                <br><br>
+                <dl class="row">
+                    <dt class="col-sm-3">Departamento</dt>
+                    <dd class="col-sm-9">{{haydeptos?departments[publicacion?.department_id-1].name:vacio}}</dd>
+                    <dt class="col-sm-3">Creado:</dt>
+                    <dd class="col-sm-9">{{publicacion?.created_at}}</dd>
+                    <dt class="col-sm-3">Modificado:</dt>
+                    <dd class="col-sm-9">{{publicacion?.updated_at}}</dd>
+                </dl>
+                
 
             </div>
                
@@ -30,12 +40,15 @@
                     
                 <div class="p-3 mb-2 bg-light text-dark">
 
-                    <h4>
+                    <h5>
                         <p class="text-center">¡Comunicate con {{usuario?.given_name}}!</p>
-                    </h4>
+                    </h5>
                     <h4>
                         <p class="text-center">Telefono: {{usuario?.phone}}</p>
                     </h4>
+                    <h6>
+                            <p class="text-center">Email: {{usuario?.email}}</p>
+                    </h6>
                     <p class="text-center">Enviale un correo! (pronto!)</p>
                     <form id="contact-form" method="post" action="contact.php" role="form">
 

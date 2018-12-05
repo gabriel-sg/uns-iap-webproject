@@ -1,8 +1,9 @@
 #  Ingeniería de Aplicaciones - Proyecto Final
 
-Proyecto web para la materia Ingeniería de Aplicaciones, de la carrera de Ingeniería en Computación en la **Universidad Nacional del Sur**.
+Proyecto web para la materia de Ingeniería de Aplicaciones, en la **Universidad Nacional del Sur**.
 
-<p align="center"><img src="repoassets/home_page.png" alt="screenshot" width="960" height="430"></p>
+<p align="center"><img src="repoassets/captura_home_page.png" alt="screenshot" width="960" height="430"></p>
+<p></p>
 
 ### Equipo de Trabajo
 * Benamo, Sebastian
@@ -12,8 +13,8 @@ Proyecto web para la materia Ingeniería de Aplicaciones, de la carrera de Ingen
 ### Tecnologías Utilizadas
 * Laravel 5.7
 * Angular 7.0.2
-* Bootstap 4.1
-* MySQL
+* Bootstrap 4.1
+* MySQL 5.7
 * PHP 7.2
 
 ### Apis

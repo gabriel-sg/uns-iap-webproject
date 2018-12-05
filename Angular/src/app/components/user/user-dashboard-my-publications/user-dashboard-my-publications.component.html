@@ -12,7 +12,7 @@
         </div>
         <div class="col-md-3" id="imgContainer">
         <!--  <img src="https://www.cambio16.com/wp-content/uploads/2017/08/foto-el-nino-del-meme-triunfal-reaparece-10-anos-despues.jpg" class="img-fluid" alt="Responsive image"> -->
-          <img src={{photos.get(publication.id)}} class="img-fluid" alt="Responsive image">
+          <img src={{photos.get(publication.id)}} class="img-fluid rounded mx-auto d-block" alt="Responsive image">
         </div>
         <div class="col col-md-2">
           <a class="btn btn-sm btn-secondary" (click)="modificar(publication.id)" role="button">Modificar</a>

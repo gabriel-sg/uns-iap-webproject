@@ -8,3 +8,8 @@
   display:flex;
   align-items: center
 } */
+
+#click{
+  cursor: pointer;
+
+}

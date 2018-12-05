@@ -48,8 +48,10 @@ export class NavbarComponent implements OnInit {
     //     console.log(error);
     //   })*/;
     // this.router.navigate(['/search-result']);
-
-    this.router.navigate(['/search-result'], { queryParams: { busqueda: this.searchForm.value.search }});
+    
+    if(this.searchForm.value.search.trim()){
+           this.router.navigate(['/search-result'], { queryParams: { busqueda: this.searchForm.value.search }});
+    }
 
   }
 }

@@ -17,7 +17,7 @@ class PublicationController extends Controller
      */
     public function index()
     {
-        $publications = Publication::get();
+        $publications = Publication::orderBy('created_at','desc')->paginate(10);
         echo json_encode($publications);
     }
 

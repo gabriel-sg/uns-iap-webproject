@@ -5,6 +5,11 @@
     <nav class="col-md-3 d-none d-md-block bg-light sidebar">
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
+          <li>
+            <h2>
+              Bienvenido, {{currentUser?.given_name}}!
+            </h2>
+          </li>
           <li class="nav-item">
             <a class="nav-link active" [routerLink]="['mis-publicaciones']">
               <span data-feather="home"></span>

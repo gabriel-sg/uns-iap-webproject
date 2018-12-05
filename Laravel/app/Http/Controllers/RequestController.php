@@ -16,7 +16,7 @@ class RequestController extends Controller
     public function index()
     {
         //
-        $requestEntries = RequestModel::orderBy('updated_at','desc')->get();
+        $requestEntries = RequestModel::orderBy('created_at','desc')->get();
         echo json_encode($requestEntries);
     }
 

@@ -29,6 +29,8 @@ Route::get('publications/show/apuntes','PublicationController@apuntes');
 
 Route::get('publications/show/materiales','PublicationController@materiales');
 
+Route::get('publications/category/{cat}','PublicationController@category');
+
 Route::resource('departments', 'DepartmentController');
 
 Route::resource('users', 'UsersController');

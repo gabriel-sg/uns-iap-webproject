@@ -112,7 +112,7 @@ class PublicationController extends Controller
     public function libros()
     {
         $libros = Publication::where('category','Libro')
-        ->orderBy('updated_at','desc')
+        ->orderBy('created_at','desc')
         ->paginate(10);
         echo json_encode($libros);
     }
@@ -120,7 +120,7 @@ class PublicationController extends Controller
     public function apuntes()
     {
         $apuntes = Publication::where('category','Apunte')
-        ->orderBy('updated_at','desc')
+        ->orderBy('created_at','desc')
         ->paginate(10);
         echo json_encode($apuntes);
     }
@@ -128,9 +128,17 @@ class PublicationController extends Controller
     public function materiales()
     {
         $materiales = Publication::where('category','Material')
-        ->orderBy('updated_at','desc')
+        ->orderBy('created_at','desc')
         ->paginate(10);
         echo json_encode($materiales);
+    }
+
+    public function category($cat)
+    {
+        $publications = Publication::where('category',$cat)
+        ->orderBy('created_at','desc')
+        ->paginate(10);
+        echo json_encode($publications);
     }
 
     /**

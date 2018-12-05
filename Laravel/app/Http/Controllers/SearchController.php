@@ -11,7 +11,7 @@ class SearchController extends Controller
     public function searchRequests(Request $request,$search)
     {
         $requests = RequestModel::search($search)
-            ->orderBy('updated_at','desc')
+            ->orderBy('created_at','desc')
             ->paginate(10);
         echo json_encode($requests);
     }
@@ -19,7 +19,7 @@ class SearchController extends Controller
     public function  searchPublications(Request $request,$search)
     {
         $requests = Publication::search($search)
-            ->orderBy('updated_at','desc')
+            ->orderBy('created_at','desc')
             ->paginate(10);
         echo json_encode($requests);
     }

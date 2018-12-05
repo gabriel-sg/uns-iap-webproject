@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
+use App\Department;
 
 class Publication extends Model
 {
@@ -17,7 +18,8 @@ class Publication extends Model
      */
     public function toSearchableArray()
     {
-        $array = $this->toArray();        
-        return array('title' => $array['title'],'description' => $array['description'],'category' => $array['category']);
+        $array = $this->toArray();  
+        $depto= Department::find($array['department_id']);      
+        return array('title' => $array['title'],'description' => $array['description'],'category' => $array['category'], 'department' => $depto->name);
     } 
 }

@@ -11,5 +11,8 @@
 
 #click{
   cursor: pointer;
+}
 
+.img-fluid{
+  max-height: 150px;
 }

@@ -2,13 +2,10 @@
   <div *ngIf="!modify; else modifyForm">
     <div *ngFor="let request of requests">
       <div class="card bg-light">
-        <div class="card-header">
-          <!-- <h5><a [routerLink]="['/publication-item',publication.id]" class="card-link">{{publication.title}}</a></h5> -->
-          <h5>{{request.title}}</h5>
-        </div>
         <div class="card-body">
           <div class="row">
             <div class="col-md-10">
+              <h5 class="card-title">{{request.title}}</h5>
               <p class="card-text">{{request.description}}</p>
             </div>
             <div class="col col-md-2">

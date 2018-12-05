@@ -4,11 +4,11 @@
 <div *ngIf="!loading">
     <div *ngIf="publicaciones.length >0">
         <div *ngFor="let publication of publicaciones">
-            <div class="row">
+            <div class="row" *ngIf="publication.visible">
                 <div class="col-md-1"></div>
                 <div class="col-md-10">
                     <div class="card bg-light mb-3" [routerLink]="['/publication-item',publication.id]">
-                        <div class="card-body">
+                        <div class="card-body" style="cursor: pointer;">
                             <div class="row">
                                 <div class="col-md-8">
                                     <h2 class="card-title">{{publication.title}}</h2>

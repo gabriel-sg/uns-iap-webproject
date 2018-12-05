@@ -13,6 +13,8 @@ Proyecto web para la materia Ingeniería de Aplicaciones, de la carrera de Ingen
 * Laravel 5.7
 * Angular 7.0.2
 * Bootstap 4.1
+* MySQL
+* PHP 7.2
 
 ### Apis
 * Google Auth
